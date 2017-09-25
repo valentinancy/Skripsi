@@ -5,40 +5,67 @@
 \section{Latar Belakang}
 \label{sec:label}
 
-Bagian ini akan diisi dengan apa yang melatarbelakangi pembuatan template skripsi ini.
-Termasuk juga masalah-masalah yang akan dihadapi untuk membuatnya, termasuk kurangnya kemampuan penguasaan \LaTeX{} sehingga template ini dibuat dengan mengandalkan berbagai contoh yang tersebar di dunia maya, yang digabung-gabung menjadi satu jua.
-Bagian lain juga akan dilengkapi, untuk sementara diisi dengan lorem ipsum versi bahasa inggris.
+Pratinjau merupakan suatu kegiatan yang dilakukan untuk melakukan tinjau awal terhadap suatu perencanaan sebelum akhirnya membuat keputusan. Kegiatan pratinjau ini biasa dilakukan untuk dapat meyakinkan pembuatan keputusan yang kuat sebelum melanjutkan ke tahapan selanjutnya. Selain itu kegiatan pratinjau juga dapat dilakukan untuk meminimalisir hasil akhir yang tidak sesuai dengan perencanaan awal.
 
-\dtext{5-10}
+Sebagai perwujudan dari tujuan kegiatan pratinjau, maka diperlukan suatu aplikasi untuk mendukung kegiatan tersebut. Aplikasi pratinjau ini dapat digunakan oleh pengguna sebagai media untuk melihat gambaran produk akhir yang ingin dihasilkan. Melalui aplikasi pratinjau pengguna tidak perlu lagi hanya sekedar membayangkan produk akhir yang ingin dibuat, namun pengguna bisa langsung melihat gambaran maya mengenai produk akhir tersebut. Kemudian dengan tambahan kehadiran aplikasi 3 dimensi, pengguna akan mendapatkan perspektif yang lebih sesuai dengan realita dari peninjauan produk hasil akhir. Aplikasi 3 dimensi tentunya dapat memberikan perspektif yang lebih detail dan semakin meminimalisir perbedaan pada hasil akhir produk dengan rancangan awal.
+
+Selain itu di sisi lain, aplikasi berbasis web merupakan salah satu jenis aplikasi yang paling banyak digunakan. Aplikasi berbasis web memungkinkan pengguna untuk melakukan akses langsung ke aplikasi tanpa perlu melakukan instalasi pada perangkat yang mereka gunakan. Hal tersebut menjadi salah satu keunggulan yang membuat jenis aplikasi ini lebih dipilih pengguna dibandingkan jenis aplikasi lainnya. Kemudian aplikasi berbasis web juga ramah untuk berbagai lingkungan sistem operasi sehingga tidak membatasi cakupan penggunanya. Oleh karena itu, aplikasi pratinjau 3 dimensi berbasis web merupakan solusi yang sangat tepat untuk memenuhi permasalahan yang dijelaskan di paragraf-paragraf sebelumnya.
+
+Pada skripsi ini akan dibuat aplikasi pratinjau 3 dimensi berbasis web yang dapat memungkinkan pengguna untuk melakukan kustomisasi pada ruangan belajar mengajar. Aplikasi ini akan memanfaatkan WebGL dan Three.js library di dalam implementasinya. WebGL merupakan teknologi web yang menyuguhkan akselerasi grafis 3 dimensi ke dalam browser tanpa memasang perangkat lunak tambahan. Sementara Three.js library merupakan library JavaScript yang digunakan untuk membuat permainan dan aplikasi 3D. Kemudian sebagai studi kasus, ruang belajar mengajar yang akan dilakukan untuk simulasi aplikasi pratinjau 3 dimensi berbasis web adalah ruangan kelas pada Fakultas Teknologi Informasi dan Sains.
 
 \section{Rumusan Masalah}
 \label{sec:rumusan}
-Bagian ini akan diisi dengan penajaman dari masalah-masalah yang sudah diidentifikasi di bagian sebelumnya. 
-
-\dtext{6}
+Berikut ini masalah-masalah yang dibahas dalam skripsi ini:
+\begin{itemize}
+    \item Bagaimana ruangan kelas dan objek pendukung lainnya dapat direpsentasikan dalam WebGL?
+    \item Bagaimana mengkonversi hasil pratinjau ke dalam format PDF?
+\end{itemize}
 
 \section{Tujuan}
 \label{sec:tujuan}
-Akan dipaparkan secara lebih terperinci dan tersturkur apa yang menjadi tujuan pembuatan template skripsi ini
-
-\dtext{7}
+Berikut ini tujuan-tujuan yang ingin dicapai dalam penilitian ini:
+\begin{itemize}
+    \item Membangun aplikasi yang dapat merepresentasikan ruangan dalam WebGL.
+    \item Membangun fitur konversi hasil pratinjau ke dalam format PDF.
+\end{itemize}
 
 \section{Batasan Masalah}
 \label{sec:batasan}
-Untuk mempermudah pembuatan template ini, tentu ada hal-hal yang harus dibatasi, misalnya saja bahwa template ini bukan berupa style \LaTeX{} pada umumnya (dengan alasannya karena belum mampu jika diminta membuat seperti itu)
-
-\dtext{8}
-
+Terdapat beberapa batasan masalah dalam penilitian ini, yaitu:
+\begin{enumerate}
+    \item Pengguna hanya dapat melakukan kustomisasi pada tekstur lantai, warna cat dinding bagian atas, dan warna cat dinding bagian bawah dari ruangan kelas.
+    \item Pengguna hanya dapat mengganti tekstur lantai, warna cat dinding bagian atas, dan warna cat dinding bagian bawah dengan 8 variasi.
+    \item Hasil akhir dari kustomisasi hanya akan didapatkan dalam format PDF.
+    \item Hasil akhir kustomisasi dengan format PDF hanya akan memuat tekstur lantai, warna cat dinding bagian atas, dan warna cat dinding bagian bawah yang telah dipilih oleh pengguna. Sehingga bukan dalam bentuk \textit{screenshot} ruangan kelas 3 dimensi.
+\end{enumerate}
 \section{Metodologi}
 \label{sec:metlit}
-Tentunya akan diisi dengan metodologi yang serius sehingga templatenya terkesan lebih serius.
-
-\dtext{9}
+Metodologi yang digunakan untuk menyusun penelitian ini adalah sebagai berikut:
+\begin{enumerate}
+    \item Mempelajari standar WebGL sebagai \textit{Application Programming Interface} untuk menampilkan grafis 3 dimensi pada \textit{web browser}.
+    \item Mempelajari penggunaan Three.js sebagai \textit{library} dari WebGL.
+    \item Memodelkan ruangan belajar mengajar secara 3 dimensi.
+    \item Melakukan analisis terhadap situs web yang akan dibangun.
+    \item Merancang tampilan situs web yang akan dibangun.
+    \item Mengimplementasikan situs web.
+    \item Melakukan pengujian terhadap situs web yang telah dibangun.
+    \item Menulis dokumen skripsi.
+\end{enumerate}
 
 \section{Sistematika Pembahasan}
 \label{sec:sispem}
-Rencananya Bab 2 akan berisi petunjuk penggunaan template dan dasar-dasar \LaTeX.
-Mungkin bab 3,4,5 dapt diisi oleh ketiga jurusan, misalnya peraturan dasar skripsi atau pedoman penulisan, tentu jika berkenan.
-Bab 6 akan diisi dengan kesimpulan, bahwa membuat template ini ternyata sungguh menghabiskan banyak waktu.
-
-\dtext{10}
+Pembahasan dalam buku skripsi ini dilakukan secara sistematis sebagai berikut:
+\begin{itemize}
+    \item Bab 1 Pendahuluan
+    Berisi latar belakang, rumusan masalah, tujuan, batasan masalah, metodologi penilitian, dan sistematika pembahasan.
+    \item Bab 2 Dasar Teori
+    Berisi teori-teori dasar mengenai WebGL dan Three.js \textit{library}.
+    \item Bab 3 Analisis
+    Berisi analisis masalah dan solusi, studi kasus, perancangan perangkat lunak, diagram aktivitas, \textit{use case} diagram, dan diagram paket.
+    \item Bab 4 Perancangan
+    Berisi perancangan antarmuka dan diagram kelas.
+    \item Bab 5 Implementasi
+    Berisi implementasi antarmuka perangkat lunak, implementasi menggunakan WebGL dan \textit{library} Three.js, pengujian perangkat lunak yang telah dibangun, dan kesimpulan berdasarkan pengujian.
+    \item Bab 6 Kesimpulan dan Saran
+    Berisi kesimpulan berdasarkan pengujian yang telah dilakukan dan saran untuk penelitian berikutnya.
+\end{itemize}

@@ -1,20 +1,37 @@
 %versi 2 (8-10-2016)
 \chapter{Landasan Teori}
 \label{chap:teori}
+Bab ini berisi penjelasan mengenai teori-teori yang menjadi dasar penelitian ini, seperti WebGL dan Three.js \textit{library}.
 
-\section{Skripsi}
-\label{sec:skripsi} 
- 
-Rencananya akan diisi dengan penjelasan umum mengenai buku skripsi.
+\section{Web Graphics Library}
+\label{sec:webgl} 
+\textit{Web Graphics Library} (WebGL) merupakan \textit{Application Programming Interface} (API) JavaScript yang digunakan untuk membuat grafiis 3 dimensi melalui media \textit{browser} tanpa harus memasang \textit{plugin} tambahan. WebGL juga merupakan salah satu implementasi dari OpenGL, sebuah API yang biasa digunakan untuk menghasilkan permainan 3 dimensi. WebGL juga dibuat berdasarkan OpenGL \textit{Embedded Systems} (ES) API yang merupakan subset dari OpenGL namun ditujukan untuk perangkat portabel. Oleh karena itu WebGL dapat ditampilkan pada \textit{browser desktop} maupun \textit{browser} pada perangkat \textit{mobile}.
 
-\dtext{11-12} 
+Sampai dengan detik ini, sudah sangat banyak \textit{browser} pada \textit{desktop} maupun perangkat \textit{mobile} yang mendukung WebGL. Namun tidak semua perangkat keras pada \textit{platform} pengguna mendukung. Hal ini dikarenakan \textit{browser} perlu mengakses langsung \textit{Graphics Processing Unit} (GPU) pada \textit{Graphics Card}. Semua perangkat keras pasti memiliki \textit{Central Processing Unit} (CPU), namun tidak semua komputer dilengkapi oleh GPU yang mendukung OpenGL terbaru. GPU mengambil peran sebagai pengolah grafis yang dapat meringankan tugas dari CPU, sehingga memberikan performa yang lebih baik.
 
-\section{\LaTeX}
+Pada penggunaanya, WebGL selalu melibatkan penggunaan \textit{canvas} elemen pada HTML5 sebagai media untuk menggambarkan grafis. Kemudian pada WebGL terdapat shader yang didefinisikan dengan menggunakan bahasa khusus yang disebut OpenGL ES Shading Language (GLSL), namun tidak semua yang ada pada GLSL terdapat pada WebGL. \textit{Shader} pada WebGL digunakan untuk menerjemahkan titik dan warna, namun \textit{shader} masih terbagi menjadi dua jenis. Jenis yang pertama adalah \textit{Fragment Shader} yang mewakili informasi warna, sementara jenis yang kedua adalah \textit{Vertex Shader} yang mewakili informasi posisi hasil.
+
+\section{Three.js \textit{Library}}
 \label{sec:latex}
+Three.js \textit{library} merupakan \textit{library} Javascript yang biasa digunakan untuk membuat permainan dan aplikasi 3 dimensi. Three.js \textit{library} ini memanfaatkan WebGL API untuk menampilkan grafis 3 dimensi pada \textit{browser} tanpa harus memasang \textit{plugin} tambahan. Three.js \textit{library} membantu menyederhanakan struktur program yang ditulis dibandingkan dengan hanya menggunakan WebGL. Tentunya, Three.js \textit{library} akan sangat membantu pada pengembangan grafik 3 dimensi yang kompleks. Oleh karena Three.js \textit{library} memanfaatkan WebGL API, Three.js \textit{llibrary} dapat dijalankan pada semua \textit{browser} yang mendukung WebGL.
 
-Mengapa menggunakan \LaTeX{} untuk buku skripsi dan apa keunggulan/kerugiannya bagi mahasiswa dan pembuat template. 
+Terdapat beberapa fungsi penting yang disediakan oleh Three.js \textit{library} dalam pembuatan grafis 3 dimensi, di antaranya adalah:
+\begin{itemize}
+\item \textit{Renderers}, menampilkan grafis 3 dimensi ke \textit{browser}.
+\item \textit{Scenes}, menambahkan dan menghapus objek pada saat program berjalan.
+\item \textit{Cameras}, memberikan perspektif kepada pengguna.
+\item \textit{Animation}, mensimulasikan perubahan bentuk grafis 3 dimensi.
+\item \textit{Lights}, memberikan efek pencahayaan.
+\item \textit{Materials}, membuat material yang disertai dengan tekstur dan bayangan halus.
+\item \textit{Shaders}, memberikan akses penuh kepada semua fitur WebGL.
+\item \textit{Objects}, membuat berbagai jenis bentuk objek yang rinci.
+\item \textit{Geometry}, membuat bentuk objek 3 dimensi.
+\item \textit{Loaders}, memuat \textit{file} pendukung seperti gambar, JavaScript Object Notation (JSON), dan \textit{Scene}.
+\item \textit{Utilities}, memberikan seperangkat fungsi waktu dan matematika 3D.
+\item \textit{Export/Import}, membuat \textit{file} JSON yang kompatibel dengan Three.js \textit{library}.
+\end{itemize}
 
-\dtext{13-14}
+Selain itu Three.js \textit{library} juga telah menyediakan \textit{editor} dengan basis Graphical User Interface yang memungkinkan pengembang untuk mencoba terlebih dahulu sebelum mulai menulis kode program. \textit{Editor} ini juga memungkinkan pengembang untuk melakukan ekspor objek 3 dimensi dalam format JSON.
 
 
 \section{Template Skripsi FTIS UNPAR}
