@@ -3,32 +3,289 @@
 \label{chap:teori}
 Bab ini berisi penjelasan mengenai teori-teori yang menjadi dasar penelitian ini, seperti WebGL dan Three.js \textit{library}.
 
-\section{Web Graphics Library}
+\section{WebGL}
 \label{sec:webgl} 
-\textit{Web Graphics Library} (WebGL) merupakan \textit{Application Programming Interface} (API) JavaScript yang digunakan untuk membuat grafiis 3 dimensi melalui media \textit{browser} tanpa harus memasang \textit{plugin} tambahan. WebGL juga merupakan salah satu implementasi dari OpenGL, sebuah API yang biasa digunakan untuk menghasilkan permainan 3 dimensi. WebGL juga dibuat berdasarkan OpenGL \textit{Embedded Systems} (ES) API yang merupakan subset dari OpenGL namun ditujukan untuk perangkat portabel. Oleh karena itu WebGL dapat ditampilkan pada \textit{browser desktop} maupun \textit{browser} pada perangkat \textit{mobile}.
+%\textit{Web Graphics Library} (WebGL) merupakan \textit{Application Programming Interface} (API) JavaScript yang digunakan untuk membuat grafiis 3 dimensi melalui media \textit{browser} tanpa harus memasang \textit{plugin} tambahan. WebGL juga merupakan salah satu implementasi dari OpenGL, sebuah API yang biasa digunakan untuk menghasilkan permainan 3 dimensi. WebGL juga dibuat berdasarkan OpenGL \textit{Embedded Systems} (ES) API yang merupakan subset dari OpenGL namun ditujukan untuk perangkat portabel. Oleh karena itu WebGL dapat ditampilkan pada \textit{browser desktop} maupun \textit{browser} pada perangkat \textit{mobile}.
 
-Sampai dengan detik ini, sudah sangat banyak \textit{browser} pada \textit{desktop} maupun perangkat \textit{mobile} yang mendukung WebGL. Namun tidak semua perangkat keras pada \textit{platform} pengguna mendukung. Hal ini dikarenakan \textit{browser} perlu mengakses langsung \textit{Graphics Processing Unit} (GPU) pada \textit{Graphics Card}. Semua perangkat keras pasti memiliki \textit{Central Processing Unit} (CPU), namun tidak semua komputer dilengkapi oleh GPU yang mendukung OpenGL terbaru. GPU mengambil peran sebagai pengolah grafis yang dapat meringankan tugas dari CPU, sehingga memberikan performa yang lebih baik.
+%Sampai dengan detik ini, sudah sangat banyak \textit{browser} pada \textit{desktop} maupun perangkat \textit{mobile} yang mendukung WebGL. Namun tidak semua perangkat keras pada \textit{platform} pengguna mendukung. Hal ini dikarenakan \textit{browser} perlu mengakses langsung \textit{Graphics Processing Unit} (GPU) pada \textit{Graphics Card}. Semua perangkat keras pasti memiliki \textit{Central Processing Unit} (CPU), namun tidak semua komputer dilengkapi oleh GPU yang mendukung OpenGL terbaru. GPU mengambil peran sebagai pengolah grafis yang dapat meringankan tugas dari CPU, sehingga memberikan performa yang lebih baik.
 
-Pada penggunaanya, WebGL selalu melibatkan penggunaan \textit{canvas} elemen pada HTML5 sebagai media untuk menggambarkan grafis. Kemudian pada WebGL terdapat shader yang didefinisikan dengan menggunakan bahasa khusus yang disebut OpenGL ES Shading Language (GLSL), namun tidak semua yang ada pada GLSL terdapat pada WebGL. \textit{Shader} pada WebGL digunakan untuk menerjemahkan titik dan warna, namun \textit{shader} masih terbagi menjadi dua jenis. Jenis yang pertama adalah \textit{Fragment Shader} yang mewakili informasi warna, sementara jenis yang kedua adalah \textit{Vertex Shader} yang mewakili informasi posisi hasil.
+%Pada penggunaanya, WebGL selalu melibatkan penggunaan \textit{canvas} elemen pada HTML5 sebagai media untuk menggambarkan grafis. Kemudian pada WebGL terdapat shader yang didefinisikan dengan menggunakan bahasa khusus yang disebut OpenGL ES Shading Language (GLSL), namun tidak semua yang ada pada GLSL terdapat pada WebGL. \textit{Shader} pada WebGL digunakan untuk menerjemahkan titik dan warna, namun \textit{shader} masih terbagi menjadi dua jenis. Jenis yang pertama adalah \textit{Fragment Shader} yang mewakili informasi warna, sementara jenis yang kedua adalah \textit{Vertex Shader} yang mewakili informasi posisi hasil.
 
-\section{Three.js \textit{Library}}
+WebGL adalah sebuah Application Programming Interface (API) yang membangun objek 3 dimensi dengan mode langsung yang dirancang untuk {\it web}. WebGL diturunkan dari OpenGL ES 2.0, menyediakan fungsi pembangunan sejenis tetapi di dalam konteks HTML. WebGL dirancang sebagai konteks pembangunan objek pada elemen {\it canvas} HTML. {\it Canvas} pada HTML menyediakan suatu destinasi untuk pembangunan objek secara programatik pada halaman {\it web} dan memungkinkan menampilkan objek yang sedang dibangun menggunakan API pembangun objek yang berbeda. Berikut ini merupakan {\it interfaces} dan fungsionalitas yang ada pada WebGL:
+\begin{enumerate}
+\item {\it Types}
+
+	Berikut ini merupakan tipe-tipe yang digunakan pada semua {\it interface} di bagian penjelasan selanjutnya.
+	\begin{lstlisting}
+	typedef unsigned long  GLenum;
+	typedef boolean        GLboolean;
+	typedef unsigned long  GLbitfield;
+	typedef byte           GLbyte;
+	typedef short          GLshort;
+	typedef long           GLint;
+	typedef long           GLsizei;
+	typedef long long      GLintptr;
+	typedef long long      GLsizeiptr;
+	typedef octet          GLubyte;
+	typedef unsigned short GLushort;
+	typedef unsigned long  GLuint;
+	typedef unrestricted float GLfloat;
+	typedef unrestricted float GLclampf;
+	\end{lstlisting}
+	
+\item {\it WebGLContextAttributes}
+
+	{\it WebGLContextAttributes} merupakan kamus yang berisi atribut-atribut latar untuk menggambar yang diberikan melalui parameter kedua pada {\it getContext}. Berikut ini merupakan daftar nilai awal dari atribut pada {\it WebGLContextAttributes}, nilai awal ini akan digunakan apabila tidak ada parameter kedua yang diberikan kepada {\it getContext} atau jika objek pengguna yang tidak memiliki atribut pada namanya diberikan kepada getContext.
+	\begin{lstlisting}
+	dictionary WebGLContextAttributes {
+    	GLboolean alpha = true;
+    	GLboolean depth = true;
+    	GLboolean stencil = false;
+    	GLboolean antialias = true;
+    	GLboolean premultipliedAlpha = true;
+    	GLboolean preserveDrawingBuffer = false;
+    	WebGLPowerPreference powerPreference = "default";
+    	GLboolean failIfMajorPerformanceCaveat = false;
+	};
+	\end{lstlisting}
+	Berikut ini merupakan penjelasan setiap atribut pada {\it WebGLContextAttributes} 
+	\begin{itemize}
+	\item {\it alpha}
+	
+	Jika nilainya {\it true}, penyangga gambar telah memiliki {\it alpha channel} yang bertujuan untuk menampilkan operasi {\it alpha} destinasi OpenGL . Jika nilainya {\it false}, tidak ada penyangga {\it alpha} yang tersedia.
+	
+	\item {\it depth}
+	
+	Jika nilainya {\it true}, penyangga gambar memiliki sebuah penyangga kedalaman yang setidaknya berisi 16 {\it bits}. Jika nilainya {\it false}, tidak ada penyangga kedalaman yang tersedia.
+	
+	\item {\it stencil}
+	
+	Jika nilainya {\it true}, penyangga gambar memiliki penyangga stensil yang setidaknya berisi 8 {\it bits}. Jika nilainya {\it false}, tidak ada penyangga stensil yang tersedia.
+	
+	\item {\it antialias}
+	
+	Jika nilainya {\it true} dan implementasinya mendukung {\it antialias} maka penyangga gambar akan menampilkan {\it antialias} menggunakan teknik yang dipilih dan kualitas. Jika nilainya {\it false} atau implementasi tidak mendukung {\it antialias} maka tidak ada {\it antialias} yang ditampilkan.
+	
+	\item {\it premultipliedAlpha}
+	
+	Jika nilainya {\it true}, penyusun halaman akan mengasumsikan penyangga gambar memiliki warna dengan {\it premultiplied alpha}. Jika nilainya {\it false}, penyusun halaman akan mengasumsikan bahwa warna pada penyangga gambar bukan {\it premultiplied}.
+	
+	\item {\it preserveDrawingBuffer}
+	
+	Jika nilainya {\it false} saat penyangga gambar mempresentasikan bagian dari penyangga gambar yang terdeskripsikan, konten-konten pada penyangga gambar akan dihapus ke nilai awalnya. Begitupun jug adengan elemen dari penyangga gambar seperti warna, kedalaman, dan stensil yang juga akan dihapus. Jika nilainya {\it true}, penyangga tidak akan dihapus dan akan mempresentasikan nilainya sampai nantinya dihapus atau ditulis kembali oleh penulisnya.
+	
+	\item {\it powerPreference}
+	
+	Menyediakan petunjuk untuk agen pengguna yang mengindikasikan konfigurasi GPU yang cocok untuk konteks WebGL tersebut.
+	
+	\item {\it failIfMajorPerformanceCaveat}
+	
+	Jika nilainya {\it true}, pembuatan konteks akan gagal jika implementasi menentukan bahwa performansi pada konteks WebGL yang dibuat akan sangat rendah pada aplikasi yang membuat persamaan pemanggilan OpenGL.
+	
+	\end{itemize}
+	
+\item {\it WebGLObject}
+
+	{\it Interface WebGLObject} merupakan {\it interface} awal untuk diturunkan kepada semua objek GL.
+	\begin{lstlisting}
+	interface WebGLObject {
+	};
+	\end{lstlisting}
+	
+\item {\it WebGLBuffer} 
+	
+	{\it Interface WebGLBuffer} merepresentasikan sebuah OpenGL {\it Buffer Object}.
+	\begin{lstlisting}
+	interface WebGLBuffer : WebGLObject {
+	};
+	\end{lstlisting}
+	
+\item {\it WebGLFrameBuffer}
+
+	{\it Interface WebGLFrameBuffer} merepresentasikan sebuah OpenGL {\it Frame Buffer Object}.
+	\begin{lstlisting}
+	interface WebGLFramebuffer : WebGLObject {
+	};
+	\end{lstlisting}
+
+\item {\it WebGLProgram}
+
+	{\it Interface WebGLProgram} merepresentasikan sebuah OpenGL {\it Program Object}.
+	\begin{lstlisting}
+	interface WebGLProgram : WebGLObject {
+	};
+	\end{lstlisting}
+
+\item {\it WebGLRenderbuffer}
+
+	{\it Interface WebGLRenderbuffer} merepresentasikan sebuah OpenGL {\it Renderbuffer Object}.
+	\begin{lstlisting}
+	interface WebGLRenderbuffer : WebGLObject {
+	};
+	\end{lstlisting}
+
+\item {\it WebGLShader}
+
+	{\it Interface WebGLShader} merepresentasikan sebuah OpenGL {\it Shader Object}.
+	\begin{lstlisting}
+	interface WebGLShader : WebGLObject {
+	};
+	\end{lstlisting}
+
+\item {\it WebGLTexture}
+
+	{\it Interface WebGLTexture} merepresentasikan sebuah OpenGL {\it Texture Object}.
+	\begin{lstlisting}
+	interface WebGLTexture : WebGLObject {
+	};
+	\end{lstlisting}
+	
+\item {\it WebGLUniformLocation}
+
+	{\it Interface WebGLUniformLocation} merepresentasikan lokasi dari variabel {\it uniform} pada program {\it shader}.
+	\begin{lstlisting}
+	interface WebGLUniformLocation {
+	};
+	\end{lstlisting}
+	
+\item {\it WebGLActiveInfo}
+
+	{\it Interface WebGLActiveInfo} merepresentasikan informasi yang dikembalikan dari pemanggilan {\it getActiveAttrib} dan {\it getActiveUniform}.
+	\begin{lstlisting}
+	interface WebGLActiveInfo {
+  		 readonly attribute GLint size;
+   		 readonly attribute GLenum type;
+		 readonly attribute DOMString name;
+	};
+	\end{lstlisting}
+	
+\item {\it WebGLShaderPrecisionFormat}
+
+	{\it Interface WebGLShaderPrecisionFormat} merepresentasikan informasi yang dikembalikan dari pemanggilan {\it getShaderPrecisionFormat}.
+	\begin{lstlisting}
+	interface WebGLShaderPrecisionFormat {
+    		readonly attribute GLint rangeMin;
+    		readonly attribute GLint rangeMax;
+    		readonly attribute GLint precision;
+	};
+	\end{lstlisting}
+	
+\item {\it ArrayBuffer} dan {\it Typed Arrays}
+
+	{\it Vertex, index, texture,} dan data lainnya ditransfer ke implementasi WebGL menggunakan {\it ArrayBuffer, Typed Arrays,} dan {\it DataViews} seperti yang telah didefinisikan pada spesifikasi ECMAScript.
+	\begin{lstlisting}
+	var numVertices = 100; // for example
+
+	// Hitung ukuran buffer yang dibutuhkan dalam bytes dan floats
+	var vertexSize = 3 * Float32Array.BYTES_PER_ELEMENT +
+     	4 * Uint8Array.BYTES_PER_ELEMENT;
+	var vertexSizeInFloats = vertexSize / Float32Array.BYTES_PER_ELEMENT;
+
+	// Alokasikan buffer
+	var buf = new ArrayBuffer(numVertices * vertexSize);
+
+	// Map buffer ke Float32Array untuk mengakses posisi
+	var positionArray = new Float32Array(buf);
+
+	// Map buffer yang sama ke Uint8Array untuk mengakses warna
+	var colorArray = new Uint8Array(buf);
+
+	// Inisialisasi offset dari vertices dan warna pada buffer
+	var positionIdx = 0;
+	var colorIdx = 3 * Float32Array.BYTES_PER_ELEMENT;
+
+	// Inisialisasi buffer
+	for (var i = 0; i < numVertices; i++) {
+    		positionArray[positionIdx] = ...;
+    		positionArray[positionIdx + 1] = ...;
+    		positionArray[positionIdx + 2] = ...;
+    		colorArray[colorIdx] = ...;
+    		colorArray[colorIdx + 1] = ...;
+    		colorArray[colorIdx + 2] = ...;
+    		colorArray[colorIdx + 3] = ...;
+    		positionIdx += vertexSizeInFloats;
+    		colorIdx += vertexSize;
+	}
+	\end{lstlisting}
+	
+\item {\it WebGL Contect}
+	{\it WebGLRenderingContext} merepresentasikan API yang memungkinkan gaya pembangunan OpenGL ES 2.0 ke elemen {\it canvas}.
+
+\item {\it WebGLContextEvent}
+	WebGL menghasilkan sebuah {\it WebGLContextEvent} sebagai respon dari perubahan penting pada status konteks pembangunan WebGL. {\it Event} tersebut dikirim melalui {\it DOM Event System} dan dilanjutkan ke HTMLCanvasEvent yang diasosiasikan dengan konteks pembangunan WebGL.
+
+\end{enumerate}
+
+
+\section{Pustaka Three.js}
 \label{sec:latex}
-Three.js \textit{library} merupakan \textit{library} Javascript yang biasa digunakan untuk membuat permainan dan aplikasi 3 dimensi. Three.js \textit{library} ini memanfaatkan WebGL API untuk menampilkan grafis 3 dimensi pada \textit{browser} tanpa harus memasang \textit{plugin} tambahan. Three.js \textit{library} membantu menyederhanakan struktur program yang ditulis dibandingkan dengan hanya menggunakan WebGL. Tentunya, Three.js \textit{library} akan sangat membantu pada pengembangan grafik 3 dimensi yang kompleks. Oleh karena Three.js \textit{library} memanfaatkan WebGL API, Three.js \textit{llibrary} dapat dijalankan pada semua \textit{browser} yang mendukung WebGL.
-
-Terdapat beberapa fungsi penting yang disediakan oleh Three.js \textit{library} dalam pembuatan grafis 3 dimensi, di antaranya adalah:
+Pustaka Three.js ini bertujuan untuk membuat pustaka 3 dimensi yang mudah dan ringan untuk digunakan. Pustaka ini menyediakan <canvas>, <svg>, dan CSS3D, dan pembangun WebGL.
+Terdapat beberapa fungsi penting yang disediakan oleh pustaka Three.js dalam pembuatan grafis 3 dimensi, di antaranya adalah:
 \begin{itemize}
-\item \textit{Renderers}, menampilkan grafis 3 dimensi ke \textit{browser}.
-\item \textit{Scenes}, menambahkan dan menghapus objek pada saat program berjalan.
-\item \textit{Cameras}, memberikan perspektif kepada pengguna.
-\item \textit{Animation}, mensimulasikan perubahan bentuk grafis 3 dimensi.
-\item \textit{Lights}, memberikan efek pencahayaan.
-\item \textit{Materials}, membuat material yang disertai dengan tekstur dan bayangan halus.
-\item \textit{Shaders}, memberikan akses penuh kepada semua fitur WebGL.
-\item \textit{Objects}, membuat berbagai jenis bentuk objek yang rinci.
-\item \textit{Geometry}, membuat bentuk objek 3 dimensi.
-\item \textit{Loaders}, memuat \textit{file} pendukung seperti gambar, JavaScript Object Notation (JSON), dan \textit{Scene}.
-\item \textit{Utilities}, memberikan seperangkat fungsi waktu dan matematika 3D.
-\item \textit{Export/Import}, membuat \textit{file} JSON yang kompatibel dengan Three.js \textit{library}.
+
+\item \textit{Animation}
+
+	\begin{itemize}
+	\item {\it AnimationAction}, menjadwalkan penampilan dari animasi yang disimpan pada {\it AnimationClips}.
+	\item {\it AnimationClip}, seperangkat jalur {\it keyframe} yang dapat digunakan untuk merepresentasikan animasi.
+	\item {\it AnimationMixer}, alat untuk memainkan animasi pada beberapa objek di layar.
+	\item {\it AnimationObjectGroup}, sebuah grup objek yang menerima keadaan animasi yang dibagikan.
+	\item {\it AnimationUtils}, sebuah objek dengan berbagai fungsi untuk membantu animasi yang digunakan secara internal.
+	\item {\it KeyframeTrack}, sebuah urutan waktu dari {\it keyframe} yang berisi daftar waktu dan nilai terkait lainnya. Biasa digunakan untuk menganimasikan properti spesifik dari sebuah objek.
+	\item {\it PropertyBinding}, menyimpan referensi kepada properti asli pada graf layar yang digunakan secara internal.
+	\item {\it PropertyMixer}, penyangga properti graf layar yang memungkinkan akumulasi berat yang digunakan secara internal.
+	\end{itemize}
+
+\item \textit{Cameras}
+
+	\begin{itemize}
+	\item {\it Camera}, kelas abstrak untuk {\it cameras}. Kelas ini harus selalu diwarisi saat membangun suatu kamera.
+	\item {\it CubeCamera}, membuat 6 kamera yang dibangun pada {\it WebGLRenderTargetCube}.
+	\item{\it OrthographicCamera}, kamera yang menggunakan proyeksi ortografik.
+	\item {\it PerspectiveCamera}, kamera yang menggunakan pyoyeksi perspektif.
+	\item {\it StereoCamera}, dua buah {\it PerspektifCamera} yang digunakan untuk efek seperti {\it 3D Anaglyph} dan {\it Parallax Barrier}.
+	\end{itemize}
+	
+\item \textit{Lights}
+
+	\begin{itemize}
+	\item {\it AmbientLight}, sebuah cahaya yang menyinari objek secara global dan merata.
+	\item {\it DirectionalLight}, sebuah pancaran sinar dari arah yang spesifik.
+	\item {\it HemisphereLight}, sebuah cahaya yang penyinaran dilakukan tepat di atas layar dengan peleburan warna langit ke warna lantai.
+	\item {\it Light}, kelas abstrak untuk {\it Lights}.
+	\item {\it PointLight}, sebuah pancaran dari satu titik pada setiap arah.
+	\item {\it RectAreaLight}, sebuah pancaran sinar seragam melewati permukaan bidang persegi panjang.
+	\item {\it SpotLight}, sebuah pancaran dari satu titik pada setiap arah sepanjang bidang yang ukurannya dapat bertambah lebih jauh.
+	\end{itemize}
+	
+\item \textit{Objects}
+
+	\begin{itemize}
+	\item {\it Bone}, sebuah tulang yang merupakan bagian dari kerangka.
+	\item {\it Group}, hampir sama dengan suatu {\it Object3D}.
+	\item {\it LensFlare}, membuat lensa suar tiruan yang mengikuti cahaya.
+	\item {\it Line}, sebuah garis yang kontinu.
+	\item {\it LineLoop}, sebuah line kontinu yang kembali ke awal.
+	\item {\it LineSegments}, beberapa garis yang ditarik antara beberapa pasang {\it vertex}.
+	\item {\it Mesh}, sebuah kelas yang merepresentasikan object dengan dasar segitiga.
+	\item {\it Points}, sebuah kelas yang merepresentasikan titik.
+	\item {\it Skeleton}, sebuah {\it array} dari tulang untuk membuat kerangka yang bisa digunakan pada {\it SkinnedMesh}.
+	\item {\it SkinnedMesh}, sebuah {\it mesh} yang mempunyai kerangka yang terdiri dari tulang dan digunakan untuk menganimasikan kumpulan {\it vertex} pada geometri.
+	\end{itemize}
+	
+\item \textit{Scenes}
+
+	\begin{itemize}
+	\item {\it Fog}, kelas yang berisi parameter untuk mendefinisikan kabut.
+	\item {\it Scene}, sebuah layar yang memungkinkan untuk membuat dan menempatkan sesuatu pada pustaka Three.js. 
+	\end{itemize}
+	
+\item \textit{Texture}
+	\begin{itemize}
+	\item {\it Texture}, membuat tekstur untuk mengaplikasikan permukaan atau sebagai refleksi.
+	\item {\it CanvasTexture}, membuat tekstur dari suatu elemen {\it canvas}.
+	\end{itemize}	
+	
 \end{itemize}
 
 Selain itu Three.js \textit{library} juga telah menyediakan \textit{editor} dengan basis Graphical User Interface yang memungkinkan pengembang untuk mencoba terlebih dahulu sebelum mulai menulis kode program. \textit{Editor} ini juga memungkinkan pengembang untuk melakukan ekspor objek 3 dimensi dalam format JSON.

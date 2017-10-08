@@ -5,20 +5,20 @@
 \section{Latar Belakang}
 \label{sec:label}
 
-Pratinjau merupakan suatu kegiatan yang dilakukan untuk melakukan tinjau awal terhadap suatu perencanaan sebelum akhirnya membuat keputusan. Kegiatan pratinjau ini biasa dilakukan untuk dapat meyakinkan pembuatan keputusan yang kuat sebelum melanjutkan ke tahapan selanjutnya. Selain itu kegiatan pratinjau juga dapat dilakukan untuk meminimalisir hasil akhir yang tidak sesuai dengan perencanaan awal.
+Aplikasi pratinjau 3 dimensi merupakan sebuah perangkat lunak yang membantu penggunanya untuk meninjau kembali desain dari produk yang ingin dihasilkan secara 3 dimensi, sebelum pengguna tersebut melakukan implementasi pembuatan produk. Kelebihan dari aplikasi ini adalah pengguna dapat melakukan peninjauan dari berbagai sudut pandang untuk memaksimalkan hasil dari implementasi pembuatan produk. Aplikasi pratinjau tiga dimensi juga memungkinkan pengguna untuk merubah desain dari produk, hal ini bertujuan agar dapat membantu pengguna memutuskan desain produk yang paling sesuai. Pada dasarnya aplikasi pratinjau tiga dimensi bertujuan untuk membantu pengguna agar terhindar dari hasil pembuatan produk yang tidak sesuai dengan ekspektasi pengguna.
 
-Sebagai perwujudan dari tujuan kegiatan pratinjau, maka diperlukan suatu aplikasi untuk mendukung kegiatan tersebut. Aplikasi pratinjau ini dapat digunakan oleh pengguna sebagai media untuk melihat gambaran produk akhir yang ingin dihasilkan. Melalui aplikasi pratinjau pengguna tidak perlu lagi hanya sekedar membayangkan produk akhir yang ingin dibuat, namun pengguna bisa langsung melihat gambaran maya mengenai produk akhir tersebut. Kemudian dengan tambahan kehadiran aplikasi 3 dimensi, pengguna akan mendapatkan perspektif yang lebih sesuai dengan realita dari peninjauan produk hasil akhir. Aplikasi 3 dimensi tentunya dapat memberikan perspektif yang lebih detail dan semakin meminimalisir perbedaan pada hasil akhir produk dengan rancangan awal.
+Penggunaan teknologi {\it web} pada aplikasi 3 dimensi dapat memudahkan pengguna untuk melakukan akses aplikasi tanpa harus melakukan instalasi aplikasi namun hanya menggunakan {\it  browser}. Kemudian aplikasi berbasis web juga ramah untuk berbagai lingkungan sistem operasi seperti Windows, Linux, dan Mac OS sehingga tidak membatasi cakupan penggunanya.
 
-Selain itu di sisi lain, aplikasi berbasis web merupakan salah satu jenis aplikasi yang paling banyak digunakan. Aplikasi berbasis web memungkinkan pengguna untuk melakukan akses langsung ke aplikasi tanpa perlu melakukan instalasi pada perangkat yang mereka gunakan. Hal tersebut menjadi salah satu keunggulan yang membuat jenis aplikasi ini lebih dipilih pengguna dibandingkan jenis aplikasi lainnya. Kemudian aplikasi berbasis web juga ramah untuk berbagai lingkungan sistem operasi sehingga tidak membatasi cakupan penggunanya. Oleh karena itu, aplikasi pratinjau 3 dimensi berbasis web merupakan solusi yang sangat tepat untuk memenuhi permasalahan yang dijelaskan di paragraf-paragraf sebelumnya.
+Pada skripsi ini, akan dibuat aplikasi pratinjau 3 dimensi berbasis web yang dapat memungkinkan pengguna untuk melakukan kustomisasi ruang belajar mengajar pada lingkungan perkuliahan. Melalui perangkat lunak ini, pengguna diharapkan dapat memiliki gambaran 3 dimensi mengenai ruangan belajar mengajar dengan komposisi warna dinding dan tekstur lantai yang tepat. Perangkat lunak akan dibuat dengan memanfaatkan WebGL dan pustaka Three.js. WebGL merupakan sebuah lintas platform, standar web bebas royalti untuk {\it Application Programming Interface} (API) grafis 3 dimensi level rendah yang berdasar dari OpenGL ES, terbuka untuk ECMAScript melalui elemen {\it canvas} HTML5. Sementara itu pustaka Three.js bertujuan membuat pustaka 3 dimensi yang mudah dan ringan untuk digunakan. Kemudian sebagai studi kasus, ruangan belajar mengajar yang akan digunakan untuk melakukan simulasi aplikasi pratinjau tiga dimensi berbasis {\it web} adalah salah satu ruangan perkuliahan di Fakultas Teknologi Informasi dan Sains. Ruangan tersebut dilengkapi dengan peralatan multimedia yang dapat menunjang pengajaran berbasis Teknologi Informasi seperti komputer, proyektor, serta koneksi internet yang dapat menunjang perkuliahan berbasis E-learning. Selain itu untuk menjamin kenyamanan selama perkuliahan, semua ruang kuliah dilengkapi pendingin udara.
 
-Pada skripsi ini akan dibuat aplikasi pratinjau 3 dimensi berbasis web yang dapat memungkinkan pengguna untuk melakukan kustomisasi pada ruangan belajar mengajar. Aplikasi ini akan memanfaatkan WebGL dan Three.js library di dalam implementasinya. WebGL merupakan teknologi web yang menyuguhkan akselerasi grafis 3 dimensi ke dalam browser tanpa memasang perangkat lunak tambahan. Sementara Three.js library merupakan library JavaScript yang digunakan untuk membuat permainan dan aplikasi 3D. Kemudian sebagai studi kasus, ruang belajar mengajar yang akan dilakukan untuk simulasi aplikasi pratinjau 3 dimensi berbasis web adalah ruangan kelas pada Fakultas Teknologi Informasi dan Sains.
+\includegraphics[scale=0.5]{ruang1}
 
 \section{Rumusan Masalah}
 \label{sec:rumusan}
 Berikut ini masalah-masalah yang dibahas dalam skripsi ini:
 \begin{itemize}
     \item Bagaimana ruangan kelas dan objek pendukung lainnya dapat direpsentasikan dalam WebGL?
-    \item Bagaimana mengkonversi hasil pratinjau ke dalam format PDF?
+    \item Bagaimana membuat tampilan responsif pada aplikasi agar terlihat bagus saat dicetak?
 \end{itemize}
 
 \section{Tujuan}
@@ -26,7 +26,7 @@ Berikut ini masalah-masalah yang dibahas dalam skripsi ini:
 Berikut ini tujuan-tujuan yang ingin dicapai dalam penilitian ini:
 \begin{itemize}
     \item Membangun aplikasi yang dapat merepresentasikan ruangan dalam WebGL.
-    \item Membangun fitur konversi hasil pratinjau ke dalam format PDF.
+    \item Membangun tampilan aplikasi yang responsif sehingga terlihat bagus saat dicetak.
 \end{itemize}
 
 \section{Batasan Masalah}
@@ -35,8 +35,6 @@ Terdapat beberapa batasan masalah dalam penilitian ini, yaitu:
 \begin{enumerate}
     \item Pengguna hanya dapat melakukan kustomisasi pada tekstur lantai, warna cat dinding bagian atas, dan warna cat dinding bagian bawah dari ruangan kelas.
     \item Pengguna hanya dapat mengganti tekstur lantai, warna cat dinding bagian atas, dan warna cat dinding bagian bawah dengan 8 variasi.
-    \item Hasil akhir dari kustomisasi hanya akan didapatkan dalam format PDF.
-    \item Hasil akhir kustomisasi dengan format PDF hanya akan memuat tekstur lantai, warna cat dinding bagian atas, dan warna cat dinding bagian bawah yang telah dipilih oleh pengguna. Sehingga bukan dalam bentuk \textit{screenshot} ruangan kelas 3 dimensi.
 \end{enumerate}
 \section{Metodologi}
 \label{sec:metlit}
