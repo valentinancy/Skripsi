@@ -240,50 +240,1389 @@ Terdapat beberapa fungsi penting yang disediakan oleh pustaka Three.js dalam pem
 
 	\begin{itemize}
 	\item {\it Camera}, kelas abstrak untuk {\it cameras}. Kelas ini harus selalu diwarisi saat membangun suatu kamera.
+	
 	\item {\it CubeCamera}, membuat 6 kamera yang dibangun pada {\it WebGLRenderTargetCube}.
+	\begin{lstlisting}
+var cubeCamera = new THREE.CubeCamera( 1, 100000, 128 );
+scene.add( cubeCamera );
+\end{lstlisting}
+	
 	\item{\it OrthographicCamera}, kamera yang menggunakan proyeksi ortografik.
+\begin{lstlisting}
+var camera = new THREE.OrthographicCamera( width / - 2, width / 2, 
+height / 2, height / - 2, 1, 1000 );
+scene.add( camera );
+\end{lstlisting}
+	
 	\item {\it PerspectiveCamera}, kamera yang menggunakan pyoyeksi perspektif.
+\begin{lstlisting}
+var camera = new THREE.PerspectiveCamera( 45, width / height, 
+1, 1000 );
+scene.add( camera );
+\end{lstlisting}
+	
 	\item {\it StereoCamera}, dua buah {\it PerspektifCamera} yang digunakan untuk efek seperti {\it 3D Anaglyph} dan {\it Parallax Barrier}.
+
+	\end{itemize}
+	
+\item \textit{Core}
+	\begin{itemize}
+	\item{\it BufferAttribute}, kelas ini menyimpan data untuk atribut yang diasosiasikan menggunakan BufferGeometry. Hal ini memungkinkan pengiriman data yang lebih efisien kepada GPU.
+	\item{\it BufferGeometry}, merupakan sebuah kelas alternatif efisien untuk {\it Geometry}. Karena kelas ini menyimpan semua data, termasuk posisi vertex, index permukaan, normal, warna, UV, dan atribut kustom menggunakan buffer. Kelas ini mengurangi biaya pengiriman seluruh data ke GPU.
+\begin{lstlisting}
+var geometry = new THREE.BufferGeometry();
+// membuat bentuk kotak sederhana dengan melakukan duplikasi pada
+// bagian atas kiri dan bawah kanan
+// kumpulan vertex karena setiap vertex harus muncul di setiap segitiga
+var vertices = new Float32Array( [
+	-1.0, -1.0,  1.0,
+	 1.0, -1.0,  1.0,
+	 1.0,  1.0,  1.0,
+
+	 1.0,  1.0,  1.0,
+	-1.0,  1.0,  1.0,
+	-1.0, -1.0,  1.0
+] );
+
+// itemSize = 3 karena ada 3 values (components) per vertex
+geometry.addAttribute( 'position', new THREE.BufferAttribute
+( vertices, 3 ) );
+var material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+var mesh = new THREE.Mesh( geometry, material );
+\end{lstlisting}
+
+	\item{\it Clock}, sebuah objek untuk menjaga alur dari waktu.
+	\item{Direct Geometry}, kelas ini digunakan secara internal untuk mengkonversi {\it Geometry} menjadi {\it BufferGeometry}.
+	\item{\it EventDispatcher}, suatu {\it event} pada JavaScript untuk objek kustom.
+\begin{lstlisting}
+// menambahkan event untuk objek kustom
+var Car = function () {
+    this.start = function () {
+        this.dispatchEvent( { type: 'start',
+        message: 'vroom vroom!' } );
+    };
+};
+
+//  mencampur EventDispatcher.prototype dengan prototipe objek kustom
+Object.assign( Car.prototype, EventDispatcher.prototype );
+
+// Using events with the custom object
+
+var car = new Car();
+
+car.addEventListener( 'start', function ( event ) {
+
+    alert( event.message );
+
+} );
+
+car.start();
+\end{lstlisting}
+
+	\item{\it Face3}, permukaan segitiga yang digunakan pada {\it Geometry}.
+\begin{lstlisting}
+var material = new THREE.MeshStandardMaterial( { color : 0x00cc00 } );
+
+// membuat geometry segitiga
+var geometry = new THREE.Geometry();
+geometry.vertices.push( new THREE.Vector3( -50, -50, 0 ) );
+geometry.vertices.push( new THREE.Vector3(  50, -50, 0 ) );
+geometry.vertices.push( new THREE.Vector3(  50,  50, 0 ) );
+
+//membuat permukaan baru dengan vertex 0, 1, 2
+var normal = new THREE.Vector3( 0, 1, 0 ); //optional
+var color = new THREE.Color( 0xffaa00 ); //optional
+var materialIndex = 0; //optional
+var face = new THREE.Face3( 0, 1, 2, normal, color, materialIndex );
+
+// menambahkan permukaan ke array permukaan geometry
+geometry.faces.push( face );
+
+// permukaan normal dan vertex normal dapat dihitung
+// secara otomatis apabila tidak disediakan di atas
+geometry.computeFaceNormals();
+geometry.computeVertexNormals();
+
+scene.add( new THREE.Mesh( geometry, material ) );
+\end{lstlisting}
+
+	\item{\it Geometry}, kelas dasar untuk {\it Geometry}.
+\begin{lstlisting}
+var geometry = new THREE.Geometry();
+
+geometry.vertices.push(
+	new THREE.Vector3( -10,  10, 0 ),
+	new THREE.Vector3( -10, -10, 0 ),
+	new THREE.Vector3(  10, -10, 0 )
+);
+
+geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
+
+geometry.computeBoundingSphere();
+\end{lstlisting}
+
+	\item{\it InstancedBufferAttribute}, sebuah versi instansi dari {\it BufferAttribute}.
+	
+	\item{\it InstancedBufferGeometry}, sebuah versi instansi dari {\it BufferGeometry}.
+	
+	\item{\it InstancedInterleavedBuffer}, sebuah versi instansi dari {\it InterleavedBuffer}.
+	
+	\item{\it InterleavedBuffer}.
+	
+	\item{\it InterleavedBufferAttribute}.
+	
+	\item{\it Layers}, lapisan-lapisan objek yang berisi dari objek 3 dimensi dan terdiri dari 1 sampai 32 layer yang diberi nomor 0 sampai 31. Secara internal, layer disimpan sebagai sebuah {\it bit mask}. Kemudian sebagai inisialisasinya, semua anggota dai {\it Object3Ds} merupakan member dari lapisan 0.
+	\item{\it Object3D}, sebuah kelas dasar untuk hampir semua object pada Three.js yang juga menyediakan seperangkat properti dan metode untuk memanipulasi objek 3 dimenasi pada ruang.
+	\item{\it Raycaster}, sebuah kelas yang didesain untuk membantu {\it raycasting}. {\it Raycasting} digunakan untuk mengetahui posisi kursor berada pada suatu benda diantara benda lainnya.
+	
+\begin{lstlisting}
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();
+
+function onMouseMove( event ) {
+	// menghitung posisi kursor pada koordinat perangkat normal
+	// (-1 to +1) untuk kedua komponen
+
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
+
+function render() {
+	// mengubah sinar dari kamera dan posisi kursor
+	raycaster.setFromCamera( mouse, camera );
+
+	// kalkulasi objek yang berpotongan pada sinar
+	var intersects = raycaster.intersectObjects( scene.children );
+
+	for ( var i = 0; i < intersects.length; i++ ) {
+		intersects[ i ].object.material.color.set( 0xff0000 );
+	}
+	renderer.render( scene, camera );
+}
+
+window.addEventListener( 'mousemove', onMouseMove, false );
+window.requestAnimationFrame(render);
+\end{lstlisting}
+	
+	\item{\it Uniform}, merupakan variabel global GLSL. {\it Uniform} akan dikirim ke program {\it shader}.
+	
+\begin{lstlisting}
+uniforms: {
+	time: { value: 1.0 },
+	resolution: new THREE.Uniform(new THREE.Vector2())
+}
+\end{lstlisting}
+	
+	\end{itemize}
+	
+\item \textit{Geometries}
+	\begin{itemize}
+	\item {\it BoxBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it BoxGeometry}.
+	
+\begin{lstlisting}
+var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
+\end{lstlisting}
+
+	\item {\it BoxGeometry}, merupakan kelas primitif geometri berbentuk segi empat.
+	
+\begin{lstlisting}
+var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
+\end{lstlisting}
+	
+	\item {\it CircleBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it CircleGeometry}.
+	
+\begin{lstlisting}
+var geometry = new THREE.CircleBufferGeometry( 5, 32 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var circle = new THREE.Mesh( geometry, material );
+scene.add( circle );
+\end{lstlisting}
+	
+	\item {\it CircleGeometry}, merupakan bentuk sederhana dari geometri {\it Euclidean}.
+	
+\begin{lstlisting}
+var geometry = new THREE.CircleGeometry( 5, 32 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var circle = new THREE.Mesh( geometry, material );
+scene.add( circle );
+\end{lstlisting}
+	
+	\item {\it ConeBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it ConeGeometry}.
+	
+\begin{lstlisting}
+var geometry = new THREE.ConeBufferGeometry( 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var cone = new THREE.Mesh( geometry, material );
+scene.add( cone );
+\end{lstlisting}
+	
+	\item {\it ConeGeometry}, sebuah kelas untuk mengeneralisasi geometri kerucut.
+	
+\begin{lstlisting}
+var geometry = new THREE.ConeGeometry( 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var cone = new THREE.Mesh( geometry, material );
+scene.add( cone );
+\end{lstlisting}
+
+	\item {\it CylinderBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it CylinderGeometry}.
+	
+\begin{lstlisting}
+var geometry = new THREE.CylinderBufferGeometry( 5, 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var cylinder = new THREE.Mesh( geometry, material );
+scene.add( cylinder );
+\end{lstlisting}
+
+	\item {\it CylinderGeometry}, sebuah kelas untuk mengeneralisasi geometri silinder.
+	
+\begin{lstlisting}
+var geometry = new THREE.CylinderGeometry( 5, 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var cylinder = new THREE.Mesh( geometry, material );
+scene.add( cylinder );
+\end{lstlisting}
+
+	\item {\it DodecahedronBufferGeometry}, sebuah kelas untuk mengeneralisasi geometri pigura berduabelas segi.
+
+	\item {\it DodecahedronGeometry}, sebuah kelas untuk mengeneralisasi geometri pigura berduabelas segi.
+
+	\item {\it EdgesGeometry}, dapat digunakan sebagai objek pembantu untuk melihat tepi dari suatu objek geometri.
+	
+\begin{lstlisting}
+var geometry = new THREE.BoxBufferGeometry( 100, 100, 100 );
+var edges = new THREE.EdgesGeometry( geometry );
+var line = new THREE.LineSegments( edges,
+new THREE.LineBasicMaterial( { color: 0xffffff } ) );
+scene.add( line );
+\end{lstlisting}
+
+	\item {\it ExtrudeGeometry}, membuat geometri diekstrusi dari sebuah alur bentuk.
+	
+\begin{lstlisting}
+var length = 12, width = 8;
+
+var shape = new THREE.Shape();
+shape.moveTo( 0,0 );
+shape.lineTo( 0, width );
+shape.lineTo( length, width );
+shape.lineTo( length, 0 );
+shape.lineTo( 0, 0 );
+
+var extrudeSettings = {
+	steps: 2,
+	amount: 16,
+	bevelEnabled: true,
+	bevelThickness: 1,
+	bevelSize: 1,
+	bevelSegments: 1
+};
+
+var geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material ) ;
+scene.add( mesh );
+\end{lstlisting}
+
+	\item {\it ExtrudeBufferGeometry}, membuat {\it BufferGeometry} diekstrusi dari sebuah alur bentuk.
+	
+\begin{lstlisting}
+var length = 12, width = 8;
+
+var shape = new THREE.Shape();
+shape.moveTo( 0,0 );
+shape.lineTo( 0, width );
+shape.lineTo( length, width );
+shape.lineTo( length, 0 );
+shape.lineTo( 0, 0 );
+
+var extrudeSettings = {
+	steps: 2,
+	amount: 16,
+	bevelEnabled: true,
+	bevelThickness: 1,
+	bevelSize: 1,
+	bevelSegments: 1
+};
+
+var geometry = new THREE.ExtrudeBufferGeometry( shape, extrudeSettings );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material ) ;
+scene.add( mesh );
+\end{lstlisting}
+
+	\item {\it IcosahedronBufferGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri {\it icosahedron}.
+
+	\item {\it IcosahedronGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri {\it icosahedron}.
+
+	\item {\it LatheBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it LatheGeometry}.
+	
+\begin{lstlisting}
+var points = [];
+for ( var i = 0; i < 10; i ++ ) {
+	points.push( new THREE.Vector2( Math.sin( i * 0.2 ) * 10 + 5,
+	( i - 5 ) * 2 ) );
+}
+var geometry = new THREE.LatheBufferGeometry( points );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var lathe = new THREE.Mesh( geometry, material );
+scene.add( lathe );
+\end{lstlisting}
+
+	\item {\it LatheGeometry}, membuat jala dengan simetri aksial seperti vas. Bentuk ini berotasi di sekitar sumbu Y.
+	
+\begin{lstlisting}
+var points = [];
+for ( var i = 0; i < 10; i ++ ) {
+	points.push( new THREE.Vector2( Math.sin( i * 0.2 ) * 10 + 5,
+	( i - 5 ) * 2 ) );
+}
+var geometry = new THREE.LatheGeometry( points );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var lathe = new THREE.Mesh( geometry, material );
+scene.add( lathe );
+\end{lstlisting}
+
+	\item {\it OctahedronBufferGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri segi delapan.
+	
+	\item {\it OctahedronGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri segi delapan.
+	
+	\item {\it ParametricBufferGeometry}, mengeneralisasi geometri yang merepresentasikan permukaan parametrik.
+	
+\begin{lstlisting}
+var geometry = new THREE.ParametricBufferGeometry( 
+THREE.ParametricGeometries.klein, 25, 25 );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
+\end{lstlisting}
+
+	\item {\it ParametricGeometry}, mengeneralisasi geometri yang merepresentasikan permukaan parametrik.
+	
+\begin{lstlisting}
+var geometry = new THREE.ParametricGeometry( 
+THREE.ParametricGeometries.klein, 25, 25 );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
+\end{lstlisting}
+
+	\item {\it PlaneBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it PlaneGeometry}.
+	
+\begin{lstlisting}
+var geometry = new THREE.PlaneBufferGeometry( 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( 
+	{color: 0xffff00, side: THREE.DoubleSide} 
+);
+var plane = new THREE.Mesh( geometry, material );
+scene.add( plane );
+\end{lstlisting}
+
+	\item {\it PlaneGeometry}, sebuah kelas untuk mengeneralisasi geometri dataran.
+	
+\begin{lstlisting}
+var geometry = new THREE.PlaneGeometry( 5, 20, 32 );
+var material = new THREE.MeshBasicMaterial( 
+	{color: 0xffff00, side: THREE.DoubleSide}
+ );
+var plane = new THREE.Mesh( geometry, material );
+scene.add( plane );
+\end{lstlisting}
+
+	\item {\it PolyhedronBufferGeometry}, merupakan sebuah padat 3 dimensi dengan permukaan datar.
+	
+\begin{lstlisting}
+var verticesOfCube = [
+    -1,-1,-1,    1,-1,-1,    1, 1,-1,    -1, 1,-1,
+    -1,-1, 1,    1,-1, 1,    1, 1, 1,    -1, 1, 1,
+];
+
+var indicesOfFaces = [
+    2,1,0,    0,3,2,
+    0,4,7,    7,3,0,
+    0,1,5,    5,4,0,
+    1,2,6,    6,5,1,
+    2,3,7,    7,6,2,
+    4,5,6,    6,7,4
+];
+
+var geometry = new THREE.PolyhedronBufferGeometry( verticesOfCube,
+ indicesOfFaces, 6, 2 );
+\end{lstlisting}
+
+	\item {\it PolyhedronGeometry}, merupakan sebuah padat 3 dimensi dengan permukaan datar.
+	
+\begin{lstlisting}
+var verticesOfCube = [
+    -1,-1,-1,    1,-1,-1,    1, 1,-1,    -1, 1,-1,
+    -1,-1, 1,    1,-1, 1,    1, 1, 1,    -1, 1, 1,
+];
+
+var indicesOfFaces = [
+    2,1,0,    0,3,2,
+    0,4,7,    7,3,0,
+    0,1,5,    5,4,0,
+    1,2,6,    6,5,1,
+    2,3,7,    7,6,2,
+    4,5,6,    6,7,4
+];
+
+var geometry = new THREE.PolyhedronGeometry( verticesOfCube, 
+indicesOfFaces, 6, 2 );
+\end{lstlisting}
+
+	\item {\it RingBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it RingGeometry}.
+	
+\begin{lstlisting}
+var geometry = new THREE.RingBufferGeometry( 1, 5, 32 );
+var material = new THREE.MeshBasicMaterial( 
+	{ color: 0xffff00, side: THREE.DoubleSide } 
+);
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
+\end{lstlisting}
+
+	\item {\it RingGeometry}, sebuah kelas untuk mengeneralisasi geometri cincin dua dimensi.
+	
+\begin{lstlisting}
+var geometry = new THREE.RingGeometry( 1, 5, 32 );
+var material = new THREE.MeshBasicMaterial( 
+{ color: 0xffff00, side: THREE.DoubleSide } 
+);
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
+\end{lstlisting}
+
+	\item {\it ShapeBufferGeometry}, membuat sebuah geometri poligonal satu sisi dari satu atau lebih alur bentuk.
+	
+\begin{lstlisting}
+var x = 0, y = 0;
+
+var heartShape = new THREE.Shape();
+
+heartShape.moveTo( x + 5, y + 5 );
+heartShape.bezierCurveTo( x + 5, y + 5, x + 4, y, x, y );
+heartShape.bezierCurveTo( x - 6, y, x - 6, y + 7,x - 6,
+ y + 7 );
+heartShape.bezierCurveTo( x - 6, y + 11, x - 3, y + 15.4,
+ x + 5, y + 19 );
+heartShape.bezierCurveTo( x + 12, y + 15.4, x + 16,
+ y + 11, x + 16, y + 7 );
+heartShape.bezierCurveTo( x + 16, y + 7, x + 16,
+ y, x + 10, y );
+heartShape.bezierCurveTo( x + 7, y, x + 5, y + 5,
+ x + 5, y + 5 );
+
+var geometry = new THREE.ShapeBufferGeometry( heartShape );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material ) ;
+scene.add( mesh );
+\end{lstlisting}
+
+	\item {\it ShapeGeometry}, membuat sebuah geometri poligonal satu sisi dari satu atau lebih alur bentuk.
+	
+\begin{lstlisting}
+var x = 0, y = 0;
+
+var heartShape = new THREE.Shape();
+
+heartShape.moveTo( x + 5, y + 5 );
+heartShape.bezierCurveTo( x + 5, y + 5, x + 4, y, x, y );
+heartShape.bezierCurveTo( x - 6, y, x - 6, y + 7,x - 6, 
+y + 7 );
+heartShape.bezierCurveTo( x - 6, y + 11, x - 3, y + 15.4, 
+x + 5, y + 19 );
+heartShape.bezierCurveTo( x + 12, y + 15.4, x + 16,
+ y + 11, x + 16, y + 7 );
+heartShape.bezierCurveTo( x + 16, y + 7, x + 16, 
+y, x + 10, y );
+heartShape.bezierCurveTo( x + 7, y, x + 5, y + 5, 
+x + 5, y + 5 );
+
+var geometry = new THREE.ShapeGeometry( heartShape );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material ) ;
+scene.add( mesh );
+\end{lstlisting}
+
+	\item {\it SphereBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it SphereGeometry}.
+	
+\begin{lstlisting}
+var geometry = new THREE.SphereBufferGeometry( 5, 32, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var sphere = new THREE.Mesh( geometry, material );
+scene.add( sphere );
+\end{lstlisting}
+
+	\item {\it SphereGeometry}, sebuah kelas untuk mengeneralisasi geometri bola.
+	
+\begin{lstlisting}
+var geometry = new THREE.SphereGeometry( 5, 32, 32 );
+var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var sphere = new THREE.Mesh( geometry, material );
+scene.add( sphere );
+\end{lstlisting}
+
+	\item {\it TetrahedronBufferGeometry}, sebuah kelas untuk mengeneralisasi geometri segi empat.
+	
+	\item {\it TetrahedronGeometry}, sebuah kelas untuk mengeneralisasi geometri segi empat.
+	
+	\item {\it TextBufferGeometry}, sebuah kelas untuk mengeneralisasi tulisan sebagai suatu geometri tunggal.
+	
+\begin{lstlisting}
+var loader = new THREE.FontLoader();
+
+loader.load( 'fonts/helvetiker_regular.typeface.json',
+function ( font ) {
+	var geometry = new THREE.TextBufferGeometry(
+	 'Hello three.js!', {
+		font: font,
+		size: 80,
+		height: 5,
+		curveSegments: 12,
+		bevelEnabled: true,
+		bevelThickness: 10,
+		bevelSize: 8,
+		bevelSegments: 5
+	} );
+} );
+\end{lstlisting}
+
+	\item {\it TextGeometry},  sebuah kelas untuk mengeneralisasi tulisan sebagai suatu geometri tunggal.
+	
+\begin{lstlisting}
+var loader = new THREE.FontLoader();
+
+loader.load( 'fonts/helvetiker_regular.typeface.json', 
+function ( font ) {
+	var geometry = new THREE.TextGeometry(
+	'Hello three.js!', {
+		font: font,
+		size: 80,
+		height: 5,
+		curveSegments: 12,
+		bevelEnabled: true,
+		bevelThickness: 10,
+		bevelSize: 8,
+		bevelSegments: 5
+	} );
+} );
+\end{lstlisting}
+
+	\item {\it TorusBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it TorusGeometry}.
+	
+\begin{lstlisting}
+var geometry = new THREE.TorusBufferGeometry( 10, 3, 16, 100 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var torus = new THREE.Mesh( geometry, material );
+scene.add( torus );
+\end{lstlisting}
+
+	\item {\it TorusGeometry}, sebuah kelas untuk mengeneralisasi geometri torus.
+	
+\begin{lstlisting}
+var geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var torus = new THREE.Mesh( geometry, material );
+scene.add( torus );
+\end{lstlisting}
+
+	\item {\it TorusKnotBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it TorusKnotGeometry}.
+	
+\begin{lstlisting}
+var geometry = new THREE.TorusKnotBufferGeometry( 10, 3, 100, 16 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var torusKnot = new THREE.Mesh( geometry, material );
+scene.add( torusKnot );
+\end{lstlisting}
+
+	\item {\it TorusKnotGeometry}, membuat simpul knot dengan bagian bentuk yang didefinisikan dengan sepasang bilangan bulat koprima p dan q. 
+	
+\begin{lstlisting}
+var geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var torusKnot = new THREE.Mesh( geometry, material );
+scene.add( torusKnot );
+\end{lstlisting}
+
+	\item {\it TubeGeometry}, membuat sebuah tabung yang diekstrusi sepanjang 3 dimensi melengkung.
+	
+\begin{lstlisting}
+function CustomSinCurve( scale ) {
+
+	THREE.Curve.call( this );
+
+	this.scale = ( scale === undefined ) ? 1 : scale;
+
+}
+
+CustomSinCurve.prototype = Object.create( THREE.Curve.prototype );
+CustomSinCurve.prototype.constructor = CustomSinCurve;
+
+CustomSinCurve.prototype.getPoint = function ( t ) {
+
+	var tx = t * 3 - 1.5;
+	var ty = Math.sin( 2 * Math.PI * t );
+	var tz = 0;
+
+	return new THREE.Vector3( tx, ty, tz ).multiplyScalar(
+	 this.scale );
+
+};
+
+var path = new CustomSinCurve( 10 );
+var geometry = new THREE.TubeGeometry( path, 20, 2, 8, false );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
+\end{lstlisting}
+
+	\item {\it TubeBufferGeometry},  membuat sebuah tabung yang diekstrusi sepanjang 3 dimensi melengkung.
+	
+\begin{lstlisting}
+function CustomSinCurve( scale ) {
+
+	THREE.Curve.call( this );
+
+	this.scale = ( scale === undefined ) ? 1 : scale;
+
+}
+
+CustomSinCurve.prototype = Object.create( THREE.Curve.prototype );
+CustomSinCurve.prototype.constructor = CustomSinCurve;
+
+CustomSinCurve.prototype.getPoint = function ( t ) {
+
+	var tx = t * 3 - 1.5;
+	var ty = Math.sin( 2 * Math.PI * t );
+	var tz = 0;
+
+	return new THREE.Vector3( tx, ty, tz ).multiplyScalar( this.scale );
+
+};
+
+var path = new CustomSinCurve( 10 );
+var geometry = new THREE.TubeBufferGeometry( path, 20, 2, 8, false );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
+\end{lstlisting}
+
+	\item {\it WireframeGeometry}, dapat digunakan sebagai objek pembantu untuk menampilkan sebuah objek geometri sebagai {\it wireframe}.
+	
+\begin{lstlisting}
+var geometry = new THREE.SphereBufferGeometry( 100, 100, 100 );
+
+var wireframe = new THREE.WireframeGeometry( geometry );
+
+var line = new THREE.LineSegments( wireframe );
+line.material.depthTest = false;
+line.material.opacity = 0.25;
+line.material.transparent = true;
+
+scene.add( line );
+\end{lstlisting}
+
 	\end{itemize}
 	
 \item \textit{Lights}
 
 	\begin{itemize}
 	\item {\it AmbientLight}, sebuah cahaya yang menyinari objek secara global dan merata.
+	
+\begin{lstlisting}
+var light = new THREE.AmbientLight( 0x404040 ); 
+scene.add( light );
+\end{lstlisting}
+	
 	\item {\it DirectionalLight}, sebuah pancaran sinar dari arah yang spesifik.
+	
+\begin{lstlisting}
+var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+scene.add( directionalLight );
+\end{lstlisting}
+
 	\item {\it HemisphereLight}, sebuah cahaya yang penyinaran dilakukan tepat di atas layar dengan peleburan warna langit ke warna lantai.
+	
+\begin{lstlisting}
+var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+scene.add( light );
+\end{lstlisting}
+
 	\item {\it Light}, kelas abstrak untuk {\it Lights}.
+
 	\item {\it PointLight}, sebuah pancaran dari satu titik pada setiap arah.
+	
+\begin{lstlisting}
+var light = new THREE.PointLight( 0xff0000, 1, 100 );
+light.position.set( 50, 50, 50 );
+scene.add( light );
+\end{lstlisting}
+
 	\item {\it RectAreaLight}, sebuah pancaran sinar seragam melewati permukaan bidang persegi panjang.
+	
+\begin{lstlisting}
+var width = 2;
+var height = 10;
+var rectLight = new THREE.RectAreaLight(
+0xffffff, undefined,  width, height );
+rectLight.intensity = 70.0;
+rectLight.position.set( 5, 5, 0 );
+scene.add( rectLight )
+
+rectLightHelper = new THREE.RectAreaLightHelper( rectLight );
+scene.add( rectLightHelper );
+\end{lstlisting}
+
 	\item {\it SpotLight}, sebuah pancaran dari satu titik pada setiap arah sepanjang bidang yang ukurannya dapat bertambah lebih jauh.
+	
+\begin{lstlisting}
+var spotLight = new THREE.SpotLight( 0xffffff );
+spotLight.position.set( 100, 1000, 100 );
+
+spotLight.castShadow = true;
+
+spotLight.shadow.mapSize.width = 1024;
+spotLight.shadow.mapSize.height = 1024;
+
+spotLight.shadow.camera.near = 500;
+spotLight.shadow.camera.far = 4000;
+spotLight.shadow.camera.fov = 30;
+
+scene.add( spotLight );
+\end{lstlisting}
+
 	\end{itemize}
 	
+\item \textit{Loaders}
+
+	\begin{itemize}
+	\item {\it AnimationLoader}, kelas untuk memuat animasi dalam format JSON.
+	
+\begin{lstlisting}
+// instansiasi pemuat
+var loader = new THREE.AnimationLoader();
+
+// memuat sumber daya
+loader.load(
+	// URL sumber daya
+	'animations/animation.js',
+	// fungsi yang dijalankan saat sumber data telah dimuat
+	function ( animation ) {
+		// melakukan sesuatu dengan animasi
+	},
+	// fungsi yang dipanggil saat unduh dalam proses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
+	// fungsi yang dipanggil saat unduh gagal
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);
+\end{lstlisting}
+
+	\item {\it CubeTextureLoader}, kelas untuk memuat sebuah {\it CubeTexture}.
+	
+\begin{lstlisting}
+var scene = new THREE.Scene();
+scene.background = new THREE.CubeTextureLoader()
+	.setPath( 'textures/cubeMaps/' )
+	.load( [
+		'1.png',
+		'2.png',
+		'3.png',
+		'4.png',
+		'5.png',
+		'6.png'
+	] );
+\end{lstlisting}
+
+	\item {\it DataTextureLoader}, kelas dasar abstrak untuk memuat format tekstur biner umum.
+	
+	\item {\it FileLoader}, kelas level rendah untuk memuat sumber daya dengan {\it XMLHTTPRequest}. Kelas ini digunakan secara internal untuk kebanyakan {\it loaders}.
+	
+\begin{lstlisting}
+var loader = new THREE.FileLoader();
+
+//memuat sebuah file teks keluaran ke konsol
+loader.load(
+    // sumber daya URL
+    'example.txt',
+
+    // fungsi yang dijalankan saat sumber daya telah dimuat
+    function ( data ) {
+        // keluaran teks ke konsol
+        console.log( data )
+    },
+
+    //fungsi yang dipanggil saat unduh dalam proses
+    function ( xhr ) {
+        console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+    },
+
+    // fungsi yang dipanggil saat unduh gagal
+    function ( xhr ) {
+        console.error( 'An error happened' );
+    }
+);
+
+\end{lstlisting}
+
+	\item {\it FontLoader}, kelas untuk memuat sebuah font dalam format JSON.
+	
+\begin{lstlisting}
+var loader = new THREE.FontLoader();
+var font = loader.load(
+	// sumber daya URL
+	'fonts/helvetiker_bold.typeface.json'\
+	// fungsi yang dijalankan saat sumber daya telah dimuat
+	function ( font ) {
+		// melakukan sesuatu dengan font
+		scene.add( font );
+	},
+	// fungsi yang dipanggil saat unduh dalam proses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100)
+		 + '% loaded' );
+	},
+	// fungsi yang dipanggil saat unduh gagal
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);
+\end{lstlisting}
+
+	\item {\it ImageLoader}, sebuah pemuat untuk memuat gambar.
+	
+\begin{lstlisting}
+// inisiasi pemuat
+var loader = new THREE.ImageLoader();
+
+// load a image resource
+loader.load(
+	// sumber daya URL
+	'textures/skyboxsun25degtest.png',
+	// fungsi yang dijalankan saat sumber daya telah dimuat
+	function ( image ) {
+		// melakukan sesuatu dengan gambar
+
+		// menggambar bagian dari gambar pada canvas
+		var canvas = document.createElement( 'canvas' );
+		var context = canvas.getContext( '2d' );
+		context.drawImage( image, 100, 100 );
+	},
+	// fungsi yang dipanggil saat unduh dalam proses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100)
+		 + '% loaded' );
+	},
+	// fungsi yang dipanggil saat unduh gagal
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);
+\end{lstlisting}
+
+	\item {\it JSONLoader}, sebuah pemuat untuk memuat objek dalam format JSON.
+	
+\begin{lstlisting}
+// inisiasi pemuat
+var loader = new THREE.JSONLoader();
+
+// memuat sumber daya
+loader.load(
+
+	// sumber daya URL
+	'models/animated/monster/monster.js',
+
+	// fungsi yang dijalankan saat sumber daya telah dimuat
+	function ( geometry, materials ) {
+
+		var material = materials[ 0 ];
+		var object = new THREE.Mesh( geometry, material );
+
+		scene.add( object );
+
+	}
+);
+\end{lstlisting}
+
+	\item {\it Loader}, kelas dasar untuk implementasi pemuat.
+	
+	\item {\it MaterialLoader}, sebuah pemuat untuk memuat {\it Material} dalam format JSON.
+	
+\begin{lstlisting}
+// inisiasi pemuat
+var loader = new THREE.MaterialLoader();
+
+// memuat sumber daya
+loader.load(
+	// sumber daya URL
+	'path/to/material.json',
+	// fungsi yang dijalankan saat sumber daya telah dimuat
+	function ( material ) {
+		object.material = material;
+	},
+	// fungsi yang dipanggil saat unduh dalam proses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100)
+		 + '% loaded' );
+	},
+	// fungsi yang dipanggil saat unduh gagal
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);
+\end{lstlisting}
+
+	\item {\it ObjectLoader}, sebuah pemuat untuk memuat sumber daya JSON.
+	
+\begin{lstlisting}
+var loader = new THREE.ObjectLoader();
+
+loader.load(
+    // sumber daya URL
+    "models/json/example.json",
+
+    // mengirimkan data yang telah dimuat ke fungsi onLoad
+    // di sini diasumsikan mejadi sebuah objek
+    function ( obj ) {
+		// menambahkan objek yang telah dimuat ke layar
+        scene.add( obj );
+    },
+
+    // fungsi yang dipanggil saat unduh dalam proses
+    function ( xhr ) {
+        console.log( (xhr.loaded / xhr.total * 100)
+         + '% loaded' );
+    },
+
+    // fungsi yang dipanggil saat unduh gagal
+    function ( xhr ) {
+        console.error( 'An error happened' );
+    }
+);
+
+
+// sebagai alternatif untuk mengurai JSON yang telah dimuat
+var object = loader.parse( a_json_object );
+
+scene.add( object );
+\end{lstlisting}
+
+	\item {\it TextureLoader}, kelas untuk memuat tekstur.
+	
+\begin{lstlisting}
+// inisiasi pemuat
+var loader = new THREE.TextureLoader();
+
+// memuat sumber daya
+loader.load(
+	// sumber daya URL
+	'textures/land_ocean_ice_cloud_2048.jpg',
+	// fungsi yang dijalankan saat sumber daya telah dimuat
+	function ( texture ) {
+		// melakukan sesuatu dengan tekstur
+		var material = new THREE.MeshBasicMaterial( {
+			map: texture
+		 } );
+	},
+	// fungsi yang dipanggil saat unduh dalam proses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100)
+		 + '% loaded' );
+	},
+	// fungsi yang dipanggil saat unduh gagal
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);
+\end{lstlisting}
+
+	\item {\it MTLLoader}, sebuah pemuat untuk memuat sumber daya .mtl. Pemuat ini digunakan secara internal pada {\it OBJMTLLoader} dan {\it UTS8Loader}.
+	
+	\item {\it OBJLoader}, sebuah pemuat untuk memuat sumber daya .obj.
+	
+\begin{lstlisting}
+// inisiasi pemuat
+var loader = new THREE.OBJLoader();
+
+// memuat sumber daya
+loader.load(
+	// sumber daya URL
+	'models/monster.obj',
+	// fungsi yang dipanggil saat sumber daya telah dimuat
+	function ( object ) {
+		scene.add( object );
+	}
+);
+\end{lstlisting}
+
+	\end{itemize}
+
+\item \textit{Materials}
+
+	\begin{itemize}
+	\item {\it LineBasicMaterial}, sebuah bahan untuk menggambar geometri gaya {\it wireframe}.
+	
+\begin{lstlisting}
+var material = new THREE.LineBasicMaterial( {
+	color: 0xffffff,
+	linewidth: 1,
+	linecap: 'round', //ignored by WebGLRenderer
+	linejoin:  'round' //ignored by WebGLRenderer
+} );
+\end{lstlisting}
+
+	\item {\it LineDashedMaterial}, sebuah bahan untuk menggambar geometri gaya {\it wireframe} dengan garis putus-putus.
+	
+\begin{lstlisting}
+var material = new THREE.LineDashedMaterial( {
+	color: 0xffffff,
+	linewidth: 1,
+	scale: 1,
+	dashSize: 3,
+	gapSize: 1,
+} );
+\end{lstlisting}
+
+	\item {\it Material}, kelas dasar abstrak untuk bahan.
+	
+	\item {\it MeshBasicMaterial}, sebuah bahan untuk menggambar geometri dengan cara sederhana yang datar.
+	
+	\item {\it MeshDepthMaterial}, sebuah bahan untuk menggambar geometri berdasarkan kedalaman.
+	
+	\item {\it MeshLambertMaterial}, sebuah bahan untuk permukaan yang tidak bercahaya.
+	
+	\item {\it MeshNormalMaterial}, sebuah bahan yang memetakan vektor normal ke warna RGB.
+	
+	\item {\it MeshPhongMaterial}, sebuah bahan untuk permukaan yang bercahaya dengan sorotan cahaya.
+	
+	\item {\it MeshPhysicalMaterial}, sebuah ekstensi dari {\it MeshStandardMaterial} yang memungkinkan kontrol yang lebih kuat terhadap daya pemantulan.
+	
+	\item {\it MeshStandardMaterial}, sebuah fisik bahan dasar standar menggunakan alur kerja {\it Metallic-Roughness}.
+	
+	\item {\it MeshToonMaterial}, sebuah ekstensi dari {\it MeshPhongMaterial} dengan bayangan.
+	
+	\item {\it PointsMaterial}, sebuah bahan dasar yang digunakan {\it Points}.
+	
+\begin{lstlisting}
+var starsGeometry = new THREE.Geometry();
+
+for ( var i = 0; i < 10000; i ++ ) {
+
+	var star = new THREE.Vector3();
+	star.x = THREE.Math.randFloatSpread( 2000 );
+	star.y = THREE.Math.randFloatSpread( 2000 );
+	star.z = THREE.Math.randFloatSpread( 2000 );
+
+	starsGeometry.vertices.push( star );
+
+}
+
+var starsMaterial = new THREE.PointsMaterial( { color: 0x888888 } );
+
+var starField = new THREE.Points( starsGeometry, starsMaterial );
+
+scene.add( starField );
+\end{lstlisting}
+
+	\item {\it RawShaderMaterial}, kelas ini bekerja seperti {\it ShaderMaterial} kecuali definisi dari {\it uniform} dan atribut yang telah ada tidak ditambahkan secara otomatis ke GLSL {\it shader} kode.
+	
+\begin{lstlisting}
+var material = new THREE.RawShaderMaterial( {
+
+    uniforms: {
+        time: { value: 1.0 }
+    },
+    vertexShader: document.getElementById( 'vertexShader' )
+    .textContent,
+    fragmentShader: document.getElementById( 'fragmentShader')
+    .textContent,
+
+} );
+\end{lstlisting}
+
+	\item {\it ShaderMaterial}, sebuah bahan yang dibangun dengan {\it shader} kustom.
+	
+\begin{lstlisting}
+var material = new THREE.ShaderMaterial( {
+
+	uniforms: {
+
+		time: { value: 1.0 },
+		resolution: { value: new THREE.Vector2() }
+
+	},
+
+	vertexShader: document.getElementById( 'vertexShader' )
+	.textContent,
+
+	fragmentShader: document.getElementById( 'fragmentShader')
+	.textContent
+
+} );
+\end{lstlisting}
+
+	\item {\it ShadowMaterial}, sebuah bahan yang dapat menerima bayangan tetapi jika tidak merima bayangan maka akan transparan.
+	
+\begin{lstlisting}
+var planeGeometry = new THREE.PlaneGeometry( 2000, 2000 );
+planeGeometry.rotateX( - Math.PI / 2 );
+
+var planeMaterial = new THREE.ShadowMaterial();
+planeMaterial.opacity = 0.2;
+
+var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+plane.position.y = -200;
+plane.receiveShadow = true;
+scene.add( plane );
+\end{lstlisting}
+
+	\item {\it SpriteMaterial}, sebuah bahan yang digunakan dengan {\it Sprite}.
+	
+\begin{lstlisting}
+var spriteMap = new THREE.TextureLoader().load( 'textures/sprite.png' );
+
+var spriteMaterial = new THREE.SpriteMaterial( {
+ map: spriteMap, color: 0xffffff } );
+
+var sprite = new THREE.Sprite( spriteMaterial );
+sprite.scale.set(200, 200, 1)
+
+scene.add( sprite );
+\end{lstlisting}
+
+	\end{itemize}
+
+
 \item \textit{Objects}
 
 	\begin{itemize}
 	\item {\it Bone}, sebuah tulang yang merupakan bagian dari kerangka.
-	\item {\it Group}, hampir sama dengan suatu {\it Object3D}.
-	\item {\it LensFlare}, membuat lensa suar tiruan yang mengikuti cahaya.
-	\item {\it Line}, sebuah garis yang kontinu.
-	\item {\it LineLoop}, sebuah line kontinu yang kembali ke awal.
-	\item {\it LineSegments}, beberapa garis yang ditarik antara beberapa pasang {\it vertex}.
-	\item {\it Mesh}, sebuah kelas yang merepresentasikan object dengan dasar segitiga.
-	\item {\it Points}, sebuah kelas yang merepresentasikan titik.
-	\item {\it Skeleton}, sebuah {\it array} dari tulang untuk membuat kerangka yang bisa digunakan pada {\it SkinnedMesh}.
-	\item {\it SkinnedMesh}, sebuah {\it mesh} yang mempunyai kerangka yang terdiri dari tulang dan digunakan untuk menganimasikan kumpulan {\it vertex} pada geometri.
-	\end{itemize}
 	
+\begin{lstlisting}
+var root = new THREE.Bone();
+var child = new THREE.Bone();
+
+root.add( child );
+child.position.y = 5;
+\end{lstlisting}
+	
+	\item {\it Group}, hampir sama dengan suatu {\it Object3D}.
+	
+\begin{lstlisting}
+var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+
+var cubeA = new THREE.Mesh( geometry, material );
+cubeA.position.set( 100, 100, 0 );
+
+var cubeB = new THREE.Mesh( geometry, material );
+cubeB.position.set( -100, -100, 0 );
+
+//create a group and add the two cubes
+//These cubes can now be rotated / scaled etc as a group
+var group = new THREE.Group();
+group.add( cubeA );
+group.add( cubeB );
+
+scene.add( group );
+\end{lstlisting}
+	
+	\item {\it LensFlare}, membuat lensa suar tiruan yang mengikuti cahaya.
+	
+\begin{lstlisting}
+var light = new THREE.PointLight( 0xffffff, 1.5, 2000 );
+
+var textureLoader = new THREE.TextureLoader();
+
+var textureFlare = textureLoader.
+load( "textures/lensflare/lensflare.png" );
+
+var flareColor = new THREE.Color( 0xffffff );
+flareColor.setHSL( h, s, l + 0.5 );
+
+var lensFlare = new THREE.LensFlare( textureFlare,
+ 700, 0.0, THREE.AdditiveBlending, flareColor );
+lensFlare.position.copy( light.position );
+
+scene.add( lensFlare );
+\end{lstlisting}
+	
+	\item {\it Line}, sebuah garis yang kontinu.
+	
+\begin{lstlisting}
+var material = new THREE.LineBasicMaterial({
+	color: 0x0000ff
+});
+
+var geometry = new THREE.Geometry();
+geometry.vertices.push(
+	new THREE.Vector3( -10, 0, 0 ),
+	new THREE.Vector3( 0, 10, 0 ),
+	new THREE.Vector3( 10, 0, 0 )
+);
+
+var line = new THREE.Line( geometry, material );
+scene.add( line );
+\end{lstlisting}
+	
+	\item {\it LineLoop}, sebuah line kontinu yang kembali ke awal.
+	
+	\item {\it LineSegments}, beberapa garis yang ditarik antara beberapa pasang {\it vertex}.
+	
+	\item {\it Mesh}, sebuah kelas yang merepresentasikan object dengan dasar segitiga.
+	
+\begin{lstlisting}
+var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
+\end{lstlisting}
+	
+	\item {\it Points}, sebuah kelas yang merepresentasikan titik.
+	
+	\item {\it Skeleton}, sebuah {\it array} dari tulang untuk membuat kerangka yang bisa digunakan pada {\it SkinnedMesh}.
+	
+\begin{lstlisting}
+var bones = [];
+
+var shoulder = new THREE.Bone();
+var elbow = new THREE.Bone();
+var hand = new THREE.Bone();
+
+shoulder.add( elbow );
+elbow.add( hand );
+
+bones.push( shoulder );
+bones.push( elbow );
+bones.push( hand );
+
+shoulder.position.y = -5;
+elbow.position.y = 0;
+hand.position.y = 5;
+
+var armSkeleton = new THREE.Skeleton( bones );
+\end{lstlisting}
+	
+	\item {\it SkinnedMesh}, sebuah {\it mesh} yang mempunyai kerangka yang terdiri dari tulang dan digunakan untuk menganimasikan kumpulan {\it vertex} pada geometri.
+	
+\begin{lstlisting}
+var geometry = new THREE.CylinderBufferGeometry( 
+5, 5, 5, 5, 15, 5, 30 );
+
+// membuat index kulit dan berat kulit
+for ( var i = 0; i < geometry.vertices.length; i ++ ) {
+
+	// fungsi imajiner untuk menghitung index dan berat
+	//bagian ini harus diganti bergantung pada kerangka dan model
+	var skinIndex = calculateSkinIndex( 
+	geometry.vertices, i );
+	var skinWeight = calculateSkinWeight( 
+	geometry.vertices, i );
+
+	// menggerakan antara tulang
+	geometry.skinIndices.push( new THREE.Vector4( 
+	skinIndex, skinIndex + 1, 0, 0 ) );
+	geometry.skinWeights.push( new THREE.Vector4(
+	1 - skinWeight, skinWeight, 0, 0 ) );
+
+}
+
+var mesh = THREE.SkinnedMesh( geometry, material );
+
+// lihat contoh dari THREE.Skeleton untuk armSkeleton
+var rootBone = armSkeleton.bones[ 0 ];
+mesh.add( rootBone );
+
+// ikat kerangka dengan jala
+mesh.bind( armSkeleton );
+
+// pindahkan tulang dan manipulasi model
+armSkeleton.bones[ 0 ].rotation.x = -0.1;
+armSkeleton.bones[ 1 ].rotation.x = 0.2;
+\end{lstlisting}
+	
+	\item {\it Sprite}, sebuah dataran yang selalu menghadap kamera secara umum dengan bagian tekstur transparan diaplikasikan.
+	
+\begin{lstlisting}
+var spriteMap = new THREE.TextureLoader().load( "sprite.png" );
+var spriteMaterial = new THREE.SpriteMaterial( 
+{ map: spriteMap, color: 0xffffff } );
+var sprite = new THREE.Sprite( spriteMaterial );
+scene.add( sprite );
+\end{lstlisting}
+	
+	\end{itemize}
+
+\item \textit{Renderers}
+	\item {\it WebGLRenderer}, pembangun WebGL menampilkan layar indah yang dbuat oleh Anda menggunakan WebGL.
+	
+	\item {\it WebGLRenderTarget}, merupakan sebuah penyangga target pembangun yang memungkinkan kartu video menggambarkan piksel untuk layar yang dibangun di latar.
+	
+	\item {\it WebGLRenderTargetCube}, digunakan oleh {\it CubeCamera} sebagai {\it WebGLRenderTarget}. 
+		
 \item \textit{Scenes}
 
 	\begin{itemize}
 	\item {\it Fog}, kelas yang berisi parameter untuk mendefinisikan kabut.
+	
+	\item {it FogExp2}, kelas ini berisi parameter pendefinisikan eksponensial kabut yang bertumbuh secara padat eksponensial dengan jarak.
+	
 	\item {\it Scene}, sebuah layar yang memungkinkan untuk membuat dan menempatkan sesuatu pada pustaka Three.js. 
 	\end{itemize}
 	
 \item \textit{Texture}
 	\begin{itemize}
+	\item{\it CanvasTexture}, membuat tekstur dari suatu elemen {\it canvas}.
+	\item{\it CompressedTexture}, membuat tekstur berdasarkan data bentuk kompres. Contohnya dari sebuah berkas DDS.
+	\item{\it CubeTexture}, membuat tekstur kubus dari 6 buah gambar.
+	
+\begin{lstlisting}
+var loader = new THREE.CubeTextureLoader();
+loader.setPath( 'textures/cube/pisa/' );
+
+var textureCube = loader.load( [
+	'px.png', 'nx.png',
+	'py.png', 'ny.png',
+	'pz.png', 'nz.png'
+] );
+
+var material = new THREE.MeshBasicMaterial( { 
+color: 0xffffff, envMap: textureCube 
+} );
+\end{lstlisting}
+	
+	\item{\it DataTexture}, membuat tekstur langsung dari data mentah, lebar, dan panjang.
+	\item{\it DepthTexture}, membuat tekstur untuk digunakan sebagai {\it Depth Texture}.
 	\item {\it Texture}, membuat tekstur untuk mengaplikasikan permukaan atau sebagai refleksi.
-	\item {\it CanvasTexture}, membuat tekstur dari suatu elemen {\it canvas}.
+	
+\begin{lstlisting}
+var texture = new THREE.TextureLoader().load( "textures/water.jpg" );
+texture.wrapS = THREE.RepeatWrapping;
+texture.wrapT = THREE.RepeatWrapping;
+texture.repeat.set( 4, 4 );
+\end{lstlisting}
+	
+	\item{\it VideoTexture}, membuat tekstur untuk digunakan sebagai tekstur video.
+	
+\begin{lstlisting}
+var video = document.getElementById( 'video' );
+
+var texture = new THREE.VideoTexture( video );
+texture.minFilter = THREE.LinearFilter;
+texture.magFilter = THREE.LinearFilter;
+texture.format = THREE.RGBFormat;
+\end{lstlisting}
+	
 	\end{itemize}	
 	
 \end{itemize}
