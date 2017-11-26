@@ -1,0 +1,214 @@
+%versi 2 (8-10-2016)
+\chapter{Landasan Teori}
+\label{chap:teori}
+Bab ini berisi penjelasan mengenai teori-teori yang menjadi dasar penelitian ini, seperti WebGL dan Three.js \textit{library}.
+
+\section{WebGL}
+\label{sec:webgl} 
+WebGL adalah sebuah Application Programming Interface (API) yang membangun objek 3 dimensi dengan mode langsung yang dirancang untuk {\it web}. WebGL diturunkan dari OpenGL ES 2.0, menyediakan fungsi pembangunan sejenis tetapi di dalam konteks HTML. WebGL dirancang sebagai konteks pembangunan objek pada elemen {\it canvas} HTML. {\it Canvas} pada HTML menyediakan suatu destinasi untuk pembangunan objek secara programatik pada halaman {\it web} dan memungkinkan menampilkan objek yang sedang dibangun menggunakan API pembangun objek yang berbeda \cite{webgl}. Berikut ini merupakan {\it interfaces} dan fungsionalitas yang ada pada WebGL:
+\begin{enumerate}
+\item {\it WebGLObject}
+
+	{\it Interface WebGLObject} merupakan {\it interface} awal untuk diturunkan kepada semua objek GL.
+	\begin{lstlisting}[caption={{\it Interface} awal pada WebGL.}, captionpos=b]
+interface WebGLObject {
+};
+	\end{lstlisting}
+	
+\item {\it WebGLFrameBuffer}
+
+	{\it Interface WebGLFrameBuffer} merepresentasikan sebuah OpenGL {\it Frame Buffer Object}.
+	\begin{lstlisting}[caption={{\it Frame Buffer Object} pada OpenGL.}, captionpos=b]
+interface WebGLFramebuffer : WebGLObject {
+};
+	\end{lstlisting}
+
+\item {\it WebGLProgram}
+
+	{\it Interface WebGLProgram} merepresentasikan sebuah OpenGL {\it Program Object}.
+	\begin{lstlisting}[caption={{\it Program Object} pada OpenGL.}, captionpos=b]
+interface WebGLProgram : WebGLObject {
+};
+	\end{lstlisting}
+	
+ {\it WebGLShader}
+
+	{\it Interface WebGLShader} merepresentasikan sebuah OpenGL {\it Shader Object}.
+	\begin{lstlisting}[caption={{\it Shader Object} pada OpenGL.}, captionpos=b]
+interface WebGLShader : WebGLObject {
+};
+	\end{lstlisting}
+
+\item {\it WebGLTexture}
+
+	{\it Interface WebGLTexture} merepresentasikan sebuah OpenGL {\it Texture Object}.
+	\begin{lstlisting}[caption={{\it Texture Object} pada OpenGL.}, captionpos=b]
+interface WebGLTexture : WebGLObject {
+};
+	\end{lstl
+\item {\it ArrayBuffer} dan {\it Typed Arrays}
+
+	{\it Vertex, index, texture,} dan data lainnya ditransfer ke implementasi WebGL menggunakan {\it ArrayBuffer, Typed Arrays,} dan {\it DataViews} seperti yang telah didefinisikan pada spesifikasi ECMAScript.
+\begin{lstlisting}[caption={Transfer data ke implementasi WebGL.}, captionpos=b]
+var numVertices = 100; // for example
+
+// Hitung ukuran buffer yang dibutuhkan dalam bytes dan floats
+var vertexSize = 3 * Float32Array.BYTES_PER_ELEMENT +
+4 * Uint8Array.BYTES_PER_ELEMENT;
+var vertexSizeInFloats = vertexSize / Float32Array.BYTES_PER_ELEMENT;
+
+// Alokasikan buffer
+var buf = new ArrayBuffer(numVertices * vertexSize);
+
+// Map buffer ke Float32Array untuk mengakses posisi
+var positionArray = new Float32Array(buf);
+
+	// Map buffer yang sama ke Uint8Array untuk mengakses warna
+var colorArray = new Uint8Array(buf);
+
+// Inisialisasi offset dari vertices dan warna pada buffer
+var positionIdx = 0;
+var colorIdx = 3 * Float32Array.BYTES_PER_ELEMENT;
+
+// Inisialisasi buffer
+for (var i = 0; i < numVertices; i++) {
+    	positionArray[positionIdx] = ...;
+    	positionArray[positionIdx + 1] = ...;
+    	positionArray[positionIdx + 2] = ...;
+    	colorArray[colorIdx] = ...;
+    	colorArray[colorIdx + 1] = ...;
+    	colorArray[colorIdx + 2] = ...;
+    	colorArray[colorIdx + 3] = ...;
+   	positionIdx += vertexSizeInFloats;
+   	colorIdx += vertexSize;
+}
+\end{lstlisting}
+	
+\item {\it WebGL Contect}
+	{\it WebGLRenderingContext} merepresentasikan API yang memungkinkan gaya pembangunan OpenGL ES 2.0 ke elemen {\it canvas}.
+
+\item {\it WebGLContextEvent}
+	WebGL menghasilkan sebuah {\it WebGLContextEvent} sebagai respon dari perubahan penting pada status konteks pembangunan WebGL. {\it Event} tersebut dikirim melalui {\it DOM Event System} dan dilanjutkan ke HTMLCanvasEvent yang diasosiasikan dengan konteks pembangunan WebGL.
+
+\end{enumerate}
+
+
+\section{Pustaka Three.js}
+\label{sec:latex}
+Pustaka Three.js ini bertujuan untuk membuat pustaka 3 dimensi yang mudah dan ringan untuk digunakan. Pustaka ini menyediakan <canvas>, <svg>, dan CSS3D, dan pembangun WebGL \cite{githubthreejs}.
+Terdapat beberapa fungsi penting yang disediakan oleh pustaka Three.js dalam pembuatan grafis 3 dimensi, di antaranya adalah \cite{threejs}:
+\begin{itemize}
+
+\item \textit{Cameras}
+
+	\begin{itemize}
+	\item {\it Camera}, kelas abstrak untuk {\it cameras}. Kelas ini harus selalu diimplementasikan saat membangun suatu kamera. Konstruktor pada kelas ini digunakan untuk membuat kamera baru, namun kelas ini tidak dipergunakan secara langsung melainkan menggunakan {\it PerspectiveCamera} atau {\it OrthographicCamera}.
+	
+	\item {\it PerspectiveCamera}, kamera yang menggunakan pyoyeksi perspektif. Konstruktor pada kelas ini menerima parameter berupa {\it frustum} pandangan vertikal, {\it frustum} pandangan horizontal, dan {\it frustum} jarak dekat, dan {\it frustum} jarak jauh. Contoh untuk kelas {\it PerspectiveCamera} dapat dilihat pada pada {\it listing} 2.16.
+\begin{lstlisting}[caption={Contoh instansiasi kelas {\it PerspectiveCamera}},captionpos=b]
+var camera = new THREE.PerspectiveCamera( 45, width / height, 
+1, 1000 );
+scene.add( camera );
+\end{lstlisting}
+	\end{itemize}
+
+\item \textit{Geometries}
+	\begin{itemize}
+	\item {\it BoxGeometry}, merupakan kelas primitif geometri berbentuk segi empat. Contoh penggunaannya sama seperti kelas {\it BoxBufferGeometry}. Konstruktor pada kelas ini menerima parameter berupa lebar sisi pada sumbu X dengan nilai awal adalah 1, tinggi sisi pada sumbu Y dengan nilai awal adalah 1, kedalaman sisi pada sumbu Z dengan nilai awal adalah 1, jumlah permukaan yang berpotongan dengan lebar sisi dengan nilai awal adalah 1 dan bersifat fakultatif,  jumlah permukaan yang berpotongan dengan tinggi sisi dengan nilai awal adalah 1 dan bersifat fakultatif,  dan jumlah permukaan yang berpotongan dengan kedalaman sisi dengan nilai awal adalah 1 dan bersifat fakultatif
+	\end{itemize}
+	
+\item \textit{Lights}
+
+	\begin{itemize}
+	\item {\it AmbientLight}, sebuah cahaya yang menyinari objek secara global dan merata. Konstruktor pada kelas ini menerima parameter berupa warna dalam RGB dan intensitas. Contoh untuk kelas {\it AmbientLight} dapat dilihat pada pada {\it listing} 2.38.
+	\end{itemize}
+	
+\item \textit{Loaders}
+
+	\begin{itemize}
+	\item {\it JSONLoader}, sebuah pemuat untuk memuat objek dalam format JSON. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it JSONLoader} dapat dilihat pada pada {\it listing} 2.46.
+	
+\begin{lstlisting}[caption={Contoh penggunaan kelas {\it JSONLoader}.},captionpos=b]
+// inisiasi pemuat
+var loader = new THREE.JSONLoader();
+
+// memuat sumber daya
+loader.load(
+
+	// sumber daya URL
+	'models/animated/monster/monster.js',
+
+	// fungsi yang dijalankan saat sumber daya telah dimuat
+	function ( geometry, materials ) {
+
+		var material = materials[ 0 ];
+		var object = new THREE.Mesh( geometry, material );
+
+		scene.add( object );
+	}
+);
+\end{lstlisting}
+
+	\item {\it Loader}, kelas dasar untuk implementasi pemuat.
+	
+	\item {\it TextureLoader}, kelas untuk memuat tekstur. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it TextureLoader} dapat dilihat pada pada {\it listing} 2.49.
+	
+\begin{lstlisting}[caption={Contoh penggunaan kelas {\it TextureLoader}.},captionpos=b]
+// inisiasi pemuat
+var loader = new THREE.TextureLoader();
+
+// memuat sumber daya
+loader.load(
+	// sumber daya URL
+	'textures/land_ocean_ice_cloud_2048.jpg',
+	// fungsi yang dijalankan saat sumber daya telah dimuat
+	function ( texture ) {
+		// melakukan sesuatu dengan tekstur
+		var material = new THREE.MeshBasicMaterial( {
+			map: texture
+		 } );
+	},
+	// fungsi yang dipanggil saat unduh dalam proses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100)
+		 + '% loaded' );
+	},
+	// fungsi yang dipanggil saat unduh gagal
+	function ( xhr ) {
+		console.log( 'An error happened' );
+	}
+);
+\end{lstlisting}
+	\end{itemize}
+
+\item \textit{Materials}
+
+	\begin{itemize
+	\item {\it Material}, kelas dasar abstrak untuk bahan.
+	
+	\item {\it MeshBasicMaterial}, sebuah bahan untuk menggambar geometri dengan cara sederhana yang datar. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\end{itemize}
+
+\item \textit{Objects}
+	\begin{itemize}
+	\item {\it Mesh}, sebuah kelas yang merepresentasikan object dengan dasar segitiga. Konstruktor pada kelas ini menerima parameter berupa geometri dan material. Contoh untuk kelas {\it Mesh} dapat dilihat pada pada {\it listing} 2.62.
+	
+\begin{lstlisting}[caption={Contoh penggunaan kelas {\it Mesh}.},captionpos=b]
+var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
+\end{lstlisting}
+	\end{itemize}
+
+\item \textit{Renderers}
+	\begin{itemize}
+	\item {\it WebGLRenderer}, pembangun WebGL menampilkan layar indah yang dbuat oleh Anda menggunakan WebGL. Konstruktor pada kelas ini menerima parameter berupa {\it canvas}, konteks, presisi, dan parameter relevan lainnya.
+	\end{itemize}
+		
+\item \textit{Scenes}
+	\begin{itemize}
+	\item {\it Scene}, sebuah layar yang memungkinkan untuk membuat dan menempatkan sesuatu pada pustaka Three.js. 
+	\end{itemize}
+\end{itemize}
+ 

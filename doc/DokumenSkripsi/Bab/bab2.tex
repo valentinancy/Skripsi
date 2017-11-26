@@ -5,18 +5,13 @@ Bab ini berisi penjelasan mengenai teori-teori yang menjadi dasar penelitian ini
 
 \section{WebGL}
 \label{sec:webgl} 
-%\textit{Web Graphics Library} (WebGL) merupakan \textit{Application Programming Interface} (API) JavaScript yang digunakan untuk membuat grafiis 3 dimensi melalui media \textit{browser} tanpa harus memasang \textit{plugin} tambahan. WebGL juga merupakan salah satu implementasi dari OpenGL, sebuah API yang biasa digunakan untuk menghasilkan permainan 3 dimensi. WebGL juga dibuat berdasarkan OpenGL \textit{Embedded Systems} (ES) API yang merupakan subset dari OpenGL namun ditujukan untuk perangkat portabel. Oleh karena itu WebGL dapat ditampilkan pada \textit{browser desktop} maupun \textit{browser} pada perangkat \textit{mobile}.
-
-%Sampai dengan detik ini, sudah sangat banyak \textit{browser} pada \textit{desktop} maupun perangkat \textit{mobile} yang mendukung WebGL. Namun tidak semua perangkat keras pada \textit{platform} pengguna mendukung. Hal ini dikarenakan \textit{browser} perlu mengakses langsung \textit{Graphics Processing Unit} (GPU) pada \textit{Graphics Card}. Semua perangkat keras pasti memiliki \textit{Central Processing Unit} (CPU), namun tidak semua komputer dilengkapi oleh GPU yang mendukung OpenGL terbaru. GPU mengambil peran sebagai pengolah grafis yang dapat meringankan tugas dari CPU, sehingga memberikan performa yang lebih baik.
-
-%Pada penggunaanya, WebGL selalu melibatkan penggunaan \textit{canvas} elemen pada HTML5 sebagai media untuk menggambarkan grafis. Kemudian pada WebGL terdapat shader yang didefinisikan dengan menggunakan bahasa khusus yang disebut OpenGL ES Shading Language (GLSL), namun tidak semua yang ada pada GLSL terdapat pada WebGL. \textit{Shader} pada WebGL digunakan untuk menerjemahkan titik dan warna, namun \textit{shader} masih terbagi menjadi dua jenis. Jenis yang pertama adalah \textit{Fragment Shader} yang mewakili informasi warna, sementara jenis yang kedua adalah \textit{Vertex Shader} yang mewakili informasi posisi hasil.
 
 WebGL adalah sebuah Application Programming Interface (API) yang membangun objek 3 dimensi dengan mode langsung yang dirancang untuk {\it web}. WebGL diturunkan dari OpenGL ES 2.0, menyediakan fungsi pembangunan sejenis tetapi di dalam konteks HTML. WebGL dirancang sebagai konteks pembangunan objek pada elemen {\it canvas} HTML. {\it Canvas} pada HTML menyediakan suatu destinasi untuk pembangunan objek secara programatik pada halaman {\it web} dan memungkinkan menampilkan objek yang sedang dibangun menggunakan API pembangun objek yang berbeda \cite{webgl}. Berikut ini merupakan {\it interfaces} dan fungsionalitas yang ada pada WebGL:
 \begin{enumerate}
 \item {\it Types}
 
 	Berikut ini merupakan tipe-tipe yang digunakan pada semua {\it interface} di bagian penjelasan selanjutnya. Kemudian dijelaskan juga alias untuk semua tipe yang ada pada WebGL.
-	\begin{lstlisting}[caption={type yang serupa hehe}, captionpos=b]
+	\begin{lstlisting}[caption={Alias untuk tipe pada WebGL.}, captionpos=b]
 	typedef unsigned long  GLenum;
 	typedef boolean        GLboolean;
 	typedef unsigned long  GLbitfield;
@@ -35,8 +30,8 @@ WebGL adalah sebuah Application Programming Interface (API) yang membangun objek
 	
 \item {\it WebGLContextAttributes}
 
-	{\it WebGLContextAttributes} merupakan kamus yang berisi atribut-atribut latar untuk menggambar yang diberikan melalui parameter kedua pada {\it getContext}. Berikut ini merupakan daftar nilai awal dari atribut pada {\it WebGLContextAttributes}, nilai awal ini akan digunakan apabila tidak ada parameter kedua yang diberikan kepada {\it getContext} atau jika objek pengguna yang tidak memiliki atribut pada namanya diberikan kepada getContext.
-	\begin{lstlisting}
+	{\it WebGLContextAttributes} merupakan kamus yang berisi atribut-atribut latar untuk menggambar yang diberikan melalui parameter kedua pada {\it getContext}. Berikut ini merupakan daftar nilai awal dari atribut pada {\it WebGLContextAttributes}, nilai awal ini akan digunakan apabila tidak ada parameter kedua yang diberikan kepada {\it getContext} atau jika objek pengguna yang tidak memiliki atribut pada namanya diberikan kepada getContext. 
+	\begin{lstlisting}[caption={Nilai awal pada {\it WebGLContextAttributes} saat tidak ada parameter kedua yang diberikan.}, captionpos=b]
 dictionary WebGLContextAttributes {
     GLboolean alpha = true;
     GLboolean depth = true;
@@ -87,7 +82,7 @@ dictionary WebGLContextAttributes {
 \item {\it WebGLObject}
 
 	{\it Interface WebGLObject} merupakan {\it interface} awal untuk diturunkan kepada semua objek GL.
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={{\it Interface} awal pada WebGL.}, captionpos=b]
 interface WebGLObject {
 };
 	\end{lstlisting}
@@ -95,7 +90,7 @@ interface WebGLObject {
 \item {\it WebGLBuffer} 
 	
 	{\it Interface WebGLBuffer} merepresentasikan sebuah OpenGL {\it Buffer Object}.
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={{\it Buffer Object} pada OpenGL.}, captionpos=b]
 interface WebGLBuffer : WebGLObject {
 };
 	\end{lstlisting}
@@ -103,7 +98,7 @@ interface WebGLBuffer : WebGLObject {
 \item {\it WebGLFrameBuffer}
 
 	{\it Interface WebGLFrameBuffer} merepresentasikan sebuah OpenGL {\it Frame Buffer Object}.
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={{\it Frame Buffer Object} pada OpenGL.}, captionpos=b]
 interface WebGLFramebuffer : WebGLObject {
 };
 	\end{lstlisting}
@@ -111,7 +106,7 @@ interface WebGLFramebuffer : WebGLObject {
 \item {\it WebGLProgram}
 
 	{\it Interface WebGLProgram} merepresentasikan sebuah OpenGL {\it Program Object}.
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={{\it Program Object} pada OpenGL.}, captionpos=b]
 interface WebGLProgram : WebGLObject {
 };
 	\end{lstlisting}
@@ -119,7 +114,7 @@ interface WebGLProgram : WebGLObject {
 \item {\it WebGLRenderbuffer}
 
 	{\it Interface WebGLRenderbuffer} merepresentasikan sebuah OpenGL {\it Renderbuffer Object}.
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={{\it Renderbuffer Object} pada OpenGL.}, captionpos=b]
 interface WebGLRenderbuffer : WebGLObject {
 };
 	\end{lstlisting}
@@ -127,7 +122,7 @@ interface WebGLRenderbuffer : WebGLObject {
 \item {\it WebGLShader}
 
 	{\it Interface WebGLShader} merepresentasikan sebuah OpenGL {\it Shader Object}.
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={{\it Shader Object} pada OpenGL.}, captionpos=b]
 interface WebGLShader : WebGLObject {
 };
 	\end{lstlisting}
@@ -135,7 +130,7 @@ interface WebGLShader : WebGLObject {
 \item {\it WebGLTexture}
 
 	{\it Interface WebGLTexture} merepresentasikan sebuah OpenGL {\it Texture Object}.
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={{\it Texture Object} pada OpenGL.}, captionpos=b]
 interface WebGLTexture : WebGLObject {
 };
 	\end{lstlisting}
@@ -143,7 +138,7 @@ interface WebGLTexture : WebGLObject {
 \item {\it WebGLUniformLocation}
 
 	{\it Interface WebGLUniformLocation} merepresentasikan lokasi dari variabel {\it uniform} pada program {\it shader}.
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={Lokasi dari variabel {\it uniform}.}, captionpos=b]
 interface WebGLUniformLocation {
 };
 	\end{lstlisting}
@@ -151,7 +146,7 @@ interface WebGLUniformLocation {
 \item {\it WebGLActiveInfo}
 
 	{\it Interface WebGLActiveInfo} merepresentasikan informasi yang dikembalikan dari pemanggilan {\it getActiveAttrib} dan {\it getActiveUniform}.
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={Keluaran dari  pemanggilan {\it getActiveAttrib} dan {\it getActiveUniform}.}, captionpos=b]
 interface WebGLActiveInfo {
   	 readonly attribute GLint size;
    	 readonly attribute GLenum type;
@@ -162,7 +157,7 @@ interface WebGLActiveInfo {
 \item {\it WebGLShaderPrecisionFormat}
 
 	{\it Interface WebGLShaderPrecisionFormat} merepresentasikan informasi yang dikembalikan dari pemanggilan {\it getShaderPrecisionFormat}.
-	\begin{lstlisting}
+	\begin{lstlisting}[caption={Keluaran dari  pemanggilan {\it getShaderPrecisionFormat}.}, captionpos=b]
 interface WebGLShaderPrecisionFormat {
     	readonly attribute GLint rangeMin;
     	readonly attribute GLint rangeMax;
@@ -173,7 +168,7 @@ interface WebGLShaderPrecisionFormat {
 \item {\it ArrayBuffer} dan {\it Typed Arrays}
 
 	{\it Vertex, index, texture,} dan data lainnya ditransfer ke implementasi WebGL menggunakan {\it ArrayBuffer, Typed Arrays,} dan {\it DataViews} seperti yang telah didefinisikan pada spesifikasi ECMAScript.
-\begin{lstlisting}
+\begin{lstlisting}[caption={Transfer data ke implementasi WebGL.}, captionpos=b]
 var numVertices = 100; // for example
 
 // Hitung ukuran buffer yang dibutuhkan dalam bytes dan floats
@@ -226,22 +221,22 @@ Terdapat beberapa fungsi penting yang disediakan oleh pustaka Three.js dalam pem
 \item \textit{Cameras}
 
 	\begin{itemize}
-	\item {\it Camera}, kelas abstrak untuk {\it cameras}. Kelas ini harus selalu diwarisi saat membangun suatu kamera. Konstruktor pada kelas ini digunakan untuk membuat kamera baru, namun kelas ini tidak dipergunakan secara langsung melainkan menggunakan {\it PerspectiveCamera} atau {\it OrthographicCamera}.
+	\item {\it Camera}, kelas abstrak untuk {\it cameras}. Kelas ini harus selalu diimplementasikan saat membangun suatu kamera. Konstruktor pada kelas ini digunakan untuk membuat kamera baru, namun kelas ini tidak dipergunakan secara langsung melainkan menggunakan {\it PerspectiveCamera} atau {\it OrthographicCamera}.
 	
-	\item {\it CubeCamera}, membuat 6 kamera yang dibangun pada {\it WebGLRenderTargetCube}. Konstruktor pada kelas ini menerima parameter berupa jarak terdekat, jarak terjauh, dan resolusi dari kubus.
+	\item {\it CubeCamera}, membuat 6 kamera yang dibangun pada {\it WebGLRenderTargetCube}. Konstruktor pada kelas ini menerima parameter berupa jarak terdekat, jarak terjauh, dan resolusi dari kubus. Contoh untuk kelas {\it CubeCamera} dapat dilihat pada pada {\it listing} 2.14.
 	\begin{lstlisting}[caption={Contoh instansiasi kelas {\it CubeCamera}.},captionpos=b]
 var cubeCamera = new THREE.CubeCamera( 1, 100000, 128 );
 scene.add( cubeCamera );
 \end{lstlisting}
 	
-	\item{\it OrthographicCamera}, kamera yang menggunakan proyeksi ortografik. Konstruktor pada kelas ini menerima parameter berupa {\it frustum} kamera bagian kiri, {\it frustum} kamera bagian kanan, {\it frustum} kamera bagian atas, {\it frustum} kamera bagian bawah, {\it frustum} kamera untuk jarak dekat, dan {\it frustum} kamera untuk jarak jauh.
+	\item{\it OrthographicCamera}, kamera yang menggunakan proyeksi ortografik. Konstruktor pada kelas ini menerima parameter berupa {\it frustum} kamera bagian kiri, {\it frustum} kamera bagian kanan, {\it frustum} kamera bagian atas, {\it frustum} kamera bagian bawah, {\it frustum} kamera untuk jarak dekat, dan {\it frustum} kamera untuk jarak jauh. Contoh untuk kelas {\it OrthographicCamera} dapat dilihat pada pada {\it listing} 2.15.
 \begin{lstlisting}[caption={Contoh instansiasi kelas {\it OrthographicCamera}},captionpos=b]
 var camera = new THREE.OrthographicCamera( width / - 2, width / 2, 
 height / 2, height / - 2, 1, 1000 );
 scene.add( camera );
 \end{lstlisting}
 	
-	\item {\it PerspectiveCamera}, kamera yang menggunakan pyoyeksi perspektif. Konstruktor pada kelas ini menerima parameter berupa {\it frustum} pandangan vertikal, {\it frustum} pandangan horizontal, dan {\it frustum} jarak dekat, dan {\it frustum} jarak jauh.
+	\item {\it PerspectiveCamera}, kamera yang menggunakan pyoyeksi perspektif. Konstruktor pada kelas ini menerima parameter berupa {\it frustum} pandangan vertikal, {\it frustum} pandangan horizontal, dan {\it frustum} jarak dekat, dan {\it frustum} jarak jauh. Contoh untuk kelas {\it PerspectiveCamera} dapat dilihat pada pada {\it listing} 2.16.
 \begin{lstlisting}[caption={Contoh instansiasi kelas {\it PerspectiveCamera}},captionpos=b]
 var camera = new THREE.PerspectiveCamera( 45, width / height, 
 1, 1000 );
@@ -255,7 +250,7 @@ scene.add( camera );
 \item \textit{Core}
 	\begin{itemize}
 	\item{\it BufferAttribute}, kelas ini menyimpan data untuk atribut yang diasosiasikan menggunakan BufferGeometry. Hal ini memungkinkan pengiriman data yang lebih efisien kepada GPU. Konstruktor pada kelas ini menerima parameter berupa sebuah array dengan ukuran nilai dari array dikalikan dengan jumlah vertex, nilai dari array tersebut, dan juga sebuah boolean yang merepresentasikan penggunaan {\it normalized}.
-	\item{\it BufferGeometry}, merupakan sebuah kelas alternatif efisien untuk {\it Geometry}. Karena kelas ini menyimpan semua data, termasuk posisi vertex, index permukaan, normal, warna, UV, dan atribut kustom menggunakan buffer. Kelas ini mengurangi biaya pengiriman seluruh data ke GPU. Konstruktor pada kelas ini digunakan untuk membuat {\it BufferGeometry} baru dan inisialisasi nilai awal untuk objek baru tersebut.
+	\item{\it BufferGeometry}, merupakan sebuah kelas alternatif efisien untuk {\it Geometry}. Karena kelas ini menyimpan semua data, termasuk posisi vertex, index permukaan, normal, warna, UV, dan atribut kustom menggunakan buffer. Kelas ini mengurangi biaya pengiriman seluruh data ke GPU. Konstruktor pada kelas ini digunakan untuk membuat {\it BufferGeometry} baru dan inisialisasi nilai awal untuk objek baru tersebut. Contoh untuk kelas {\it BufferGeometry} dapat dilihat pada pada {\it listing} 2.17.
 \begin{lstlisting}[caption={Contoh instansiasi kelas {\it BufferGeometry} dengan membuat bentuk kotak sederhana.},captionpos=b]
 var geometry = new THREE.BufferGeometry();
 // membuat bentuk kotak sederhana dengan melakukan duplikasi pada
@@ -280,7 +275,7 @@ var mesh = new THREE.Mesh( geometry, material );
 
 	\item{\it Clock}, sebuah objek untuk menjaga alur dari waktu.
 	\item{Direct Geometry}, kelas ini digunakan secara internal untuk mengkonversi {\it Geometry} menjadi {\it BufferGeometry}. Konstruktor pada kelas ini digunakan untuk membuat {\it DirectGeometry} baru.
-	\item{\it EventDispatcher}, suatu {\it event} pada JavaScript untuk objek kustom. Konstruktor pada kelas ini digunakan untuk membuat objek {\it EventDispatcher}.
+	\item{\it EventDispatcher}, suatu {\it event} pada JavaScript untuk objek kustom. Konstruktor pada kelas ini digunakan untuk membuat objek {\it EventDispatcher}. Contoh untuk kelas {\it EventDispatcher} dapat dilihat pada pada {\it listing} 2.18.
 \begin{lstlisting}[caption={Contoh penggunaan objek {\it EventDispatcher} untuk objek kustom.},captionpos=b]
 // menambahkan event untuk objek kustom
 var Car = function () {
@@ -306,7 +301,7 @@ car.addEventListener( 'start', function ( event ) {
 car.start();
 \end{lstlisting}
 
-	\item{\it Face3}, permukaan segitiga yang digunakan pada {\it Geometry}. Konstruktor pada kelas ini menerima parameter berupa vertek A, vertek B, vertek C, sebuah vektor permukaan normal atau {\it array} dari vertek normal, sebuah warna permukaan atau {\it array} dari vertek warna, dan indeks dari {\it array} material yang akan diasosiasikan dengan permukaan.
+	\item{\it Face3}, permukaan segitiga yang digunakan pada {\it Geometry}. Konstruktor pada kelas ini menerima parameter berupa vertek A, vertek B, vertek C, sebuah vektor permukaan normal atau {\it array} dari vertek normal, sebuah warna permukaan atau {\it array} dari vertek warna, dan indeks dari {\it array} material yang akan diasosiasikan dengan permukaan. Contoh untuk kelas {\it Face3} dapat dilihat pada pada {\it listing} 2.19.
 \begin{lstlisting}[caption={Contoh penggunaan {\it Face3} pada suatu {\it Geometry}.},captionpos=b]
 var material = new THREE.MeshStandardMaterial( { color : 0x00cc00 } );
 
@@ -333,7 +328,7 @@ geometry.computeVertexNormals();
 scene.add( new THREE.Mesh( geometry, material ) );
 \end{lstlisting}
 
-	\item{\it Geometry}, kelas dasar untuk {\it Geometry}.
+	\item{\it Geometry}, kelas dasar untuk {\it Geometry}. Contoh untuk kelas {\it Geometry} dapat dilihat pada pada {\it listing} 2.20.
 \begin{lstlisting}[caption={Contoh instansiasi kelas {\it Geometry}.},captionpos=b]
 var geometry = new THREE.Geometry();
 
@@ -360,7 +355,7 @@ geometry.computeBoundingSphere();
 	
 	\item{\it Layers}, lapisan-lapisan objek yang berisi dari objek 3 dimensi dan terdiri dari 1 sampai 32 layer yang diberi nomor 0 sampai 31. Secara internal, layer disimpan sebagai sebuah {\it bit mask}. Kemudian sebagai inisialisasinya, semua anggota dai {\it Object3Ds} merupakan member dari lapisan 0. Konstruktor pada kelas ini digunakan untuk membuat objek {\it Layers} baru dengan anggota awal berada pada lapisan 0.
 	\item{\it Object3D}, sebuah kelas dasar untuk hampir semua object pada Three.js yang juga menyediakan seperangkat properti dan metode untuk memanipulasi objek 3 dimenasi pada ruang.
-	\item{\it Raycaster}, sebuah kelas yang didesain untuk membantu {\it raycasting}. {\it Raycasting} digunakan untuk mengetahui posisi kursor berada pada suatu benda diantara benda lainnya. Konstruktor pada kelas ini menerima parameter berupa vektor awal asal sinar, arah sinar, jarak terdekat, dan jarak terjauh. 
+	\item{\it Raycaster}, sebuah kelas yang didesain untuk membantu {\it raycasting}. {\it Raycasting} digunakan untuk mengetahui posisi kursor berada pada suatu benda diantara benda lainnya. Konstruktor pada kelas ini menerima parameter berupa vektor awal asal sinar, arah sinar, jarak terdekat, dan jarak terjauh. Contoh untuk kelas {\it Raycaster} dapat dilihat pada pada {\it listing} 2.21.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it Raycaster}.},captionpos=b]
 var raycaster = new THREE.Raycaster();
@@ -391,7 +386,7 @@ window.addEventListener( 'mousemove', onMouseMove, false );
 window.requestAnimationFrame(render);
 \end{lstlisting}
 	
-	\item{\it Uniform}, merupakan variabel global GLSL. {\it Uniform} akan dikirim ke program {\it shader}.
+	\item{\it Uniform}, merupakan variabel global GLSL. {\it Uniform} akan dikirim ke program {\it shader}. Contoh untuk kelas {\it Uniform} dapat dilihat pada pada {\it listing} 2.22.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it Uniform} yang diinisialisasi dengan nilai atau objek.},captionpos=b]
 uniforms: {
@@ -404,7 +399,7 @@ uniforms: {
 	
 \item \textit{Geometries}
 	\begin{itemize}
-	\item {\it BoxBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it BoxGeometry}. Konstruktor pada kelas ini menerima parameter berupa lebar sisi pada sumbu X dengan nilai awal adalah 1, tinggi sisi pada sumbu Y dengan nilai awal adalah 1, kedalaman sisi pada sumbu Z dengan nilai awal adalah 1, jumlah permukaan yang berpotongan dengan lebar sisi dengan nilai awal adalah 1 dan bersifat fakultatif,  jumlah permukaan yang berpotongan dengan tinggi sisi dengan nilai awal adalah 1 dan bersifat fakultatif,  dan jumlah permukaan yang berpotongan dengan kedalaman sisi dengan nilai awal adalah 1 dan bersifat fakultatif.
+	\item {\it BoxBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it BoxGeometry}. Konstruktor pada kelas ini menerima parameter berupa lebar sisi pada sumbu X dengan nilai awal adalah 1, tinggi sisi pada sumbu Y dengan nilai awal adalah 1, kedalaman sisi pada sumbu Z dengan nilai awal adalah 1, jumlah permukaan yang berpotongan dengan lebar sisi dengan nilai awal adalah 1 dan bersifat fakultatif,  jumlah permukaan yang berpotongan dengan tinggi sisi dengan nilai awal adalah 1 dan bersifat fakultatif,  dan jumlah permukaan yang berpotongan dengan kedalaman sisi dengan nilai awal adalah 1 dan bersifat fakultatif. Contoh untuk kelas {\it BoxBufferGeometry} dapat dilihat pada pada {\it listing} 2.23.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it BoxBufferGeometry}.},captionpos=b]
 
@@ -432,7 +427,7 @@ scene.add( cube );
 
 	\item {\it DodecahedronGeometry}, sebuah kelas untuk mengeneralisasi geometri pigura berduabelas segi. Konstruktor pada kelas ini menerima parameter berupa radius dari pigura berduabelas segi dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 1.
 
-	\item {\it EdgesGeometry}, dapat digunakan sebagai objek pembantu untuk melihat tepi dari suatu objek geometri. Konstruktor pada kelas ini menerima parameter berupa objek geometri dan tepi sudut dengan nilai awal adalah 1.
+	\item {\it EdgesGeometry}, dapat digunakan sebagai objek pembantu untuk melihat tepi dari suatu objek geometri. Konstruktor pada kelas ini menerima parameter berupa objek geometri dan tepi sudut dengan nilai awal adalah 1. Contoh untuk kelas {\it EdgesGeometry} dapat dilihat pada pada {\it listing} 2.24.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it EdgesGeometry}.},captionpos=b]
 var geometry = new THREE.BoxBufferGeometry( 100, 100, 100 );
@@ -442,7 +437,7 @@ new THREE.LineBasicMaterial( { color: 0xffffff } ) );
 scene.add( line );
 \end{lstlisting}
 
-	\item {\it ExtrudeGeometry}, membuat geometri diekstrusi dari sebuah alur bentuk. Konstruktor pada kelas ini menerima parameter berupa bentuk atau {\it array} dari bentuk dan juga pilihan yang dapat berisi beberapa parameter seperti jumlah titik pada lengkungan, jumlah titik yang digunakan untuk membagi potongan, dan lain-lain.
+	\item {\it ExtrudeGeometry}, membuat geometri diekstrusi dari sebuah alur bentuk. Konstruktor pada kelas ini menerima parameter berupa bentuk atau {\it array} dari bentuk dan juga pilihan yang dapat berisi beberapa parameter seperti jumlah titik pada lengkungan, jumlah titik yang digunakan untuk membagi potongan, dan lain-lain. Contoh untuk kelas {\it ExtrudeGeometry} dapat dilihat pada pada {\it listing} 2.25.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it ExtrudeGeometry}.},captionpos=b]
 var length = 12, width = 8;
@@ -475,7 +470,7 @@ scene.add( mesh );
 
 	\item {\it IcosahedronGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri {\it icosahedron}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0.
 
-	\item {\it LatheBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it LatheGeometry}. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari {\it Vector2s}, jumlah bagian lingkar yang ingin di generalisasi dengan nilai awal adalah 12, sudut awal dalam radian dengan nilai awal adalah 0, rentang radian dengan nilai awal adalah 2 kali Pi.  
+	\item {\it LatheBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it LatheGeometry}. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari {\it Vector2s}, jumlah bagian lingkar yang ingin di generalisasi dengan nilai awal adalah 12, sudut awal dalam radian dengan nilai awal adalah 0, rentang radian dengan nilai awal adalah 2 kali Pi. Contoh untuk kelas {\it LatheBufferGeometry} dapat dilihat pada pada {\it listing} 2.26.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it LatheBufferGeometry}.},captionpos=b]
 var points = [];
@@ -489,13 +484,13 @@ var lathe = new THREE.Mesh( geometry, material );
 scene.add( lathe );
 \end{lstlisting}
 
-	\item {\it LatheGeometry}, membuat jala dengan simetri aksial seperti vas. Bentuk ini berotasi di sekitar sumbu Y. Contoh penggunaannya sama seperti kelas {\it LatheBufferGeometry}. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari {\it Vector2s}, jumlah bagian lingkar yang ingin di generalisasi dengan nilai awal adalah 12, sudut awal dalam radian dengan nilai awal adalah 0, rentang radian dengan nilai awal adalah 2 kali Pi.  
+	\item {\it LatheGeometry}, membuat jala dengan simetri aksial seperti vas. Bentuk ini berotasi di sekitar sumbu Y. Contoh penggunaannya sama seperti kelas {\it LatheBufferGeometry}. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari {\it Vector2s}, jumlah bagian lingkar yang ingin di generalisasi dengan nilai awal adalah 12, sudut awal dalam radian dengan nilai awal adalah 0, rentang radian dengan nilai awal adalah 2 kali Pi.
 	
 	\item {\it OctahedronBufferGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri segi delapan. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0.
 	
 	\item {\it OctahedronGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri segi delapan. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0.
 	
-	\item {\it ParametricBufferGeometry}, mengeneralisasi geometri yang merepresentasikan permukaan parametrik. Konstruktor pada kelas ini menerima sebuah fungsi yang menerima nilai a dan u di antara 0 sampai dengan 1 dan mengembalikan {\it Vector3}, banyak potongan, dan banyak tumpukan.
+	\item {\it ParametricBufferGeometry}, mengeneralisasi geometri yang merepresentasikan permukaan parametrik. Konstruktor pada kelas ini menerima sebuah fungsi yang menerima nilai a dan u di antara 0 sampai dengan 1 dan mengembalikan {\it Vector3}, banyak potongan, dan banyak tumpukan. Contoh untuk kelas {\it ParametricBufferGeometry} dapat dilihat pada pada {\it listing} 2.27.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it ParametricBufferGeometry}.},captionpos=b]
 var geometry = new THREE.ParametricBufferGeometry( 
@@ -507,7 +502,7 @@ scene.add( cube );
 
 	\item {\it ParametricGeometry}, mengeneralisasi geometri yang merepresentasikan permukaan parametrik. Contoh penggunaannya sama seperti kelas {\it ParametricBufferGeometry}. Konstruktor pada kelas ini menerima sebuah fungsi yang menerima nilai a dan u di antara 0 sampai dengan 1 dan mengembalikan {\it Vector3}, banyak potongan, dan banyak tumpukan.
 	
-	\item {\it PlaneBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it PlaneGeometry}. Konstruktor pada kelas ini menerima parameter berupa lebar pada sumbu X dengan nilai awal adalah 1, tinggi pada sumbu Y dengan nilai awal adalah 1, lebar bagian dengan nilai awal adalah 1 dan bersifat fakultatif, dan tinggi bagian dengan nilai awal adalah 1 dan bersifat fakultatif.
+	\item {\it PlaneBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it PlaneGeometry}. Konstruktor pada kelas ini menerima parameter berupa lebar pada sumbu X dengan nilai awal adalah 1, tinggi pada sumbu Y dengan nilai awal adalah 1, lebar bagian dengan nilai awal adalah 1 dan bersifat fakultatif, dan tinggi bagian dengan nilai awal adalah 1 dan bersifat fakultatif. Contoh untuk kelas {\it PlaneBufferGeometry} dapat dilihat pada pada {\it listing} 2.28.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it PlaneBufferGeometry}.},captionpos=b]
 var geometry = new THREE.PlaneBufferGeometry( 5, 20, 32 );
@@ -520,7 +515,7 @@ scene.add( plane );
 
 	\item {\it PlaneGeometry}, sebuah kelas untuk mengeneralisasi geometri dataran. Contoh penggunaannya sama seperti kelas {\it PlaneBufferGeometry}. Konstruktor pada kelas ini menerima parameter berupa lebar pada sumbu X dengan nilai awal adalah 1, tinggi pada sumbu Y dengan nilai awal adalah 1, lebar bagian dengan nilai awal adalah 1 dan bersifat fakultatif, dan tinggi bagian dengan nilai awal adalah 1 dan bersifat fakultatif.
 	
-	\item {\it PolyhedronBufferGeometry}, merupakan sebuah padat 3 dimensi dengan permukaan datar. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari titik, {\it array} dari indeks yang membentuk permukaan, radius dari bentuk akhir, dan detail.
+	\item {\it PolyhedronBufferGeometry}, merupakan sebuah padat 3 dimensi dengan permukaan datar. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari titik, {\it array} dari indeks yang membentuk permukaan, radius dari bentuk akhir, dan detail. Contoh untuk kelas {\it PolyhedronBufferGeometry} dapat dilihat pada pada {\it listing} 2.29.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it PolyhedronBufferGeometry}.},captionpos=b]
 var verticesOfCube = [
@@ -543,7 +538,7 @@ var geometry = new THREE.PolyhedronBufferGeometry( verticesOfCube,
 
 	\item {\it PolyhedronGeometry}, merupakan sebuah padat 3 dimensi dengan permukaan datar. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari titik, {\it array} dari indeks yang membentuk permukaan, radius dari bentuk akhir, dan detail. Contoh penggunaannya sama seperti kelas {\it PolyhedronBufferGeometry}.
 	
-	\item {\it RingBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it RingGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius bagian dalam dengan nilai awal adalah 20, radius bagian luar dengan nilai awal adalah 50, banyak bagian sudut dengan minimum 3 dan nilai awal 8, banyak bagian Pi dengan minimum 1 dan nilai awal 8, sudut awal dengan nilai awal adalah 0, dan sudut pusat dengan nilai awal adalah dua kali Pi. 
+	\item {\it RingBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it RingGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius bagian dalam dengan nilai awal adalah 20, radius bagian luar dengan nilai awal adalah 50, banyak bagian sudut dengan minimum 3 dan nilai awal 8, banyak bagian Pi dengan minimum 1 dan nilai awal 8, sudut awal dengan nilai awal adalah 0, dan sudut pusat dengan nilai awal adalah dua kali Pi. Contoh untuk kelas {\it RingBufferGeometry} dapat dilihat pada pada {\it listing} 2.30.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it RingBufferGeometry}.},captionpos=b]
 var geometry = new THREE.RingBufferGeometry( 1, 5, 32 );
@@ -556,7 +551,7 @@ scene.add( mesh );
 
 	\item {\it RingGeometry}, sebuah kelas untuk mengeneralisasi geometri cincin dua dimensi. Konstruktor pada kelas ini menerima parameter berupa radius bagian dalam dengan nilai awal adalah 0.5, radius bagian luar dengan nilai awal adalah 1, banyak bagian sudut dengan minimum 3 dan nilai awal 8, banyak bagian Pi dengan minimum 1 dan nilai awal 8, sudut awal dengan nilai awal adalah 0, dan sudut pusat dengan nilai awal adalah dua kali Pi.  Contoh penggunaannya sama seperti kelas {\it RingBufferGeometry}.
 	
-	\item {\it ShapeBufferGeometry}, membuat sebuah geometri poligonal satu sisi dari satu atau lebih alur bentuk. Konstruktor pada kelas ini menerima parameter berupa bentuk atau {\it array} dari bentuk dan jumlah bagian lengkung.
+	\item {\it ShapeBufferGeometry}, membuat sebuah geometri poligonal satu sisi dari satu atau lebih alur bentuk. Konstruktor pada kelas ini menerima parameter berupa bentuk atau {\it array} dari bentuk dan jumlah bagian lengkung. Contoh untuk kelas {\it ShapeBufferGeometry} dapat dilihat pada pada {\it listing} 2.31.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it ShapeBufferGeometry}.},captionpos=b]
 var x = 0, y = 0;
@@ -584,7 +579,7 @@ scene.add( mesh );
 
 	\item {\it ShapeGeometry}, membuat sebuah geometri poligonal satu sisi dari satu atau lebih alur bentuk. Konstruktor pada kelas ini menerima parameter berupa bentuk atau {\it array} dari bentuk dan jumlah bagian lengkung. Contoh penggunaannya sama seperti kelas {\it ShapeBufferGeometry}.
 
-	\item {\it SphereBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it SphereGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 50, lebar bagian dengan minimum 3 dan nilai awal adalah 8, tinggi bagian dengan minimum 2 dan nilai awal 6, sudut awal horizontal dengan nilai awal 0, besar sudut horizontal dengan nilai awal adalah dua kali Pi, sudut awal vertikal dengan nilai awal adalah 0, dan besar sudut vertikal dengan nilai awal adalah Pi.
+	\item {\it SphereBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it SphereGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 50, lebar bagian dengan minimum 3 dan nilai awal adalah 8, tinggi bagian dengan minimum 2 dan nilai awal 6, sudut awal horizontal dengan nilai awal 0, besar sudut horizontal dengan nilai awal adalah dua kali Pi, sudut awal vertikal dengan nilai awal adalah 0, dan besar sudut vertikal dengan nilai awal adalah Pi. Contoh untuk kelas {\it SphereBufferGeometry} dapat dilihat pada pada {\it listing} 2.32.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it SphereBufferGeometry}.},captionpos=b]
 var geometry = new THREE.SphereBufferGeometry( 5, 32, 32 );
@@ -599,7 +594,7 @@ scene.add( sphere );
 	
 	\item {\it TetrahedronGeometry}, sebuah kelas untuk mengeneralisasi geometri segi empat. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0.
 	
-	\item {\it TextBufferGeometry}, sebuah kelas untuk mengeneralisasi tulisan sebagai suatu geometri tunggal. Konstruktor pada kelas ini menerima parameter berupa teks yang ingin ditunjukan dan parameter pendukung lainnya seperti {\it font}, ukuran, tinggi, dan lain-lain.
+	\item {\it TextBufferGeometry}, sebuah kelas untuk mengeneralisasi tulisan sebagai suatu geometri tunggal. Konstruktor pada kelas ini menerima parameter berupa teks yang ingin ditunjukan dan parameter pendukung lainnya seperti {\it font}, ukuran, tinggi, dan lain-lain. Contoh untuk kelas {\it TextBufferGeometry} dapat dilihat pada pada {\it listing} 2.33.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it TextBufferGeometry}.},captionpos=b]
 var loader = new THREE.FontLoader();
@@ -622,7 +617,7 @@ function ( font ) {
 
 	\item {\it TextGeometry},  sebuah kelas untuk mengeneralisasi tulisan sebagai suatu geometri tunggal. Konstruktor pada kelas ini menerima parameter berupa teks yang ingin ditunjukan dan parameter pendukung lainnya seperti {\it font}, ukuran, tinggi, dan lain-lain. Contoh penggunaannya sama seperti kelas {\it TextBufferGeometry}.
 	
-	\item {\it TorusBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it TorusGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 100, diameter tabung dengan nilai awal adalah 40, banyak bagian radial dengan nilai awal adalah 8, banyak bagian tabung dengan nilai awal adalah 6, sudut pusat dengan nilai awal adalah dua kali Pi. 
+	\item {\it TorusBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it TorusGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 100, diameter tabung dengan nilai awal adalah 40, banyak bagian radial dengan nilai awal adalah 8, banyak bagian tabung dengan nilai awal adalah 6, sudut pusat dengan nilai awal adalah dua kali Pi.  Contoh untuk kelas {\it TorusBufferGeometry} dapat dilihat pada pada {\it listing} 2.34.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it TorusBufferGeometry}.},captionpos=b]
 var geometry = new THREE.TorusBufferGeometry( 10, 3, 16, 100 );
@@ -633,7 +628,7 @@ scene.add( torus );
 
 	\item {\it TorusGeometry}, sebuah kelas untuk mengeneralisasi geometri torus. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1, diameter tabung dengan nilai awal adalah 0.04, bagian radial dengan nilai awal adalah 8, bagian tabung dengan nilai awal adalah 6, sudut pusat dengan nilai awal adalah dua kali Pi.  Contoh penggunaannya sama seperti kelas {\it TorusBufferGeometry}.
 	
-	\item {\it TorusKnotBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it TorusKnotGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 100, diameter tabung dengan nilai awal adalah 40, banyak bagian tabung dengan nilai awal adalah 64, banyak bagian radial dengan nilai awal adalah 8, jumlah rotasi pada sumbu dengan nilai awal adalah 2, dan jumlah putaran dengan nilai awal adalah 3.
+	\item {\it TorusKnotBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it TorusKnotGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 100, diameter tabung dengan nilai awal adalah 40, banyak bagian tabung dengan nilai awal adalah 64, banyak bagian radial dengan nilai awal adalah 8, jumlah rotasi pada sumbu dengan nilai awal adalah 2, dan jumlah putaran dengan nilai awal adalah 3. Contoh untuk kelas {\it TorusKnotBufferGeometry} dapat dilihat pada pada {\it listing} 2.35.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it TorusKnotBufferGeometry}.},captionpos=b]
 var geometry = new THREE.TorusKnotBufferGeometry( 10, 3, 100, 16 );
@@ -644,7 +639,7 @@ scene.add( torusKnot );
 
 	\item {\it TorusKnotGeometry}, membuat simpul knot dengan bagian bentuk yang didefinisikan dengan sepasang bilangan bulat koprima p dan q. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 100, diameter tabung dengan nilai awal adalah 40, banyak bagian tabung dengan nilai awal adalah 64, banyak bagian radial dengan nilai awal adalah 8, jumlah rotasi pada sumbu dengan nilai awal adalah 2, dan jumlah putaran dengan nilai awal adalah 3.  Contoh penggunaannya sama seperti kelas {\it TorusKnotBufferGeometry}.
 	
-	\item {\it TubeGeometry}, membuat sebuah tabung yang diekstrusi sepanjang 3 dimensi melengkung. Konstruktor pada kelas ini menerima parameter berupa alur dengan basis kelas {\it Curve}, banyak bagian tabung dengan nilai awal 64, radius dengan nilai awal adalah 1, banyak bagian radius dengan nilai awal adalah 8, dan sebuah boolean yang menyatakan tabung tersebut tertutup atau terbuka.
+	\item {\it TubeGeometry}, membuat sebuah tabung yang diekstrusi sepanjang 3 dimensi melengkung. Konstruktor pada kelas ini menerima parameter berupa alur dengan basis kelas {\it Curve}, banyak bagian tabung dengan nilai awal 64, radius dengan nilai awal adalah 1, banyak bagian radius dengan nilai awal adalah 8, dan sebuah boolean yang menyatakan tabung tersebut tertutup atau terbuka. Contoh untuk kelas {\it TubeGeometry} dapat dilihat pada pada {\it listing} 2.36.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it TubeGeometry}.},captionpos=b]
 function CustomSinCurve( scale ) {
@@ -676,9 +671,9 @@ var mesh = new THREE.Mesh( geometry, material );
 scene.add( mesh );
 \end{lstlisting}
 
-	\item {\it TubeBufferGeometry},  membuat sebuah tabung yang diekstrusi sepanjang 3 dimensi melengkung. Konstruktor pada kelas ini menerima parameter berupa alur dengan basis kelas {\it Curve}, banyak bagian tabung dengan nilai awal 64, radius dengan nilai awal adalah 1, banyak bagian radius dengan nilai awal adalah 8, dan sebuah boolean yang menyatakan tabung tersebut tertutup atau terbuka. Contoh penggunaannya sama seperti kelas {\it TubeGeometry}.
+	\item {\it TubeBufferGeometry},  membuat sebuah tabung yang diekstrusi sepanjang 3 dimensi melengkung. Konstruktor pada kelas ini menerima parameter berupa alur dengan basis kelas {\it Curve}, banyak bagian tabung dengan nilai awal 64, radius dengan nilai awal adalah 1, banyak bagian radius dengan nilai awal adalah 8, dan sebuah boolean yang menyatakan tabung tersebut tertutup atau terbuka. Contoh penggunaannya sama seperti kelas {\it TubeGeometry}. Contoh untuk kelas {\it TubeBufferGeometry} dapat dilihat pada pada {\it listing} 2.37.
 	
-	\item {\it WireframeGeometry}, dapat digunakan sebagai objek pembantu untuk menampilkan sebuah objek geometri sebagai {\it wireframe}.
+	\item {\it WireframeGeometry}, dapat digunakan sebagai objek pembantu untuk menampilkan sebuah objek geometri sebagai {\it wireframe}. Contoh untuk kelas {\it WireframeGeometry} dapat dilihat pada pada {\it listing} 2.37.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it WireframeGeometry}.},captionpos=b]
 var geometry = new THREE.SphereBufferGeometry( 100, 100, 100 );
@@ -698,7 +693,7 @@ scene.add( line );
 \item \textit{Lights}
 
 	\begin{itemize}
-	\item {\it AmbientLight}, sebuah cahaya yang menyinari objek secara global dan merata. Konstruktor pada kelas ini menerima parameter berupa warna dalam RGB dan intensitas.
+	\item {\it AmbientLight}, sebuah cahaya yang menyinari objek secara global dan merata. Konstruktor pada kelas ini menerima parameter berupa warna dalam RGB dan intensitas. Contoh untuk kelas {\it AmbientLight} dapat dilihat pada pada {\it listing} 2.38.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it AmbientLight}.},captionpos=b]
 var light = new THREE.AmbientLight( 0x404040 ); 
@@ -713,7 +708,7 @@ scene.add( light );
 
 	\item {\it PointLight}, sebuah pancaran dari satu titik pada setiap arah. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, intensitas, jarak dari cahaya saat intensitasnya 0, dan hilangnya cahaya dari pandangan dengan nilai awal adalah 1. Contoh penggunaannya sama seperti kelas {\it AmbientLight}.
 	
-	\item {\it RectAreaLight}, sebuah pancaran sinar seragam melewati permukaan bidang persegi panjang. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, intensitas dengan nilai awal adalah 1, lebar cahaya dan tinggi cahaya dengan nilai awal adalah 10.
+	\item {\it RectAreaLight}, sebuah pancaran sinar seragam melewati permukaan bidang persegi panjang. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, intensitas dengan nilai awal adalah 1, lebar cahaya dan tinggi cahaya dengan nilai awal adalah 10. Contoh untuk kelas {\it RectAreaLight} dapat dilihat pada pada {\it listing} 2.39.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it RectAreaLight}.},captionpos=b]
 var width = 2;
@@ -728,7 +723,7 @@ rectLightHelper = new THREE.RectAreaLightHelper( rectLight );
 scene.add( rectLightHelper );
 \end{lstlisting}
 
-	\item {\it SpotLight}, sebuah pancaran dari satu titik pada setiap arah sepanjang bidang yang ukurannya dapat bertambah lebih jauh. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, intensitas dengan nilai awal adalah 1, jarak maksimal cahaya dari sumber, sudut maksimum, {\it penumbra}, dan hilangnya cahaya dari pandangan dengan nilai awal adalah 1.
+	\item {\it SpotLight}, sebuah pancaran dari satu titik pada setiap arah sepanjang bidang yang ukurannya dapat bertambah lebih jauh. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, intensitas dengan nilai awal adalah 1, jarak maksimal cahaya dari sumber, sudut maksimum, {\it penumbra}, dan hilangnya cahaya dari pandangan dengan nilai awal adalah 1. Contoh untuk kelas {\it SpotLight} dapat dilihat pada pada {\it listing} 2.40.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it SpotLight}.},captionpos=b]
 var spotLight = new THREE.SpotLight( 0xffffff );
@@ -751,7 +746,7 @@ scene.add( spotLight );
 \item \textit{Loaders}
 
 	\begin{itemize}
-	\item {\it AnimationLoader}, kelas untuk memuat animasi dalam format JSON. Konstruktor pada kelas ini menerima parameter berupa {\it loadingManager}.
+	\item {\it AnimationLoader}, kelas untuk memuat animasi dalam format JSON. Konstruktor pada kelas ini menerima parameter berupa {\it loadingManager}. Contoh untuk kelas {\it AnimationLoader} dapat dilihat pada pada {\it listing} 2.41.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it AnimationLoader}.},captionpos=b]
 // instansiasi pemuat
@@ -776,7 +771,7 @@ loader.load(
 );
 \end{lstlisting}
 
-	\item {\it CubeTextureLoader}, kelas untuk memuat sebuah {\it CubeTexture}. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}.
+	\item {\it CubeTextureLoader}, kelas untuk memuat sebuah {\it CubeTexture}. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it CubeTextureLoader} dapat dilihat pada pada {\it listing} 2.42.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it CubeTextureLoader} menggunakan gambar dengan format PNG di setiap sisinya.},captionpos=b]
 var scene = new THREE.Scene();
@@ -794,7 +789,7 @@ scene.background = new THREE.CubeTextureLoader()
 
 	\item {\it DataTextureLoader}, kelas dasar abstrak untuk memuat format tekstur biner umum. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}.
 	
-	\item {\it FileLoader}, kelas level rendah untuk memuat sumber daya dengan {\it XMLHTTPRequest}. Kelas ini digunakan secara internal untuk kebanyakan {\it loaders}. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}.
+	\item {\it FileLoader}, kelas level rendah untuk memuat sumber daya dengan {\it XMLHTTPRequest}. Kelas ini digunakan secara internal untuk kebanyakan {\it loaders}. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it FileLoader} dapat dilihat pada pada {\it listing} 2.43.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it FileLoader} untuk berkas dengan format TXT.},captionpos=b]
 var loader = new THREE.FileLoader();
@@ -823,7 +818,7 @@ loader.load(
 
 \end{lstlisting}
 
-	\item {\it FontLoader}, kelas untuk memuat sebuah font dalam format JSON. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}.
+	\item {\it FontLoader}, kelas untuk memuat sebuah font dalam format JSON. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it FontLoader} dapat dilihat pada pada {\it listing} 2.44.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it FontLoader}.},captionpos=b]
 var loader = new THREE.FontLoader();
@@ -847,7 +842,7 @@ var font = loader.load(
 );
 \end{lstlisting}
 
-	\item {\it ImageLoader}, sebuah pemuat untuk memuat gambar. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}.
+	\item {\it ImageLoader}, sebuah pemuat untuk memuat gambar. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it ImageLoader} dapat dilihat pada pada {\it listing} 2.45.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it ImageLoader}.},captionpos=b]
 // inisiasi pemuat
@@ -878,7 +873,7 @@ loader.load(
 );
 \end{lstlisting}
 
-	\item {\it JSONLoader}, sebuah pemuat untuk memuat objek dalam format JSON. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}.
+	\item {\it JSONLoader}, sebuah pemuat untuk memuat objek dalam format JSON. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it JSONLoader} dapat dilihat pada pada {\it listing} 2.46.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it JSONLoader}.},captionpos=b]
 // inisiasi pemuat
@@ -904,7 +899,7 @@ loader.load(
 
 	\item {\it Loader}, kelas dasar untuk implementasi pemuat.
 	
-	\item {\it MaterialLoader}, sebuah pemuat untuk memuat {\it Material} dalam format JSON. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}.
+	\item {\it MaterialLoader}, sebuah pemuat untuk memuat {\it Material} dalam format JSON. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it MaterialLoader} dapat dilihat pada pada {\it listing} 2.47.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it MaterialLoader}.},captionpos=b]
 // inisiasi pemuat
@@ -930,7 +925,7 @@ loader.load(
 );
 \end{lstlisting}
 
-	\item {\it ObjectLoader}, sebuah pemuat untuk memuat sumber daya JSON. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}.
+	\item {\it ObjectLoader}, sebuah pemuat untuk memuat sumber daya JSON. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it ObjectLoader} dapat dilihat pada pada {\it listing} 2.48.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it ObjectLoader}.},captionpos=b]
 var loader = new THREE.ObjectLoader();
@@ -965,7 +960,7 @@ var object = loader.parse( a_json_object );
 scene.add( object );
 \end{lstlisting}
 
-	\item {\it TextureLoader}, kelas untuk memuat tekstur. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}.
+	\item {\it TextureLoader}, kelas untuk memuat tekstur. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it TextureLoader} dapat dilihat pada pada {\it listing} 2.49.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it TextureLoader}.},captionpos=b]
 // inisiasi pemuat
@@ -996,7 +991,7 @@ loader.load(
 
 	\item {\it MTLLoader}, sebuah pemuat untuk memuat sumber daya .mtl. Pemuat ini digunakan secara internal pada {\it OBJMTLLoader} dan {\it UTS8Loader}. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}.
 	
-	\item {\it OBJLoader}, sebuah pemuat untuk memuat sumber daya .obj. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}.
+	\item {\it OBJLoader}, sebuah pemuat untuk memuat sumber daya .obj. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it OBJLoader} dapat dilihat pada pada {\it listing} 2.50.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it OBJLoader}.},captionpos=b]
 // inisiasi pemuat
@@ -1017,7 +1012,7 @@ loader.load(
 \item \textit{Materials}
 
 	\begin{itemize}
-	\item {\it LineBasicMaterial}, sebuah bahan untuk menggambar geometri gaya {\it wireframe}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it LineBasicMaterial}, sebuah bahan untuk menggambar geometri gaya {\it wireframe}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif. Contoh untuk kelas {\it LineBasicMaterial} dapat dilihat pada pada {\it listing} 2.51.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it LineBasicMaterial}.},captionpos=b]
 var material = new THREE.LineBasicMaterial( {
@@ -1028,7 +1023,7 @@ var material = new THREE.LineBasicMaterial( {
 } );
 \end{lstlisting}
 
-	\item {\it LineDashedMaterial}, sebuah bahan untuk menggambar geometri gaya {\it wireframe} dengan garis putus-putus. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it LineDashedMaterial}, sebuah bahan untuk menggambar geometri gaya {\it wireframe} dengan garis putus-putus. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif. Contoh untuk kelas {\it LineDashedMaterial} dapat dilihat pada pada {\it listing} 2.52.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it LineDashMaterial}.},captionpos=b]
 var material = new THREE.LineDashedMaterial( {
@@ -1058,7 +1053,7 @@ var material = new THREE.LineDashedMaterial( {
 	
 	\item {\it MeshToonMaterial}, sebuah ekstensi dari {\it MeshPhongMaterial} dengan bayangan. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
 	
-	\item {\it PointsMaterial}, sebuah bahan dasar yang digunakan {\it Points}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it PointsMaterial}, sebuah bahan dasar yang digunakan {\it Points}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif. Contoh untuk kelas {\it PointsMaterial} dapat dilihat pada pada {\it listing} 2.53.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it PointsMaterial}.},captionpos=b]
 var starsGeometry = new THREE.Geometry();
@@ -1081,7 +1076,7 @@ var starField = new THREE.Points( starsGeometry, starsMaterial );
 scene.add( starField );
 \end{lstlisting}
 
-	\item {\it RawShaderMaterial}, kelas ini bekerja seperti {\it ShaderMaterial} kecuali definisi dari {\it uniform} dan atribut yang telah ada tidak ditambahkan secara otomatis ke GLSL {\it shader} kode. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it RawShaderMaterial}, kelas ini bekerja seperti {\it ShaderMaterial} kecuali definisi dari {\it uniform} dan atribut yang telah ada tidak ditambahkan secara otomatis ke GLSL {\it shader} kode. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif. Contoh untuk kelas {\it RawShaderMaterial} dapat dilihat pada pada {\it listing} 2.54.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it RawShaderMaterial}.},captionpos=b]
 var material = new THREE.RawShaderMaterial( {
@@ -1097,7 +1092,7 @@ var material = new THREE.RawShaderMaterial( {
 } );
 \end{lstlisting}
 
-	\item {\it ShaderMaterial}, sebuah bahan yang dibangun dengan {\it shader} kustom. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it ShaderMaterial}, sebuah bahan yang dibangun dengan {\it shader} kustom. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif. Contoh untuk kelas {\it ShaderMaterial} dapat dilihat pada pada {\it listing} 2.55.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it ShaderMaterial}.},captionpos=b]
 var material = new THREE.ShaderMaterial( {
@@ -1118,7 +1113,7 @@ var material = new THREE.ShaderMaterial( {
 } );
 \end{lstlisting}
 
-	\item {\it ShadowMaterial}, sebuah bahan yang dapat menerima bayangan tetapi jika tidak merima bayangan maka akan transparan. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it ShadowMaterial}, sebuah bahan yang dapat menerima bayangan tetapi jika tidak merima bayangan maka akan transparan. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif. Contoh untuk kelas {\it ShadowMaterial} dapat dilihat pada pada {\it listing} 2.56.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it ShadowMaterial}.},captionpos=b]
 var planeGeometry = new THREE.PlaneGeometry( 2000, 2000 );
@@ -1133,7 +1128,7 @@ plane.receiveShadow = true;
 scene.add( plane );
 \end{lstlisting}
 
-	\item {\it SpriteMaterial}, sebuah bahan yang digunakan dengan {\it Sprite}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it SpriteMaterial}, sebuah bahan yang digunakan dengan {\it Sprite}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif. Contoh untuk kelas {\it SpriteMaterial} dapat dilihat pada pada {\it listing} 2.57.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it SpriteMaterial}.},captionpos=b]
 var spriteMap = new THREE.TextureLoader().load( 'textures/sprite.png' );
@@ -1153,7 +1148,7 @@ scene.add( sprite );
 \item \textit{Objects}
 
 	\begin{itemize}
-	\item {\it Bone}, sebuah tulang yang merupakan bagian dari kerangka.
+	\item {\it Bone}, sebuah tulang yang merupakan bagian dari kerangka. Contoh untuk kelas {\it Bone} dapat dilihat pada pada {\it listing} 2.58.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it Bone}.},captionpos=b]
 var root = new THREE.Bone();
@@ -1163,7 +1158,7 @@ root.add( child );
 child.position.y = 5;
 \end{lstlisting}
 	
-	\item {\it Group}, hampir sama dengan suatu {\it Object3D}.
+	\item {\it Group}, hampir sama dengan suatu {\it Object3D}. Contoh untuk kelas {\it Group} dapat dilihat pada pada {\it listing} 2.59.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it Group}.},captionpos=b]
 var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
@@ -1184,7 +1179,7 @@ group.add( cubeB );
 scene.add( group );
 \end{lstlisting}
 	
-	\item {\it LensFlare}, membuat lensa suar tiruan yang mengikuti cahaya. Konstruktor pada kelas ini menerima parameter berupa tekstur, ukuran, jarak, mode pencampuran, dan warna. 
+	\item {\it LensFlare}, membuat lensa suar tiruan yang mengikuti cahaya. Konstruktor pada kelas ini menerima parameter berupa tekstur, ukuran, jarak, mode pencampuran, dan warna. Contoh untuk kelas {\it LensFlare} dapat dilihat pada pada {\it listing} 2.60.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it LensFlare}.},captionpos=b]
 var light = new THREE.PointLight( 0xffffff, 1.5, 2000 );
@@ -1204,7 +1199,7 @@ lensFlare.position.copy( light.position );
 scene.add( lensFlare );
 \end{lstlisting}
 	
-	\item {\it Line}, sebuah garis yang kontinu. Konstruktor pada kelas ini menerima parameter berupa geometri dan material.
+	\item {\it Line}, sebuah garis yang kontinu. Konstruktor pada kelas ini menerima parameter berupa geometri dan material. Contoh untuk kelas {\it Line} dapat dilihat pada pada {\it listing} 2.61.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it Line}.},captionpos=b]
 var material = new THREE.LineBasicMaterial({
@@ -1226,7 +1221,7 @@ scene.add( line );
 	
 	\item {\it LineSegments}, beberapa garis yang ditarik antara beberapa pasang {\it vertex}. Konstruktor pada kelas ini menerima parameter berupa geometri dan material.
 	
-	\item {\it Mesh}, sebuah kelas yang merepresentasikan object dengan dasar segitiga. Konstruktor pada kelas ini menerima parameter berupa geometri dan material.
+	\item {\it Mesh}, sebuah kelas yang merepresentasikan object dengan dasar segitiga. Konstruktor pada kelas ini menerima parameter berupa geometri dan material. Contoh untuk kelas {\it Mesh} dapat dilihat pada pada {\it listing} 2.62.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it Mesh}.},captionpos=b]
 var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
@@ -1237,7 +1232,7 @@ scene.add( mesh );
 	
 	\item {\it Points}, sebuah kelas yang merepresentasikan titik. Konstruktor pada kelas ini menerima parameter berupa geometri dan material.
 	
-	\item {\it Skeleton}, sebuah {\it array} dari tulang untuk membuat kerangka yang bisa digunakan pada {\it SkinnedMesh}. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari {\it bones} dan {\it array} invers dari {\it Matriks4s}. 
+	\item {\it Skeleton}, sebuah {\it array} dari tulang untuk membuat kerangka yang bisa digunakan pada {\it SkinnedMesh}. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari {\it bones} dan {\it array} invers dari {\it Matriks4s}. Contoh untuk kelas {\it Skeleton} dapat dilihat pada pada {\it listing} 2.63.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it Skeleton}.},captionpos=b]
 var bones = [];
@@ -1260,7 +1255,7 @@ hand.position.y = 5;
 var armSkeleton = new THREE.Skeleton( bones );
 \end{lstlisting}
 	
-	\item {\it SkinnedMesh}, sebuah {\it mesh} yang mempunyai kerangka yang terdiri dari tulang dan digunakan untuk menganimasikan kumpulan {\it vertex} pada geometri. Konstruktor pada kelas ini menerima parameter berupa geometri dan material.
+	\item {\it SkinnedMesh}, sebuah {\it mesh} yang mempunyai kerangka yang terdiri dari tulang dan digunakan untuk menganimasikan kumpulan {\it vertex} pada geometri. Konstruktor pada kelas ini menerima parameter berupa geometri dan material. Contoh untuk kelas {\it SkinnedMesh} dapat dilihat pada pada {\it listing} 2.64.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it SkinnedMesh}.},captionpos=b]
 var geometry = new THREE.CylinderBufferGeometry( 
@@ -1298,7 +1293,7 @@ armSkeleton.bones[ 0 ].rotation.x = -0.1;
 armSkeleton.bones[ 1 ].rotation.x = 0.2;
 \end{lstlisting}
 	
-	\item {\it Sprite}, sebuah dataran yang selalu menghadap kamera secara umum dengan bagian tekstur transparan diaplikasikan. Konstruktor pada kelas ini menerima parameter berupa material.
+	\item {\it Sprite}, sebuah dataran yang selalu menghadap kamera secara umum dengan bagian tekstur transparan diaplikasikan. Konstruktor pada kelas ini menerima parameter berupa material. Contoh untuk kelas {\it Sprite} dapat dilihat pada pada {\it listing} 2.65.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it Sprite}.},captionpos=b]
 var spriteMap = new THREE.TextureLoader().load( "sprite.png" );
@@ -1311,11 +1306,13 @@ scene.add( sprite );
 	\end{itemize}
 
 \item \textit{Renderers}
+	\begin{itemize}
 	\item {\it WebGLRenderer}, pembangun WebGL menampilkan layar indah yang dbuat oleh Anda menggunakan WebGL. Konstruktor pada kelas ini menerima parameter berupa {\it canvas}, konteks, presisi, dan parameter relevan lainnya.
 	
 	\item {\it WebGLRenderTarget}, merupakan sebuah penyangga target pembangun yang memungkinkan kartu video menggambarkan piksel untuk layar yang dibangun di latar. Konstruktor pada kelas ini menerima parameter berupa lebar, tinggi, dan parameter relevan lainnya.
 	
 	\item {\it WebGLRenderTargetCube}, digunakan oleh {\it CubeCamera} sebagai {\it WebGLRenderTarget}. Konstruktor pada kelas ini menerima parameter berupa lebar, tinggi, dan parameter relevan lainnya.
+	\end{itemize}
 		
 \item \textit{Scenes}
 
@@ -1331,7 +1328,7 @@ scene.add( sprite );
 	\begin{itemize}
 	\item{\it CanvasTexture}, membuat tekstur dari suatu elemen {\it canvas}. Konstruktor pada kelas ini menerima parameter berupa {\it canvas}, {\it mapping}, wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, konstanta, format, tipe, dan {\it anisotropy}.
 	\item{\it CompressedTexture}, membuat tekstur berdasarkan data bentuk kompres. Contohnya dari sebuah berkas DDS. Konstruktor pada kelas ini menerima parameter berupa objek dengan data, lebar, tinggi, format, tipe, {\it mapping}, wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, dan {\it anisotropy}.
-	\item{\it CubeTexture}, membuat tekstur kubus dari 6 buah gambar. Konstruktor pada kelas ini menerima parameter berupa gambar, {\it mapping},  wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, format, tipe, dan {\it anisotropy}.
+	\item{\it CubeTexture}, membuat tekstur kubus dari 6 buah gambar. Konstruktor pada kelas ini menerima parameter berupa gambar, {\it mapping},  wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, format, tipe, dan {\it anisotropy}. Contoh untuk kelas {\it CubeTexture} dapat dilihat pada pada {\it listing} 2.66.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it CubeTexture}.},captionpos=b]
 var loader = new THREE.CubeTextureLoader();
@@ -1350,7 +1347,7 @@ color: 0xffffff, envMap: textureCube
 	
 	\item{\it DataTexture}, membuat tekstur langsung dari data mentah, lebar, dan panjang. Konstruktor pada kelas ini menerima parameter berupa data, lebar, tinggi, format, tipe, {\it mapping}, wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, {\it anisotropy}, dan format.
 	\item{\it DepthTexture}, membuat tekstur untuk digunakan sebagai {\it Depth Texture}. Konstruktor pada kelas ini menerima parameter berupa lebar, tinggi, format, tipe, wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, dan {\it anisotropy}.
-	\item {\it Texture}, membuat tekstur untuk mengaplikasikan permukaan atau sebagai refleksi. Konstruktor pada kelas ini menerima parameter berupa gambar, {\it mapping},  wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, format, tipe, dan {\it anisotropy}.
+	\item {\it Texture}, membuat tekstur untuk mengaplikasikan permukaan atau sebagai refleksi. Konstruktor pada kelas ini menerima parameter berupa gambar, {\it mapping},  wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, format, tipe, dan {\it anisotropy}. Contoh untuk kelas {\it Texture} dapat dilihat pada pada {\it listing} 2.67.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it Texture}.},captionpos=b]
 var texture = new THREE.TextureLoader().load( "textures/water.jpg" );
@@ -1359,9 +1356,9 @@ texture.wrapT = THREE.RepeatWrapping;
 texture.repeat.set( 4, 4 );
 \end{lstlisting}
 	
-	\item{\it VideoTexture}, membuat tekstur untuk digunakan sebagai tekstur video. Konstruktor pada kelas ini menerima parameter berupa video, {\it mapping},  wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, format, tipe, dan {\it anisotropy}.
+	\item{\it VideoTexture}, membuat tekstur untuk digunakan sebagai tekstur video. Konstruktor pada kelas ini menerima parameter berupa video, {\it mapping},  wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, format, tipe, dan {\it anisotropy}. Contoh untuk kelas {\it VideoTexture} dapat dilihat pada pada {\it listing} 2.68.
 	
-\begin{lstlisting}
+\begin{lstlisting}[caption={Contoh penggunaan kelas {\it VideoTexture}.},captionpos=b]
 var video = document.getElementById( 'video' );
 
 var texture = new THREE.VideoTexture( video );
