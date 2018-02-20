@@ -220,9 +220,8 @@ Terdapat beberapa fungsi penting yang disediakan oleh pustaka Three.js dalam pem
 
 \item \textit{Cameras}
 
+	Kamera merupakan sebuah kelas abstrak yang harus selalu diimplementasikan saat membangun suatu kamera. Konstruktor pada kelas ini digunakan untuk membuat kamera baru, namun kelas ini tidak dipergunakan secara langsung melainkan menggunakan {\it PerspectiveCamera} atau {\it OrthographicCamera}.
 	\begin{itemize}
-	\item {\it Camera}, kelas abstrak untuk {\it cameras}. Kelas ini harus selalu diimplementasikan saat membangun suatu kamera. Konstruktor pada kelas ini digunakan untuk membuat kamera baru, namun kelas ini tidak dipergunakan secara langsung melainkan menggunakan {\it PerspectiveCamera} atau {\it OrthographicCamera}.
-	
 	\item {\it CubeCamera}, membuat 6 kamera yang dibangun pada {\it WebGLRenderTargetCube}. Konstruktor pada kelas ini menerima parameter berupa jarak terdekat, jarak terjauh, dan resolusi dari kubus. Contoh untuk kelas {\it CubeCamera} dapat dilihat pada pada {\it listing} 2.14.
 	\begin{lstlisting}[caption={Contoh instansiasi kelas {\it CubeCamera}.},captionpos=b]
 var cubeCamera = new THREE.CubeCamera( 1, 100000, 128 );
@@ -248,6 +247,8 @@ scene.add( camera );
 	\end{itemize}
 	
 \item \textit{Core}
+
+	Core merupakan kelas inti yang terdapat pada pustaka Three.js. Kelas-kelas di bawah ini akan memungkinkan untuk terjadinya pengiriman data, menjaga alur waktu, konversi bentuk objek, pengiriman {\it event} pada Javascript, representasi permukaan objek, representasi objek, dan hal inti lainnya.
 	\begin{itemize}
 	\item{\it BufferAttribute}, kelas ini menyimpan data untuk atribut yang diasosiasikan menggunakan BufferGeometry. Hal ini memungkinkan pengiriman data yang lebih efisien kepada GPU. Konstruktor pada kelas ini menerima parameter berupa sebuah array dengan ukuran nilai dari array dikalikan dengan jumlah vertex, nilai dari array tersebut, dan juga sebuah boolean yang merepresentasikan penggunaan {\it normalized}.
 	\item{\it BufferGeometry}, merupakan sebuah kelas alternatif efisien untuk {\it Geometry}. Karena kelas ini menyimpan semua data, termasuk posisi vertex, index permukaan, normal, warna, UV, dan atribut kustom menggunakan buffer. Kelas ini mengurangi biaya pengiriman seluruh data ke GPU. Konstruktor pada kelas ini digunakan untuk membuat {\it BufferGeometry} baru dan inisialisasi nilai awal untuk objek baru tersebut. Contoh untuk kelas {\it BufferGeometry} dapat dilihat pada pada {\it listing} 2.17.
@@ -398,6 +399,8 @@ uniforms: {
 	\end{itemize}
 	
 \item \textit{Geometries}
+
+Berbagai kelas di bawah ini memungkinkan untuk dibuatnya suatu bentuk objek geometri pada pustaka Three.js. Selain geometri yang disediakan di bawah ini, geometri kustom juga dapat dibuat dengan menggunakan kelas dasarnya yaitu {\it Geometry}. Dokumentasi untuk kelas dasar {\it Geometry} dapat dilihat pada bagian {\it Core} pada dokumen di bab ini.
 	\begin{itemize}
 	\item {\it BoxBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it BoxGeometry}. Konstruktor pada kelas ini menerima parameter berupa lebar sisi pada sumbu X dengan nilai awal adalah 1, tinggi sisi pada sumbu Y dengan nilai awal adalah 1, kedalaman sisi pada sumbu Z dengan nilai awal adalah 1, jumlah permukaan yang berpotongan dengan lebar sisi dengan nilai awal adalah 1 dan bersifat fakultatif,  jumlah permukaan yang berpotongan dengan tinggi sisi dengan nilai awal adalah 1 dan bersifat fakultatif,  dan jumlah permukaan yang berpotongan dengan kedalaman sisi dengan nilai awal adalah 1 dan bersifat fakultatif. Contoh untuk kelas {\it BoxBufferGeometry} dapat dilihat pada pada {\it listing} 2.23.
 	
@@ -692,6 +695,7 @@ scene.add( line );
 	
 \item \textit{Lights}
 
+{\it Lights} memungkinkan terjadinya penerangan pada dunia tempat objek tiga dimensi dibangun. Terdapat berbagai jenis penerangan dengan fungsi yang berbeda-beda dan akan dijelaskan lebih lanjut pada kelas-kelas di bawah ini. Kelas abstrak untuk bagian ini adalah {\it Light} yang menerima dua buah parameter berupa warna dalam heksimal dan juga intensitas. Selain itu, dunia tiga dimensi pada pustaka Three.js dapat menerima lebih dari satu jenis penerangan.
 	\begin{itemize}
 	\item {\it AmbientLight}, sebuah cahaya yang menyinari objek secara global dan merata. Konstruktor pada kelas ini menerima parameter berupa warna dalam RGB dan intensitas. Contoh untuk kelas {\it AmbientLight} dapat dilihat pada pada {\it listing} 2.38.
 	
@@ -703,8 +707,6 @@ scene.add( light );
 	\item {\it DirectionalLight}, sebuah pancaran sinar dari arah yang spesifik. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal dan intensitas. Contoh penggunaannya sama seperti kelas {\it AmbientLight}.
 
 	\item {\it HemisphereLight}, sebuah cahaya yang penyinaran dilakukan tepat di atas layar dengan peleburan warna langit ke warna lantai. Konstruktor pada kelas ini menerima parameter berupa warna langit dalam heksadesimal , warna daratan dalam heksadesimal, dan intensitas. Contoh penggunaannya sama seperti kelas {\it AmbientLight}.
-	
-	\item {\it Light}, kelas abstrak untuk {\it Lights}. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksimal dan intensitas.
 
 	\item {\it PointLight}, sebuah pancaran dari satu titik pada setiap arah. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, intensitas, jarak dari cahaya saat intensitasnya 0, dan hilangnya cahaya dari pandangan dengan nilai awal adalah 1. Contoh penggunaannya sama seperti kelas {\it AmbientLight}.
 	
@@ -745,6 +747,7 @@ scene.add( spotLight );
 	
 \item \textit{Loaders}
 
+Berbagai kelas di bawah ini merupakan kelas yang dapat digunakan untuk memuat berkas yang ingin digunakan pada pemodelan tiga dimensi dengan pustaka Three.js. Jenis berkas yang dapat dimuat bisa berupa JSON, tekstur biner umum, teks, gambar, objek, dan berbagai jenis berkas lainnya. Kelas abstrak yang digunakan untuk implementasi pemuat adalah kelas {\it Loader}.
 	\begin{itemize}
 	\item {\it AnimationLoader}, kelas untuk memuat animasi dalam format JSON. Konstruktor pada kelas ini menerima parameter berupa {\it loadingManager}. Contoh untuk kelas {\it AnimationLoader} dapat dilihat pada pada {\it listing} 2.41.
 	
@@ -896,8 +899,6 @@ loader.load(
 	}
 );
 \end{lstlisting}
-
-	\item {\it Loader}, kelas dasar untuk implementasi pemuat.
 	
 	\item {\it MaterialLoader}, sebuah pemuat untuk memuat {\it Material} dalam format JSON. Konstruktor pada kelas ini menerima parameter berupa  {\it loadingManager}. Contoh untuk kelas {\it MaterialLoader} dapat dilihat pada pada {\it listing} 2.47.
 	
@@ -1011,6 +1012,7 @@ loader.load(
 
 \item \textit{Materials}
 
+Material merupakan konstanta yang digunakan untuk mendefinisikan berbagai macam properti pada suatu objek. Material ini kemudian dapat digunakan pada objek {\it Mesh} sebagai bahan properti dasar dari objek tersebut.
 	\begin{itemize}
 	\item {\it LineBasicMaterial}, sebuah bahan untuk menggambar geometri gaya {\it wireframe}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif. Contoh untuk kelas {\it LineBasicMaterial} dapat dilihat pada pada {\it listing} 2.51.
 	
@@ -1147,6 +1149,7 @@ scene.add( sprite );
 
 \item \textit{Objects}
 
+Kelas abstrak untuk kelas-kelas di bawah ini adalah kelas {\it Object3D} yang menyediakan serangkaian properti dan metode untuk memanipulasi objek di dunia tiga dimensi. Dokumentasi untuk kelas abstrak tersebut dapat dilihat pada bagian {\it Core} di bab ini.
 	\begin{itemize}
 	\item {\it Bone}, sebuah tulang yang merupakan bagian dari kerangka. Contoh untuk kelas {\it Bone} dapat dilihat pada pada {\it listing} 2.58.
 	
@@ -1306,6 +1309,8 @@ scene.add( sprite );
 	\end{itemize}
 
 \item \textit{Renderers}
+
+Kelas-kelas di bawah ini akan digunakan sebagai pembangun model tiga dimensi yang telah kita buat untuk ditampilkan ke layar.
 	\begin{itemize}
 	\item {\it WebGLRenderer}, pembangun WebGL menampilkan layar indah yang dbuat oleh Anda menggunakan WebGL. Konstruktor pada kelas ini menerima parameter berupa {\it canvas}, konteks, presisi, dan parameter relevan lainnya.
 	
@@ -1316,6 +1321,7 @@ scene.add( sprite );
 		
 \item \textit{Scenes}
 
+{\it Scenes} merupakan wadah yang memungkinkan kita untuk meletakan model tiga dimensi yang telah kita bangun dengan menggunakan {\it renderers}. 
 	\begin{itemize}
 	\item {\it Fog}, kelas yang berisi parameter untuk mendefinisikan kabut. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, jarak terdekat, dan jarak terjauh.
 	
@@ -1325,6 +1331,8 @@ scene.add( sprite );
 	\end{itemize}
 	
 \item \textit{Texture}
+
+Kelas-kelas di bawah ini memungkinkan kita untuk membuat tekstur yang bervariasi untuk digunakan pada {\it Mesh} yang telah kita buat. Dokumentasi untuk {\it Mesh} dapat dilihat pada dokumen di bab ini.
 	\begin{itemize}
 	\item{\it CanvasTexture}, membuat tekstur dari suatu elemen {\it canvas}. Konstruktor pada kelas ini menerima parameter berupa {\it canvas}, {\it mapping}, wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, konstanta, format, tipe, dan {\it anisotropy}.
 	\item{\it CompressedTexture}, membuat tekstur berdasarkan data bentuk kompres. Contohnya dari sebuah berkas DDS. Konstruktor pada kelas ini menerima parameter berupa objek dengan data, lebar, tinggi, format, tipe, {\it mapping}, wrapS dan wrapT berdasarkan {\it THREE.ClampToEdgeWrapping}, penyaring besar, penyaring kecil, dan {\it anisotropy}.
