@@ -214,28 +214,28 @@ for (var i = 0; i < numVertices; i++) {
 
 \section{Pustaka Three.js}
 \label{sec:latex}
-Pustaka Three.js ini bertujuan untuk membuat pustaka 3 dimensi yang mudah dan ringan untuk digunakan. Pustaka ini menyediakan <canvas>, <svg>, dan CSS3D, dan pembangun WebGL \cite{githubthreejs}.
-Terdapat beberapa fungsi penting yang disediakan oleh pustaka Three.js dalam pembuatan grafis 3 dimensi, di antaranya adalah \cite{threejs}:
+Pemrograman dengan menggunakan WebGL langsung sangatlah kompleks. Kita harus mengetahui WebGL lebih detail dengan mempelajari bahasa {\it shader} yang kompleks untuk mengerti WebGL. Pustaka Three.js menyediakan sebuah {\it Application Programming Interface} (API) Javascript yang sangat mudah untuk digunakan yang didasari oleh fitur WebGL, sehingga kita dapat membuat grafik 3 dimensi yang indah tanpa harus mempelajari WebGL secara detail. Pustaka Three.js menyediakan banyak fitur dan API yang dapat kita gunakan untuk membuat layar 3 dimensi langsung pada peramban yang kita gunakan. ~\cite{threejs1}
+Berikut ini beberapa fungsi penting yang disediakan oleh pustaka Three.js dalam pembuatan grafis 3 dimensi, di antaranya adalah:
 \begin{itemize}
 
 \item \textit{Cameras}
 
-	Kamera merupakan sebuah kelas abstrak yang harus selalu diimplementasikan saat membangun suatu kamera. Konstruktor pada kelas ini digunakan untuk membuat kamera baru, namun kelas ini tidak dipergunakan secara langsung melainkan menggunakan {\it PerspectiveCamera} atau {\it OrthographicCamera}.
+	Kamera berfungsi untuk menentukan benda apa saja yang akan kita lihat pada keluaran~\cite{threejs1}. Pada pustaka three.js, {\it Camera} merupakan sebuah kelas abstrak yang harus selalu diimplementasikan saat membangun suatu kamera. Konstruktor pada kelas ini digunakan untuk membuat kamera baru, namun kelas ini tidak dipergunakan secara langsung melainkan menggunakan {\it PerspectiveCamera} atau {\it OrthographicCamera}.
 	\begin{itemize}
-	\item {\it CubeCamera}, membuat 6 kamera yang dibangun pada {\it WebGLRenderTargetCube}. Konstruktor pada kelas ini menerima parameter berupa jarak terdekat, jarak terjauh, dan resolusi dari kubus. Contoh untuk kelas {\it CubeCamera} dapat dilihat pada pada {\it listing} 2.14.
+	\item {\it CubeCamera}, digunakan untuk membuat 6 kamera yang dibangun pada {\it WebGLRenderTargetCube}. Konstruktor pada kelas ini menerima parameter berupa jarak terdekat, jarak terjauh, dan resolusi dari kubus. Contoh untuk kelas {\it CubeCamera} dapat dilihat pada pada {\it listing} 2.14.
 	\begin{lstlisting}[caption={Contoh instansiasi kelas {\it CubeCamera}.},captionpos=b]
 var cubeCamera = new THREE.CubeCamera( 1, 100000, 128 );
 scene.add( cubeCamera );
 \end{lstlisting}
 	
-	\item{\it OrthographicCamera}, kamera yang menggunakan proyeksi ortografik. Konstruktor pada kelas ini menerima parameter berupa {\it frustum} kamera bagian kiri, {\it frustum} kamera bagian kanan, {\it frustum} kamera bagian atas, {\it frustum} kamera bagian bawah, {\it frustum} kamera untuk jarak dekat, dan {\it frustum} kamera untuk jarak jauh. Contoh untuk kelas {\it OrthographicCamera} dapat dilihat pada pada {\it listing} 2.15.
+	\item{\it OrthographicCamera}, sebuah kamera yang menggunakan proyeksi ortografik~\cite{threejs}. Pada kamera ortografik semua benda di-{\it render} dengan ukuran yang sama, jarak antara objek dengan kamera tidak berpengaruh. Kamera ini biasa digunakan pada permainan dua dimensi~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa {\it frustum} kamera bagian kiri, {\it frustum} kamera bagian kanan, {\it frustum} kamera bagian atas, {\it frustum} kamera bagian bawah, {\it frustum} kamera untuk jarak dekat, dan {\it frustum} kamera untuk jarak jauh. Contoh untuk kelas {\it OrthographicCamera} dapat dilihat pada pada {\it listing} 2.15.
 \begin{lstlisting}[caption={Contoh instansiasi kelas {\it OrthographicCamera}},captionpos=b]
 var camera = new THREE.OrthographicCamera( width / - 2, width / 2, 
 height / 2, height / - 2, 1, 1000 );
 scene.add( camera );
 \end{lstlisting}
 	
-	\item {\it PerspectiveCamera}, kamera yang menggunakan pyoyeksi perspektif. Konstruktor pada kelas ini menerima parameter berupa {\it frustum} pandangan vertikal, {\it frustum} pandangan horizontal, dan {\it frustum} jarak dekat, dan {\it frustum} jarak jauh. Contoh untuk kelas {\it PerspectiveCamera} dapat dilihat pada pada {\it listing} 2.16.
+	\item {\it PerspectiveCamera}, sebuah kamera yang menggunakan pyoyeksi perspektif~\cite{threejs}. Pada kamera perspektif {\it render} pada {\it scene} dilakukan sesuai dengan perspektif pada dunia nyata~\cite{threejs1} (jarak antara objek dengan kamera berpengaruh). Konstruktor pada kelas ini menerima parameter berupa {\it frustum} pandangan vertikal, {\it frustum} pandangan horizontal, dan {\it frustum} jarak dekat, dan {\it frustum} jarak jauh. Contoh untuk kelas {\it PerspectiveCamera} dapat dilihat pada pada {\it listing} 2.16.
 \begin{lstlisting}[caption={Contoh instansiasi kelas {\it PerspectiveCamera}},captionpos=b]
 var camera = new THREE.PerspectiveCamera( 45, width / height, 
 1, 1000 );
@@ -416,7 +416,7 @@ scene.add( cube );
 	
 	\item {\it CircleBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it CircleGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius lingkaran dengan nilai awal adalah 50, jumlah banyak bagian dengan minimum adalah 3 dan nilai awal adalah 8, sudut dimulainya bagian pertama dengan nilai awal adalah 0, dan sudut pusat dengan nilai awal adalah 2 kali Pi. Contoh penggunaannya sama seperti kelas {\it BoxBufferGeometry}.
 
-	\item {\it CircleGeometry}, merupakan bentuk sederhana dari geometri {\it Euclidean}. Konstruktor pada kelas ini menerima parameter berupa radius lingkaran dengan nilai awal adalah 50, jumlah banyak bagian dengan minimum adalah 3 dan nilai awal adalah 8, sudut dimulainya bagian pertama dengan nilai awal adalah 0, dan sudut pusat dengan nilai awal adalah 2 kali Pi. Contoh penggunaannya sma seperti kelas {\it BoxBufferGeometry}.
+	\item {\it CircleGeometry}, merupakan bentuk sederhana dari geometri {\it Euclidean}~\cite{threejs}. Geometri ini dapat digunakan untuk membuat lingkaran dua dimensi yang sangat sederhana (atau sebagai bagian dari lingkaran)~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa radius lingkaran dengan nilai awal adalah 50, jumlah banyak bagian dengan minimum adalah 3 dan nilai awal adalah 8, sudut dimulainya bagian pertama dengan nilai awal adalah 0, dan sudut pusat dengan nilai awal adalah 2 kali Pi. Contoh penggunaannya sma seperti kelas {\it BoxBufferGeometry}~\cite{threejs}.
 	
 	\item {\it ConeBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it ConeGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius lingkaran untuk dasar kerucut dengan nilai awal adalah 20, tinggi kerucut dengan nilai awal adalah 100, jumlah banyak permukaan bagian dengan nilai awal adalah 8, banyak baris permukaan berdasarkan tinggi kerucut dengan nilai awal adalah 1, sebuah boolean yang menyatakan dasar kerucut tertutup atau terbuka, sudut dimulainya bagian pertama dengan nilai awal adalah 0, dan sudut pusat dengan nilai awal adalah 2 kali Pi. Contoh penggunaannya sama seperti kelas {\it BoxBufferGeometry}.
 	
@@ -424,7 +424,7 @@ scene.add( cube );
 	
 	\item {\it CylinderBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it CylinderGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius dari lingkaran bagian atas dengan nilai awal adalah 20, radius dari lingkaran bagian bawah dengan nilai awal adalah 20, tinggi silinder dengan nilai awal adalah 100, jumlah banyak permukaan bagian dengan nilai awal adalah 8, banyak baris permukaan berdasarkan tinggi silinder dengan nilai awal adalah 1, sebuah boolean yang menyatakan dasar silinder tertutup atau terbuka, sudut dimulainya bagian pertama dengan nilai awal adalah 0, dan sudut pusat dengan nilai awal adalah 2 kali Pi. Contoh penggunaannya sama seperti kelas {\it BoxBufferGeometry}.
 	
-	\item {\it CylinderGeometry}, Konstruktor pada kelas ini menerima parameter berupa radius dari lingkaran bagian atas dengan nilai awal adalah 20, radius dari lingkaran bagian bawah dengan nilai awal adalah 20, tinggi silinder dengan nilai awal adalah 100, jumlah banyak permukaan bagian dengan nilai awal adalah 8, banyak baris permukaan berdasarkan tinggi silinder dengan nilai awal adalah 1, sebuah boolean yang menyatakan dasar silinder tertutup atau terbuka, sudut dimulainya bagian pertama dengan nilai awal adalah 0, dan sudut pusat dengan nilai awal adalah 2 kali Pi. sebuah kelas untuk mengeneralisasi geometri silinder. Contoh penggunaannya sama seperti kelas {\it BoxBufferGeometry}.
+	\item {\it CylinderGeometry}, digunakan untuk membuat objek silinder dan objek-objek lainnya yang menyerupai silinder~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa radius dari lingkaran bagian atas dengan nilai awal adalah 20, radius dari lingkaran bagian bawah dengan nilai awal adalah 20, tinggi silinder dengan nilai awal adalah 100, jumlah banyak permukaan bagian dengan nilai awal adalah 8, banyak baris permukaan berdasarkan tinggi silinder dengan nilai awal adalah 1, sebuah boolean yang menyatakan dasar silinder tertutup atau terbuka, sudut dimulainya bagian pertama dengan nilai awal adalah 0, dan sudut pusat dengan nilai awal adalah 2 kali Pi. sebuah kelas untuk mengeneralisasi geometri silinder. Contoh penggunaannya sama seperti kelas {\it BoxBufferGeometry}~\cite{threejs}.
 
 	\item {\it DodecahedronBufferGeometry}, sebuah kelas untuk mengeneralisasi geometri pigura berduabelas segi. Konstruktor pada kelas ini menerima parameter berupa radius dari pigura berduabelas segi dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 1.
 
@@ -440,7 +440,7 @@ new THREE.LineBasicMaterial( { color: 0xffffff } ) );
 scene.add( line );
 \end{lstlisting}
 
-	\item {\it ExtrudeGeometry}, membuat geometri diekstrusi dari sebuah alur bentuk. Konstruktor pada kelas ini menerima parameter berupa bentuk atau {\it array} dari bentuk dan juga pilihan yang dapat berisi beberapa parameter seperti jumlah titik pada lengkungan, jumlah titik yang digunakan untuk membagi potongan, dan lain-lain. Contoh untuk kelas {\it ExtrudeGeometry} dapat dilihat pada pada {\it listing} 2.25.
+	\item {\it ExtrudeGeometry}, membuat geometri diekstrusi dari sebuah alur bentuk~\cite{threejs}. Geometri ini dapat digunakan untuk membuat sebuah objek tiga dimensi dari bentuk dua dimensi~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa bentuk atau {\it array} dari bentuk dan juga pilihan yang dapat berisi beberapa parameter seperti jumlah titik pada lengkungan, jumlah titik yang digunakan untuk membagi potongan, dan lain-lain~\cite{threejs}. Contoh untuk kelas {\it ExtrudeGeometry} dapat dilihat pada pada {\it listing} 2.25.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it ExtrudeGeometry}.},captionpos=b]
 var length = 12, width = 8;
@@ -471,7 +471,7 @@ scene.add( mesh );
 
 	\item {\it IcosahedronBufferGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri {\it icosahedron}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0.
 
-	\item {\it IcosahedronGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri {\it icosahedron}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0.
+	\item {\it IcosahedronGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri {\it icosahedron}~\cite{threejs}. Geometri ini dapat digunakan untuk membuat objek dengan banyak sisi yang memiliki 20 buah permukaan segitiga identik yang dibentuk dari 12 titik simpul~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0~\cite{threejs}.
 
 	\item {\it LatheBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it LatheGeometry}. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari {\it Vector2s}, jumlah bagian lingkar yang ingin di generalisasi dengan nilai awal adalah 12, sudut awal dalam radian dengan nilai awal adalah 0, rentang radian dengan nilai awal adalah 2 kali Pi. Contoh untuk kelas {\it LatheBufferGeometry} dapat dilihat pada pada {\it listing} 2.26.
 	
@@ -487,11 +487,11 @@ var lathe = new THREE.Mesh( geometry, material );
 scene.add( lathe );
 \end{lstlisting}
 
-	\item {\it LatheGeometry}, membuat jala dengan simetri aksial seperti vas. Bentuk ini berotasi di sekitar sumbu Y. Contoh penggunaannya sama seperti kelas {\it LatheBufferGeometry}. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari {\it Vector2s}, jumlah bagian lingkar yang ingin di generalisasi dengan nilai awal adalah 12, sudut awal dalam radian dengan nilai awal adalah 0, rentang radian dengan nilai awal adalah 2 kali Pi.
+	\item {\it LatheGeometry}, membuat jala dengan simetri aksial seperti vas. Bentuk ini berotasi di sekitar sumbu Y~\cite{threejs}. Geometri ini memungkinkan untuk membuat suatu bentuk dari kurva yang halus~\cite{threejs1}. Contoh penggunaannya sama seperti kelas {\it LatheBufferGeometry}. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari {\it Vector2s}, jumlah bagian lingkar yang ingin di generalisasi dengan nilai awal adalah 12, sudut awal dalam radian dengan nilai awal adalah 0, rentang radian dengan nilai awal adalah 2 kali Pi~\cite{threejs}.
 	
 	\item {\it OctahedronBufferGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri segi delapan. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0.
 	
-	\item {\it OctahedronGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri segi delapan. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0.
+	\item {\it OctahedronGeometry}, sebuah kelas untuk mengeneralisasi sebuah geometri segi delapan~\cite{threejs}. Geometri ini memiliki 8 buah permukaan yang terbentuk dari 6 buah titik simpul~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0~\cite{threejs}.
 	
 	\item {\it ParametricBufferGeometry}, mengeneralisasi geometri yang merepresentasikan permukaan parametrik. Konstruktor pada kelas ini menerima sebuah fungsi yang menerima nilai a dan u di antara 0 sampai dengan 1 dan mengembalikan {\it Vector3}, banyak potongan, dan banyak tumpukan. Contoh untuk kelas {\it ParametricBufferGeometry} dapat dilihat pada pada {\it listing} 2.27.
 	
@@ -503,7 +503,7 @@ var cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
 \end{lstlisting}
 
-	\item {\it ParametricGeometry}, mengeneralisasi geometri yang merepresentasikan permukaan parametrik. Contoh penggunaannya sama seperti kelas {\it ParametricBufferGeometry}. Konstruktor pada kelas ini menerima sebuah fungsi yang menerima nilai a dan u di antara 0 sampai dengan 1 dan mengembalikan {\it Vector3}, banyak potongan, dan banyak tumpukan.
+	\item {\it ParametricGeometry}, mengeneralisasi geometri yang merepresentasikan permukaan parametrik~\cite{threejs}. Geometri ini dapat digunakan untuk membentuk sebuah geometri berdasarkan sebuah persamaan~\cite{threejs1}. Contoh penggunaannya sama seperti kelas {\it ParametricBufferGeometry}. Konstruktor pada kelas ini menerima sebuah fungsi yang menerima nilai a dan u di antara 0 sampai dengan 1 dan mengembalikan {\it Vector3}, banyak potongan, dan banyak tumpukan~\cite{threejs}.
 	
 	\item {\it PlaneBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it PlaneGeometry}. Konstruktor pada kelas ini menerima parameter berupa lebar pada sumbu X dengan nilai awal adalah 1, tinggi pada sumbu Y dengan nilai awal adalah 1, lebar bagian dengan nilai awal adalah 1 dan bersifat fakultatif, dan tinggi bagian dengan nilai awal adalah 1 dan bersifat fakultatif. Contoh untuk kelas {\it PlaneBufferGeometry} dapat dilihat pada pada {\it listing} 2.28.
 	
@@ -516,7 +516,7 @@ var plane = new THREE.Mesh( geometry, material );
 scene.add( plane );
 \end{lstlisting}
 
-	\item {\it PlaneGeometry}, sebuah kelas untuk mengeneralisasi geometri dataran. Contoh penggunaannya sama seperti kelas {\it PlaneBufferGeometry}. Konstruktor pada kelas ini menerima parameter berupa lebar pada sumbu X dengan nilai awal adalah 1, tinggi pada sumbu Y dengan nilai awal adalah 1, lebar bagian dengan nilai awal adalah 1 dan bersifat fakultatif, dan tinggi bagian dengan nilai awal adalah 1 dan bersifat fakultatif.
+	\item {\it PlaneGeometry}, sebuah kelas untuk mengeneralisasi geometri dataran~\cite{threejs}. Objek ini dapat digunakan untuk membuat persegi dua dimensi yang sangat sederhana~\cite{threejs1}. Contoh penggunaannya sama seperti kelas {\it PlaneBufferGeometry}. Konstruktor pada kelas ini menerima parameter berupa lebar pada sumbu X dengan nilai awal adalah 1, tinggi pada sumbu Y dengan nilai awal adalah 1, lebar bagian dengan nilai awal adalah 1 dan bersifat fakultatif, dan tinggi bagian dengan nilai awal adalah 1 dan bersifat fakultatif~\cite{threejs}.
 	
 	\item {\it PolyhedronBufferGeometry}, merupakan sebuah padat 3 dimensi dengan permukaan datar. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari titik, {\it array} dari indeks yang membentuk permukaan, radius dari bentuk akhir, dan detail. Contoh untuk kelas {\it PolyhedronBufferGeometry} dapat dilihat pada pada {\it listing} 2.29.
 	
@@ -539,7 +539,7 @@ var geometry = new THREE.PolyhedronBufferGeometry( verticesOfCube,
  indicesOfFaces, 6, 2 );
 \end{lstlisting}
 
-	\item {\it PolyhedronGeometry}, merupakan sebuah padat 3 dimensi dengan permukaan datar. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari titik, {\it array} dari indeks yang membentuk permukaan, radius dari bentuk akhir, dan detail. Contoh penggunaannya sama seperti kelas {\it PolyhedronBufferGeometry}.
+	\item {\it PolyhedronGeometry}, merupakan sebuah padat 3 dimensi dengan permukaan datar~\cite{threejs}. Geometri ini dapat digunakan untuk dengan mudah membuat bentuk dengan banyak sisi~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa {\it array} dari titik, {\it array} dari indeks yang membentuk permukaan, radius dari bentuk akhir, dan detail~\cite{threejs}. Contoh penggunaannya sama seperti kelas {\it PolyhedronBufferGeometry}.
 	
 	\item {\it RingBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it RingGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius bagian dalam dengan nilai awal adalah 20, radius bagian luar dengan nilai awal adalah 50, banyak bagian sudut dengan minimum 3 dan nilai awal 8, banyak bagian Pi dengan minimum 1 dan nilai awal 8, sudut awal dengan nilai awal adalah 0, dan sudut pusat dengan nilai awal adalah dua kali Pi. Contoh untuk kelas {\it RingBufferGeometry} dapat dilihat pada pada {\it listing} 2.30.
 	
@@ -580,9 +580,9 @@ var mesh = new THREE.Mesh( geometry, material ) ;
 scene.add( mesh );
 \end{lstlisting}
 
-	\item {\it ShapeGeometry}, membuat sebuah geometri poligonal satu sisi dari satu atau lebih alur bentuk. Konstruktor pada kelas ini menerima parameter berupa bentuk atau {\it array} dari bentuk dan jumlah bagian lengkung. Contoh penggunaannya sama seperti kelas {\it ShapeBufferGeometry}.
+	\item {\it ShapeGeometry}, membuat sebuah geometri poligonal satu sisi dari satu atau lebih alur bentuk~\cite{threejs}. Geometri ini dapat digunakan untuk membuat bentuk dua dimensi yang kustom, tidak seperti {\it PlaneGeometry} dan {\it CircleGeometry} yang memiliki keterbatasan dalam kustomisasi tampilannya~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa bentuk atau {\it array} dari bentuk dan jumlah bagian lengkung. Contoh penggunaannya sama seperti kelas {\it ShapeBufferGeometry}~\cite{threejs}.
 
-	\item {\it SphereBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it SphereGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 50, lebar bagian dengan minimum 3 dan nilai awal adalah 8, tinggi bagian dengan minimum 2 dan nilai awal 6, sudut awal horizontal dengan nilai awal 0, besar sudut horizontal dengan nilai awal adalah dua kali Pi, sudut awal vertikal dengan nilai awal adalah 0, dan besar sudut vertikal dengan nilai awal adalah Pi. Contoh untuk kelas {\it SphereBufferGeometry} dapat dilihat pada pada {\it listing} 2.32.
+	\item {\it SphereBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it SphereGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 50, lebar bagian dengan minimum 3 dan nilai awal adalah 8, tinggi bagian dengan minimum 2 dan nilai awal 6, sudut awal horizontal dengan nilai awal 0, besar sudut horizontal dengan nilai awal adalah dua kali Pi, sudut awal vertikal dengan nilai awal adalah 0, dan besar sudut vertikal dengan nilai awal adalah Pi~\cite{threejs}. Contoh untuk kelas {\it SphereBufferGeometry} dapat dilihat pada pada {\it listing} 2.32.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it SphereBufferGeometry}.},captionpos=b]
 var geometry = new THREE.SphereBufferGeometry( 5, 32, 32 );
@@ -591,11 +591,11 @@ var sphere = new THREE.Mesh( geometry, material );
 scene.add( sphere );
 \end{lstlisting}
 
-	\item {\it SphereGeometry}, sebuah kelas untuk mengeneralisasi geometri bola. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 50, lebar bagian dengan minimum 3 dan nilai awal adalah 8, tinggi bagian dengan minimum 2 dan nilai awal 6, sudut awal horizontal dengan nilai awal 0, besar sudut horizontal dengan nilai awal adalah dua kali Pi, sudut awal vertikal dengan nilai awal adalah 0, dan besar sudut vertikal dengan nilai awal adalah Pi. Contoh penggunaannya sama seperti kelas {\it SphereBufferGeometry}.
+	\item {\it SphereGeometry}, sebuah kelas untuk mengeneralisasi geometri bola~\cite{threejs}. Geometri ini dapat digunakan untuk membuat bola tiga dimensi. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 50, lebar bagian dengan minimum 3 dan nilai awal adalah 8, tinggi bagian dengan minimum 2 dan nilai awal 6, sudut awal horizontal dengan nilai awal 0, besar sudut horizontal dengan nilai awal adalah dua kali Pi, sudut awal vertikal dengan nilai awal adalah 0, dan besar sudut vertikal dengan nilai awal adalah Pi~\cite{threejs}. Contoh penggunaannya sama seperti kelas {\it SphereBufferGeometry}.
 	
 	\item {\it TetrahedronBufferGeometry}, sebuah kelas untuk mengeneralisasi geometri segi empat. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0.
 	
-	\item {\it TetrahedronGeometry}, sebuah kelas untuk mengeneralisasi geometri segi empat. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0.
+	\item {\it TetrahedronGeometry}, sebuah kelas untuk mengeneralisasi geometri segi empat~\cite{threejs}. Geometri ini merupakan salah satu objek dengan banyak sisi yang paling sederhana~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1 dan detail dengan nilai awal adalah 0~\cite{threejs}.
 	
 	\item {\it TextBufferGeometry}, sebuah kelas untuk mengeneralisasi tulisan sebagai suatu geometri tunggal. Konstruktor pada kelas ini menerima parameter berupa teks yang ingin ditunjukan dan parameter pendukung lainnya seperti {\it font}, ukuran, tinggi, dan lain-lain. Contoh untuk kelas {\it TextBufferGeometry} dapat dilihat pada pada {\it listing} 2.33.
 	
@@ -629,7 +629,7 @@ var torus = new THREE.Mesh( geometry, material );
 scene.add( torus );
 \end{lstlisting}
 
-	\item {\it TorusGeometry}, sebuah kelas untuk mengeneralisasi geometri torus. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1, diameter tabung dengan nilai awal adalah 0.04, bagian radial dengan nilai awal adalah 8, bagian tabung dengan nilai awal adalah 6, sudut pusat dengan nilai awal adalah dua kali Pi.  Contoh penggunaannya sama seperti kelas {\it TorusBufferGeometry}.
+	\item {\it TorusGeometry}, sebuah kelas untuk mengeneralisasi geometri torus~\cite{threejs}. Torus merupakan bentuk sederhana yang menyerupai donat~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 1, diameter tabung dengan nilai awal adalah 0.04, bagian radial dengan nilai awal adalah 8, bagian tabung dengan nilai awal adalah 6, sudut pusat dengan nilai awal adalah dua kali Pi.  Contoh penggunaannya sama seperti kelas {\it TorusBufferGeometry}.
 	
 	\item {\it TorusKnotBufferGeometry}, merupakan port {\it BufferGeometry} dari {\it TorusKnotGeometry}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 100, diameter tabung dengan nilai awal adalah 40, banyak bagian tabung dengan nilai awal adalah 64, banyak bagian radial dengan nilai awal adalah 8, jumlah rotasi pada sumbu dengan nilai awal adalah 2, dan jumlah putaran dengan nilai awal adalah 3. Contoh untuk kelas {\it TorusKnotBufferGeometry} dapat dilihat pada pada {\it listing} 2.35.
 	
@@ -640,9 +640,9 @@ var torusKnot = new THREE.Mesh( geometry, material );
 scene.add( torusKnot );
 \end{lstlisting}
 
-	\item {\it TorusKnotGeometry}, membuat simpul knot dengan bagian bentuk yang didefinisikan dengan sepasang bilangan bulat koprima p dan q. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 100, diameter tabung dengan nilai awal adalah 40, banyak bagian tabung dengan nilai awal adalah 64, banyak bagian radial dengan nilai awal adalah 8, jumlah rotasi pada sumbu dengan nilai awal adalah 2, dan jumlah putaran dengan nilai awal adalah 3.  Contoh penggunaannya sama seperti kelas {\it TorusKnotBufferGeometry}.
+	\item {\it TorusKnotGeometry}, membuat simpul knot dengan bagian bentuk yang didefinisikan dengan sepasang bilangan bulat koprima p dan q~\cite{threejs}. Geometri ini dapat digunakan untuk membuat objek simpul torus~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa radius dengan nilai awal adalah 100, diameter tabung dengan nilai awal adalah 40, banyak bagian tabung dengan nilai awal adalah 64, banyak bagian radial dengan nilai awal adalah 8, jumlah rotasi pada sumbu dengan nilai awal adalah 2, dan jumlah putaran dengan nilai awal adalah 3~\cite{threejs}.  Contoh penggunaannya sama seperti kelas {\it TorusKnotBufferGeometry}.
 	
-	\item {\it TubeGeometry}, membuat sebuah tabung yang diekstrusi sepanjang 3 dimensi melengkung. Konstruktor pada kelas ini menerima parameter berupa alur dengan basis kelas {\it Curve}, banyak bagian tabung dengan nilai awal 64, radius dengan nilai awal adalah 1, banyak bagian radius dengan nilai awal adalah 8, dan sebuah boolean yang menyatakan tabung tersebut tertutup atau terbuka. Contoh untuk kelas {\it TubeGeometry} dapat dilihat pada pada {\it listing} 2.36.
+	\item {\it TubeGeometry}, membuat sebuah tabung yang diekstrusi sepanjang 3 dimensi melengkung~\cite{threejs}. Geometri ini digunakan untuk membuat tabung yang mengekstrusi sepanjang bentuk tiga dimensi {\it spline}~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa alur dengan basis kelas {\it Curve}, banyak bagian tabung dengan nilai awal 64, radius dengan nilai awal adalah 1, banyak bagian radius dengan nilai awal adalah 8, dan sebuah boolean yang menyatakan tabung tersebut tertutup atau terbuka~\cite{threejs}. Contoh untuk kelas {\it TubeGeometry} dapat dilihat pada pada {\it listing} 2.36.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it TubeGeometry}.},captionpos=b]
 function CustomSinCurve( scale ) {
@@ -697,18 +697,18 @@ scene.add( line );
 
 {\it Lights} memungkinkan terjadinya penerangan pada dunia tempat objek tiga dimensi dibangun. Terdapat berbagai jenis penerangan dengan fungsi yang berbeda-beda dan akan dijelaskan lebih lanjut pada kelas-kelas di bawah ini. Kelas abstrak untuk bagian ini adalah {\it Light} yang menerima dua buah parameter berupa warna dalam heksimal dan juga intensitas. Selain itu, dunia tiga dimensi pada pustaka Three.js dapat menerima lebih dari satu jenis penerangan.
 	\begin{itemize}
-	\item {\it AmbientLight}, sebuah cahaya yang menyinari objek secara global dan merata. Konstruktor pada kelas ini menerima parameter berupa warna dalam RGB dan intensitas. Contoh untuk kelas {\it AmbientLight} dapat dilihat pada pada {\it listing} 2.38.
+	\item {\it AmbientLight}, sebuah cahaya yang menyinari objek secara global dan merata~\cite{threejs}. {\it AmbientLight} merupakan penerangan dasar yang warnanya ditambahkan ke warna objek dan layar saat ini~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa warna dalam RGB dan intensitas. Contoh untuk kelas {\it AmbientLight} dapat dilihat pada pada {\it listing} 2.38.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it AmbientLight}.},captionpos=b]
 var light = new THREE.AmbientLight( 0x404040 ); 
 scene.add( light );
 \end{lstlisting}
 	
-	\item {\it DirectionalLight}, sebuah pancaran sinar dari arah yang spesifik. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal dan intensitas. Contoh penggunaannya sama seperti kelas {\it AmbientLight}.
+	\item {\it DirectionalLight}, sebuah pancaran sinar dari arah yang spesifik~\cite{threejs}. Biasa disebut juga dengan penerangan tak terbatas, sinar dari penerangan ini bisa dilihat secara pararel. Contoh penggunaannya adalah sebagai sinar dari matahari~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal dan intensitas. Contoh penggunaannya sama seperti kelas {\it AmbientLight}.
 
-	\item {\it HemisphereLight}, sebuah cahaya yang penyinaran dilakukan tepat di atas layar dengan peleburan warna langit ke warna lantai. Konstruktor pada kelas ini menerima parameter berupa warna langit dalam heksadesimal , warna daratan dalam heksadesimal, dan intensitas. Contoh penggunaannya sama seperti kelas {\it AmbientLight}.
+	\item {\it HemisphereLight}, sebuah cahaya yang penyinaran dilakukan tepat di atas layar dengan peleburan warna langit ke warna lantai~\cite{threejs}. {\it HemisphereLight} merupakan penerangan yang spesial dan dapat digunakan untuk  membuat penerangan pada tempat terbuka lebih terlihat natural dengan mensimulasikan sebuah reflektif permukaan dan sedikit pancaran langit~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa warna langit dalam heksadesimal , warna daratan dalam heksadesimal, dan intensitas. Contoh penggunaannya sama seperti kelas {\it AmbientLight}.
 
-	\item {\it PointLight}, sebuah pancaran dari satu titik pada setiap arah. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, intensitas, jarak dari cahaya saat intensitasnya 0, dan hilangnya cahaya dari pandangan dengan nilai awal adalah 1. Contoh penggunaannya sama seperti kelas {\it AmbientLight}.
+	\item {\it PointLight}, sebuah pancaran dari satu titik pada setiap arah~\cite{threejs}. Sebuah titik di satu tempat yang memancarkan cahaya ke segala arah~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, intensitas, jarak dari cahaya saat intensitasnya 0, dan hilangnya cahaya dari pandangan dengan nilai awal adalah 1. Contoh penggunaannya sama seperti kelas {\it AmbientLight}.
 	
 	\item {\it RectAreaLight}, sebuah pancaran sinar seragam melewati permukaan bidang persegi panjang. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, intensitas dengan nilai awal adalah 1, lebar cahaya dan tinggi cahaya dengan nilai awal adalah 10. Contoh untuk kelas {\it RectAreaLight} dapat dilihat pada pada {\it listing} 2.39.
 	
@@ -725,7 +725,7 @@ rectLightHelper = new THREE.RectAreaLightHelper( rectLight );
 scene.add( rectLightHelper );
 \end{lstlisting}
 
-	\item {\it SpotLight}, sebuah pancaran dari satu titik pada setiap arah sepanjang bidang yang ukurannya dapat bertambah lebih jauh. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, intensitas dengan nilai awal adalah 1, jarak maksimal cahaya dari sumber, sudut maksimum, {\it penumbra}, dan hilangnya cahaya dari pandangan dengan nilai awal adalah 1. Contoh untuk kelas {\it SpotLight} dapat dilihat pada pada {\it listing} 2.40.
+	\item {\it SpotLight}, sebuah pancaran dari satu titik pada setiap arah sepanjang bidang yang ukurannya dapat bertambah lebih jauh~\cite{threejs}. Sumber cahaya ini memiliki efek kerucut seperti pada lampu meja, sebuah celah pada langit-langit, atau sebuah senter~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, intensitas dengan nilai awal adalah 1, jarak maksimal cahaya dari sumber, sudut maksimum, {\it penumbra}, dan hilangnya cahaya dari pandangan dengan nilai awal adalah 1. Contoh untuk kelas {\it SpotLight} dapat dilihat pada pada {\it listing} 2.40.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it SpotLight}.},captionpos=b]
 var spotLight = new THREE.SpotLight( 0xffffff );
@@ -1014,7 +1014,7 @@ loader.load(
 
 Material merupakan konstanta yang digunakan untuk mendefinisikan berbagai macam properti pada suatu objek. Material ini kemudian dapat digunakan pada objek {\it Mesh} sebagai bahan properti dasar dari objek tersebut.
 	\begin{itemize}
-	\item {\it LineBasicMaterial}, sebuah bahan untuk menggambar geometri gaya {\it wireframe}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif. Contoh untuk kelas {\it LineBasicMaterial} dapat dilihat pada pada {\it listing} 2.51.
+	\item {\it LineBasicMaterial}, sebuah bahan untuk menggambar geometri gaya {\it wireframe}~\cite{threejs}. Material ini digunakan untuk menggambar sebuah garis yang memungkinkan kita untuk mengatur warna, lebar garis, akhir garis, dan properti gabungan dari garis~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif~\cite{threejs}. Contoh untuk kelas {\it LineBasicMaterial} dapat dilihat pada pada {\it listing} 2.51.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it LineBasicMaterial}.},captionpos=b]
 var material = new THREE.LineBasicMaterial( {
@@ -1025,7 +1025,7 @@ var material = new THREE.LineBasicMaterial( {
 } );
 \end{lstlisting}
 
-	\item {\it LineDashedMaterial}, sebuah bahan untuk menggambar geometri gaya {\it wireframe} dengan garis putus-putus. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif. Contoh untuk kelas {\it LineDashedMaterial} dapat dilihat pada pada {\it listing} 2.52.
+	\item {\it LineDashedMaterial}, sebuah bahan untuk menggambar geometri gaya {\it wireframe} dengan garis putus-putus~\cite{threejs}. Material ini digunakan untuk menggambar sebuah garis yang memungkinkan kita untuk membuat efek garis putus-putus dengan menspesifikasikan garis putus dan jarak antara putusan garis tersebut~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif~\cite{threejs}. Contoh untuk kelas {\it LineDashedMaterial} dapat dilihat pada pada {\it listing} 2.52.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it LineDashMaterial}.},captionpos=b]
 var material = new THREE.LineDashedMaterial( {
@@ -1039,15 +1039,15 @@ var material = new THREE.LineDashedMaterial( {
 
 	\item {\it Material}, kelas dasar abstrak untuk bahan.
 	
-	\item {\it MeshBasicMaterial}, sebuah bahan untuk menggambar geometri dengan cara sederhana yang datar. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it MeshBasicMaterial}, sebuah bahan untuk menggambar geometri dengan cara sederhana yang datar~\cite{threejs}. {\it MeshBasicMaterial} merupakan material paling sederhana dan tidak memperhitungkan penerangan. Bentuk dengan material ini akan di-{\it render} sebagai poligon datar sederhana, kemudian akan didapati juga pilihan untuk menunjukan bingkai dari geometri tersebut~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif~\cite{threejs}.
 	
-	\item {\it MeshDepthMaterial}, sebuah bahan untuk menggambar geometri berdasarkan kedalaman. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it MeshDepthMaterial}, sebuah bahan untuk menggambar geometri berdasarkan kedalaman~\cite{threejs}. Objek dengan material ini tidak didefinisikan dengan penerangan atau properti material yang spesifik, tetapi didefinisikan dengan jarak dari objek ke kamera. Kita juga dapat mengkombinasikan material ini dengan material lain untuk dengan mudah membuat efek kabur~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif~\cite{threejs}.
 	
-	\item {\it MeshLambertMaterial}, sebuah bahan untuk permukaan yang tidak bercahaya. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it MeshLambertMaterial}, sebuah bahan untuk permukaan yang tidak bercahaya~\cite{threejs}. Material ini dapat digunakan untuk membuat objek terlihat polos dan tidak bercahaya. Material ini merupakan material yang paling mudah untuk digunakan dan merupakan salah satu material yang merespon terhadap pencahayaan~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif~\cite{threejs}.
 	
-	\item {\it MeshNormalMaterial}, sebuah bahan yang memetakan vektor normal ke warna RGB. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it MeshNormalMaterial}, sebuah bahan yang memetakan vektor normal ke warna RGB~\cite{threejs}. Setiap permukaan dari objek di-{\it render} dengan menggunakan warna berbeda dan meskipun suatu bola dirotasikan warna tersebut akan menetap pada tempatnya~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif~\cite{threejs}.
 	
-	\item {\it MeshPhongMaterial}, sebuah bahan untuk permukaan yang bercahaya dengan sorotan cahaya. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
+	\item {\it MeshPhongMaterial}, sebuah bahan untuk permukaan yang bercahaya dengan sorotan cahaya~\cite{threejs}. {\it MeshPhongMaterial} dapat digunakan untuk membuat sebuah material yang berkilau~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif~\cite{threejs}.
 	
 	\item {\it MeshPhysicalMaterial}, sebuah ekstensi dari {\it MeshStandardMaterial} yang memungkinkan kontrol yang lebih kuat terhadap daya pemantulan. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif.
 	
@@ -1094,7 +1094,7 @@ var material = new THREE.RawShaderMaterial( {
 } );
 \end{lstlisting}
 
-	\item {\it ShaderMaterial}, sebuah bahan yang dibangun dengan {\it shader} kustom. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif. Contoh untuk kelas {\it ShaderMaterial} dapat dilihat pada pada {\it listing} 2.55.
+	\item {\it ShaderMaterial}, sebuah bahan yang dibangun dengan {\it shader} kustom~\cite{threejs}. {\it ShaderMaterial} merupakan salah satu material yang paling serba guna dan kompleks pada pustaka Three.js. Kita dapat menambahkan {\it shader} kustom yang dijalankan langsung pada konteks WebGL. {\it Shader} merupakan hasil konversi objek JavaScript pada pustaka Three.js menjadi piksel-piksel pada layar. {\it Shader} kustom tersebut dapat secara tepat mendefinisikan bagaimana suatu objek harus di-{\it render} dan ditulis ulang atau untuk mengubah nilai awal dari pustaka Three.js~\cite{threejs1}. Konstruktor pada kelas ini menerima parameter berupa objek dan bersifat fakultatif~\cite{threejs}. Contoh untuk kelas {\it ShaderMaterial} dapat dilihat pada pada {\it listing} 2.55.
 	
 \begin{lstlisting}[caption={Contoh penggunaan kelas {\it ShaderMaterial}.},captionpos=b]
 var material = new THREE.ShaderMaterial( {
@@ -1325,7 +1325,7 @@ Kelas-kelas di bawah ini akan digunakan sebagai pembangun model tiga dimensi yan
 	\begin{itemize}
 	\item {\it Fog}, kelas yang berisi parameter untuk mendefinisikan kabut. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal, jarak terdekat, dan jarak terjauh.
 	
-	\item {it FogExp2}, kelas ini berisi parameter pendefinisikan eksponensial kabut yang bertumbuh secara padat eksponensial dengan jarak. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal dan kecepatan kabut.
+	\item {\it FogExp2}, kelas ini berisi parameter pendefinisikan eksponensial kabut yang bertumbuh secara padat eksponensial dengan jarak. Konstruktor pada kelas ini menerima parameter berupa warna dalam heksadesimal dan kecepatan kabut.
 	
 	\item {\it Scene}, sebuah layar yang memungkinkan untuk membuat dan menempatkan sesuatu pada pustaka Three.js. 
 	\end{itemize}
